@@ -58,13 +58,13 @@
 
 /* ---------- céu ---------- */
 
-/* ocupa barra, manchete e o vão; o rodapé fica no papel liso */
+/* cobre a hero inteira; a base se desfaz atrás do rodapé */
 .sky {
-  grid-row: 1 / 4;
+  grid-row: 1 / -1;
   grid-column: 1;
   position: relative;
   z-index: -1;
-  margin: calc(var(--pad) * -1) calc(var(--pad) * -1) 0;
+  margin: calc(var(--pad) * -1);
   pointer-events: none;
   animation: fade 1400ms var(--ease) both;
 }
@@ -75,29 +75,26 @@
   inset: 0;
   background-color: var(--ink);
   mask-repeat: no-repeat;
-  mask-size: cover, 100% 100%;
-  mask-position:
-    var(--sky-x) var(--sky-y),
-    0 0;
-  mask-composite: intersect;
+  mask-size: cover;
+  mask-position: var(--sky-x) var(--sky-y);
   transform-origin: var(--sky-x) var(--sky-y);
 }
 
-/* a base do céu se desfaz antes do rodapé */
+/* o céu inteiro é impresso: nuvens, luz e o ar entre elas em pontos miúdos */
 .clouds {
-  mask-image: url("/images/hero/sky.webp"), linear-gradient(#000 82%, transparent);
+  mask-image: url("/images/hero/sky.webp");
 }
 
 .light {
-  mask-image: url("/images/hero/rays.webp"), linear-gradient(#000 82%, transparent);
+  mask-image: url("/images/hero/rays.webp");
 }
 
 /* Ícaro voa dentro dos raios, abaixo da manchete; a silhueta em --paper
    tapa as nuvens atrás dele */
 .icarus {
   position: absolute;
-  left: 40%;
-  top: 50%;
+  left: 46%;
+  top: 58%;
   width: clamp(140px, 19vw, 300px);
   aspect-ratio: 900 / 865;
 }
@@ -247,8 +244,8 @@
 
 /* ---------- manchete ---------- */
 
-/* cada linha tem 8 letras e ~6,8em de largura em Archivo larga e preta,
-   então a fonte é a largura disponível dividida por isso */
+/* WARNEY, a linha mais larga, mede ~5,7em em Archivo larga e preta; a fonte
+   é a largura disponível dividida por 6,1, com folga para não vazar */
 .masthead {
   container-type: inline-size;
   margin-top: clamp(20px, 4vh, 56px);
@@ -257,7 +254,7 @@
 .title {
   margin: 0;
   font-family: var(--font-display), sans-serif;
-  font-size: calc(100cqi / 6.9);
+  font-size: calc(100cqi / 6.1);
   font-weight: 900;
   font-variation-settings: "wdth" 125;
   line-height: 0.84;

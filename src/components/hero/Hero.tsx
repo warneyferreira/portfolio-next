@@ -35,7 +35,6 @@ export default function Hero() {
 
       <div className={s.masthead}>
         <h1 className={s.title}>
-          <span className={s.srOnly}>{profile.shortName}, </span>
           {hero.title.map((line) => (
             <span key={line} className={s.line}>
               {line}
@@ -43,7 +42,7 @@ export default function Hero() {
           ))}
         </h1>
         <p className={s.byline}>
-          {profile.shortName} <span aria-hidden="true">/</span> {profile.headline}
+          {hero.role} <span aria-hidden="true">/</span> {profile.headline}
         </p>
       </div>
 

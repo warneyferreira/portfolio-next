@@ -22,7 +22,9 @@ export const nav = [
 
 export const hero = {
   /* duas linhas da manchete, empilhadas na largura toda */
-  title: ["Software", "Engineer"],
+  title: ["Warney", "Rego"],
+  /* linha em itálico embaixo da manchete */
+  role: "Software Engineer",
   resumeLabel: "Baixar currículo",
 };
 
