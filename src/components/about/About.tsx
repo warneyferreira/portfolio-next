@@ -1,34 +1,33 @@
-import { Bricolage_Grotesque } from "next/font/google";
 import { about, profile } from "@/data/portfolio";
-import Sisyphus from "./Sisyphus";
 import s from "./about.module.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-about",
-});
 
 export default function About() {
   return (
-    <section id="sobre" aria-labelledby="about-title" className={`${s.about} ${bricolage.variable}`}>
+    <section id="sobre" aria-labelledby="about-title" className={s.about}>
       <div className={s.heading}>
-        <h2 id="about-title">Sobre<span aria-hidden="true">.</span></h2>
+        <h2 id="about-title">Sobre</h2>
         <p className={s.intro}>{about.intro}</p>
       </div>
 
-      <div className={s.body}>
-        <Sisyphus />
+      {/* as duas pontas do produto: a mão de quem usa e a do sistema quase se tocam */}
+      <figure
+        className={s.hands}
+        role="img"
+        aria-label="Duas mãos em retícula saem das nuvens e quase se tocam pela ponta dos dedos, com um ponto de luz entre elas."
+      >
+        <span className={s.handLeft} />
+        <span className={s.handRight} />
+        <span className={s.spark} />
+      </figure>
 
-        <div className={s.story}>
-          <div>
-            <h3>{about.front.title}</h3>
-            <p>{about.front.text}</p>
-          </div>
-          <div>
-            <h3>{about.back.title}</h3>
-            <p>{about.back.text}</p>
-          </div>
+      <div className={s.story}>
+        <div>
+          <h3>{about.front.title}</h3>
+          <p>{about.front.text}</p>
+        </div>
+        <div>
+          <h3>{about.back.title}</h3>
+          <p>{about.back.text}</p>
         </div>
       </div>
 

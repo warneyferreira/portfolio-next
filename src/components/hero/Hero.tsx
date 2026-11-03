@@ -1,21 +1,22 @@
-import { Bricolage_Grotesque } from "next/font/google";
 import { contact, hero, nav, profile } from "@/data/portfolio";
-import Head from "./Head";
 import ThemeToggle from "./ThemeToggle";
 import s from "./hero.module.css";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-hero",
-});
-
 export default function Hero() {
-  const [first, second] = hero.title;
-  const o = first.toLowerCase().indexOf("o");
-
   return (
-    <header className={`${s.hero} ${bricolage.variable}`}>
+    <header className={s.hero}>
+      {/* céu impresso em retícula: nuvens, sol com raios e Ícaro subindo */}
+      <div className={s.sky} aria-hidden="true">
+        <span className={s.clouds} />
+        <span className={s.light} />
+        <span className={s.icarus}>
+          <span className={s.icarusFloat}>
+            <span className={s.icarusShape} />
+            <span className={s.icarusInk} />
+          </span>
+        </span>
+      </div>
+
       <div className={s.bar}>
         <p className={s.place}>{profile.location}</p>
         <div className={s.end}>
@@ -32,29 +33,19 @@ export default function Hero() {
         </div>
       </div>
 
-      <h1 className={s.title}>
-        <span className={s.srOnly}>{profile.shortName}, </span>
-        <span className={s.line}>
-          {first.slice(0, o)}
-          <span className={s.o}>
-            <span className={s.srOnly}>{first[o]}</span>
-            <Head />
-            <svg className={s.pointer} viewBox="0 0 120 70" aria-hidden="true">
-              <path
-                className={s.stroke}
-                pathLength={1}
-                d="M4 64C14 46 26 30 44 30C60 30 62 50 49 51C35 52 42 22 70 15C86 11 100 14 113 19"
-              />
-              <path className={s.tip} pathLength={1} d="M100 7L114 19L100 31" />
-            </svg>
-            <span className={s.tag} aria-hidden="true">
-              <span>{profile.shortName}</span>
+      <div className={s.masthead}>
+        <h1 className={s.title}>
+          <span className={s.srOnly}>{profile.shortName}, </span>
+          {hero.title.map((line) => (
+            <span key={line} className={s.line}>
+              {line}
             </span>
-          </span>
-          {first.slice(o + 1)}
-        </span>{" "}
-        <span className={s.line}>{second}</span>
-      </h1>
+          ))}
+        </h1>
+        <p className={s.byline}>
+          {profile.shortName} <span aria-hidden="true">/</span> {profile.headline}
+        </p>
+      </div>
 
       <div className={s.foot}>
         <p className={s.lede}>{profile.description}</p>

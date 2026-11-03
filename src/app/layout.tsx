@@ -1,6 +1,22 @@
 import type { Metadata } from "next";
+import { Archivo, Bricolage_Grotesque } from "next/font/google";
 import { profile } from "@/data/portfolio";
 import "./globals.css";
+
+/* Display larga e pesada do pôster (Archivo no eixo de largura máximo) e
+   Bricolage para texto corrido. */
+const display = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+
+const text = Bricolage_Grotesque({
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+  variable: "--font-text",
+});
 
 const title = `${profile.name} | ${profile.role}`;
 
@@ -23,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" data-theme="light" suppressHydrationWarning>
+    <html lang="pt-BR" data-theme="light" className={`${display.variable} ${text.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

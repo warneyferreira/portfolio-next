@@ -1,18 +1,15 @@
+/* Sobre no mesmo pôster da hero: duas tintas do tema, display larga e
+   preta, rótulos em itálico largo, texto corrido em Bricolage, e a imagem
+   em retícula pré-impressa pintada com --ink. */
 .about {
-  --ink: #15130f;
-  --muted: #5c564d;
-  --rule: #bdb5a5;
-  margin-inline: -8px;
-  padding: clamp(64px, 7vw, 112px) clamp(20px, 3.4vw, 48px) 40px;
-  color: var(--ink);
-  font-family: var(--font-about), sans-serif;
-  scroll-margin-top: 24px;
-}
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad: clamp(20px, 3.4vw, 48px);
 
-:global(html[data-theme="dark"]) .about {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --rule: #514b43;
+  margin-inline: -8px;
+  padding: clamp(64px, 7vw, 112px) var(--pad) 40px;
+  color: var(--ink);
+  font-family: var(--font-text), sans-serif;
+  scroll-margin-top: 24px;
 }
 
 .about ::selection {
@@ -23,309 +20,106 @@
 .heading {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
-  align-items: start;
+  align-items: end;
   gap: 48px;
 }
 
 .heading h2 {
   margin: 0;
-  font-size: clamp(4rem, 7vw, 6rem);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  font-variation-settings: "opsz" 96, "wdth" 100;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  line-height: 0.85;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
 }
 
 .intro {
-  max-width: 29ch;
+  max-width: 30ch;
   margin: 0;
-  font-size: clamp(1.65rem, 2.7vw, 2.7rem);
+  font-size: clamp(1.5rem, 2.4vw, 2.4rem);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   text-wrap: pretty;
 }
 
-.body {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  gap: clamp(36px, 6vw, 96px);
-  margin-block: clamp(48px, 6vw, 88px);
-}
+/* ---------- as mãos ---------- */
 
-/* Sísifo segura a stack. Mesmo traço e mesma regra do retrato da hero: o
-   desenho são máscaras (silhueta do recorte e traço, separadas em corpo,
-   braço erguido e cabelo) pintadas com as cores do tema, e a pedra é SVG com
-   os ícones de `stack`, então nada sai da paleta. No claro a tinta cai
-   direto no papel; no escuro figura e pedra viram adesivos claros com o
-   traço escuro. */
-.sisyphus {
-  --line: var(--ink);
-  --sticker: transparent;
-  --halo: var(--paper);
+/* A imagem é cortada em duas no vão entre os dedos (49,56% × 47,92% do
+   desenho); as metades ficam na mesma geometria de máscara, então se
+   encaixam, e cada uma se aproxima da outra alguns pixels. */
+.hands {
+  --gap-x: 49.56%;
+  --gap-y: 47.92%;
 
   position: relative;
-  justify-self: center;
-  width: min(100%, 440px);
-  aspect-ratio: 846 / 1470;
-  margin: 0;
+  height: clamp(260px, 42vw, 620px);
+  margin: clamp(40px, 5vw, 72px) calc(var(--pad) * -1) 0;
+  container-type: size;
 }
 
-:global(html[data-theme="dark"]) .sisyphus {
-  --line: var(--paper);
-  --sticker: var(--ink);
-  --halo: var(--ink);
-}
-
-.boulder,
-.sisyphusFigure,
-.part,
-.effort {
+.handLeft,
+.handRight,
+.spark {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.effort {
-  overflow: visible;
-}
-
-.boulder {
-  overflow: visible;
-}
-
-.boulder pattern circle {
-  fill: var(--line);
-}
-
-.boulderSticker {
-  fill: var(--sticker);
-}
-
-.boulderEdge {
-  fill: none;
-  stroke: var(--line);
-  stroke-width: 7;
-}
-
-/* traço medido no quadro de 24 do ícone: ~7 unidades depois da escala */
-.boulderIcon {
-  fill: var(--line);
-  stroke: var(--halo);
-  stroke-width: 2.4;
-  stroke-linejoin: round;
-  paint-order: stroke;
-}
-
-.boulderSpin {
-  transform-box: view-box;
-  transform-origin: 430px 360px;
-}
-
-.part {
-  mask-size: 100% 100%;
+  background-color: var(--ink);
   mask-repeat: no-repeat;
 }
 
-.shapeBody {
-  background-color: var(--sticker);
-  mask-image: url("/images/about/sisyphus-shape-body.webp");
+.handLeft,
+.handRight {
+  inset: 0;
+  mask-size: cover;
+  mask-position: var(--gap-x) var(--gap-y);
 }
 
-.shapeArm {
-  background-color: var(--sticker);
-  mask-image: url("/images/about/sisyphus-shape-arm.webp");
+.handLeft {
+  mask-image: url("/images/about/hands-left.webp");
 }
 
-.inkBody {
-  background-color: var(--line);
-  mask-image: url("/images/about/sisyphus-ink-body.webp");
+.handRight {
+  mask-image: url("/images/about/hands-right.webp");
 }
 
-.inkArm {
-  background-color: var(--line);
-  mask-image: url("/images/about/sisyphus-ink-arm.webp");
+/* a faísca tem 240 px num desenho de 1800 × 1200, na mesma escala de cover */
+.spark {
+  --size: max(13.34cqw, 20cqh);
+
+  left: var(--gap-x);
+  top: var(--gap-y);
+  width: var(--size);
+  height: var(--size);
+  translate: -50% -50%;
+  mask-image: url("/images/about/spark.webp");
+  mask-size: 100% 100%;
 }
 
-.inkHair {
-  background-color: var(--line);
-  mask-image: url("/images/about/sisyphus-ink-hair.webp");
-}
-
-/* o braço gira no ombro (590, 815 no desenho) */
-.arm {
-  transform-origin: 69.7% 55.4%;
-}
-
-/* o cabelo balança a partir do couro cabeludo (480, 880) */
-.hair {
-  transform-origin: 56.7% 59.9%;
-}
-
-/* as marcas de esforço ficam fora do adesivo, no papel da página */
-.strainMarks {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 7;
-  stroke-linecap: round;
-  opacity: 0;
-}
-
-.strainMarks path {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-/* Um ciclo de esforço de 4,2s, tudo no mesmo compasso: a pedra pesa, o
-   corpo cede a partir dos pés, o braço erguido dobra no ombro, a pedra
-   desce junto e treme no fundo do esforço; o cabelo balança com o tranco e
-   as marcas de esforço piscam nas mãos. Depois ele ergue tudo de novo. Por
-   cima, o cabelo ondula sem parar e a pedra
-   rola devagar. As mãos estão a ~900 unidades da base, então 1,8% de
-   compressão vertical mais a dobra do braço somam os ~18 que a pedra desce. */
-@media (prefers-reduced-motion: no-preference) {
-  .boulderSpin {
-    animation: roll 140s linear infinite;
-  }
-
-  .sisyphusFigure {
-    transform-origin: 50% 100%;
-    animation: strain 4.2s ease-in-out infinite;
-  }
-
-  .boulderLift {
-    animation: sink 4.2s ease-in-out infinite;
-  }
-
-  .arm {
-    animation: arm-give 4.2s ease-in-out infinite;
-  }
-
-  .hair {
-    filter: url(#sisyphus-hair);
-    animation: hair-sway 4.2s ease-in-out infinite;
-  }
-
-  .strainMarks {
-    animation: marks 4.2s ease-out infinite;
-  }
-
-  .strainMarks path {
-    animation: marks-jolt 4.2s ease-out infinite;
-  }
-}
-
-@keyframes roll {
-  to {
-    rotate: 360deg;
-  }
-}
-
-@keyframes strain {
-  0%,
-  100% {
-    scale: 1 1;
-  }
-  48%,
-  62% {
-    scale: 1.004 0.982;
-  }
-}
-
-@keyframes sink {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  48% {
-    translate: 0 18px;
-  }
-  52% {
-    translate: -1.5px 18px;
-  }
-  56% {
-    translate: 1.5px 18px;
-  }
-  62% {
-    translate: 0 18px;
-  }
-}
-
-@keyframes arm-give {
-  0%,
-  100% {
-    rotate: 0deg;
-  }
-  48% {
-    rotate: 0.8deg;
-  }
-  52% {
-    rotate: 1.1deg;
-  }
-  56% {
-    rotate: 0.6deg;
-  }
-  62% {
-    rotate: 0.8deg;
-  }
-}
-
-@keyframes hair-sway {
-  0%,
-  100% {
-    transform: skewX(0deg);
-  }
-  30% {
-    transform: skewX(-1.8deg);
-  }
-  55% {
-    transform: skewX(2.4deg) translateY(1px);
-  }
-  78% {
-    transform: skewX(-0.8deg);
-  }
-}
-
-@keyframes marks {
-  0%,
-  44%,
-  72%,
-  100% {
-    opacity: 0;
-  }
-  50%,
-  64% {
-    opacity: 1;
-  }
-}
-
-@keyframes marks-jolt {
-  0%,
-  44% {
-    scale: 0.5;
-  }
-  50% {
-    scale: 1.15;
-  }
-  56%,
-  100% {
-    scale: 1;
-  }
-}
+/* ---------- texto ---------- */
 
 .story {
   display: grid;
-  gap: 36px;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 96px);
+  margin-block: clamp(28px, 3vw, 44px) clamp(56px, 6vw, 88px);
 }
 
 .story h3 {
-  margin: 0 0 12px;
-  font-size: clamp(1.4rem, 1.7vw, 1.8rem);
-  font-weight: 750;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(0.9rem, 0.5vw + 0.72rem, 1.1rem);
+  font-style: italic;
+  font-weight: 700;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* a ponta de trás responde do lado da mão direita */
+.story > div + div {
+  text-align: right;
+  justify-self: end;
 }
 
 .story p {
@@ -342,7 +136,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 32px;
-  border-top: 1px solid var(--rule);
+  border-top: 1.5px solid var(--ink);
   padding-top: 28px;
 }
 
@@ -356,7 +150,13 @@
 .facts dt {
   margin-bottom: 6px;
   color: var(--muted);
-  font-size: 0.875rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.72rem;
+  font-style: italic;
+  font-weight: 600;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .facts dd {
@@ -372,8 +172,12 @@
   gap: 12px;
   min-height: 44px;
   color: inherit;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-underline-offset: 5px;
   text-decoration-thickness: 1.5px;
 }
@@ -397,24 +201,70 @@
   outline-offset: 6px;
 }
 
+/* ---------- movimento ---------- */
+
+/* as mãos se aproximam, a faísca acende no ponto mais perto e as duas
+   voltam; um ciclo de 4,5s */
+@media (prefers-reduced-motion: no-preference) {
+  .handLeft {
+    animation: reach-left 4.5s ease-in-out infinite;
+  }
+
+  .handRight {
+    animation: reach-right 4.5s ease-in-out infinite;
+  }
+
+  .spark {
+    animation: spark 4.5s ease-in-out infinite;
+  }
+}
+
+@keyframes reach-left {
+  50% {
+    translate: 0.5cqw 0;
+  }
+}
+
+@keyframes reach-right {
+  50% {
+    translate: -0.5cqw 0;
+  }
+}
+
+@keyframes spark {
+  0%,
+  100% {
+    opacity: 0.35;
+    scale: 0.7;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.15;
+  }
+}
+
 @media (max-width: 800px) {
   .heading {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
 
   .intro {
     max-width: 32ch;
   }
 
-  .body {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-block: 40px 48px;
+  .hands {
+    height: 62vw;
   }
 
-  .sisyphus {
-    width: min(100%, 380px);
+  .story {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .story > div + div {
+    text-align: left;
+    justify-self: start;
   }
 
   .bottom {
