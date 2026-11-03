@@ -2,7 +2,7 @@
 
 Portfólio de [warney.dev](https://www.warney.dev) em Next.js (App Router), com identidade visual em preto e branco e animações de rolagem.
 
-A entrada `/` permite escolher entre `/colagem` e `/monochrome`. As rotas carregam o portfólio selecionado e oferecem um link para voltar ao seletor. A versão Monochrome recupera a composição da hero e o Sobre da branch homônima, com fundo liso na hero e Ícaro em primeiro plano sobre o título Warney Rego; as demais seções compartilham os dados e componentes atuais.
+A branch `main` abre diretamente o design Colagem em `/`, sem seletor de estética. A versão com as duas estéticas e a tela de escolha está preservada na branch `twodesigns`.
 
 Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/experience/Experience.tsx`, após a transição com nuvens e pássaros. Os cartões podem ser abertos para exibir detalhes, tecnologias e resultados. As pombas atravessam os quadros durante a rolagem; as animações respeitam a preferência por movimento reduzido.
 
