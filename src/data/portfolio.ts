@@ -12,6 +12,20 @@ export const profile = {
   highlightStack: ["Next.js", "React Native", "Node.js", "PostgreSQL", "LangChain", "Docker"],
 };
 
+export const nav = [
+  { href: "#sobre", label: "Sobre" },
+  { href: "#stack", label: "Stack" },
+  { href: "#experiencia", label: "Experiência" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#contato", label: "Contato" },
+] as const;
+
+export const hero = {
+  /* duas linhas da manchete; o primeiro "o" da primeira linha vira o retrato */
+  title: ["Software", "Engineer"],
+  resumeLabel: "Baixar currículo",
+};
+
 export const contact = {
   intro: "A caixa de correio fica aqui embaixo. Eu abro todo dia, mesmo quando está vazia.",
   letter: "Se você chegou até o último quadro, já dá para a gente conversar.",

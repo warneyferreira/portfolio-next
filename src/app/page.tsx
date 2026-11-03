@@ -1,5 +1,4 @@
 import {
-  about,
   certifications,
   certificationsIntro,
   contact,
@@ -14,49 +13,16 @@ import {
   stack,
   stackIntro,
 } from "@/data/portfolio";
+import Hero from "@/components/hero/Hero";
+import About from "@/components/about/About";
 
 export default function Home() {
   return (
     <>
-      <header>
-        <nav>
-          <ul>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#stack">Stack</a></li>
-            <li><a href="#experiencia">Experiência</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#educacao">Educação</a></li>
-            <li><a href="#contato">Contato</a></li>
-            <li><a href={profile.resume}>Currículo</a></li>
-          </ul>
-        </nav>
-        <h1>{profile.name}</h1>
-        <p>{profile.headline}</p>
-        <p>{profile.location}</p>
-        <p>
-          <a href={profile.resume}>Baixar currículo</a> ·{" "}
-          <a href={contact.linkedin}>LinkedIn</a>
-        </p>
-        <p>{profile.highlightStack.join(" • ")}</p>
-      </header>
+      <Hero />
 
       <main>
-        <section id="sobre">
-          <h2>Sobre</h2>
-          <p>{about.intro}</p>
-          <h3>{about.front.title}</h3>
-          <p>{about.front.text}</p>
-          <h3>{about.back.title}</h3>
-          <p>{about.back.text}</p>
-          <dl>
-            <dt>Função</dt>
-            <dd>{profile.role}</dd>
-            <dt>Base</dt>
-            <dd>{profile.location}</dd>
-            <dt>Estrada</dt>
-            <dd>{profile.experienceYears}</dd>
-          </dl>
-        </section>
+        <About />
 
         <section id="stack">
           <h2>Stack</h2>

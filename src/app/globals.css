@@ -1,0 +1,63 @@
+/* O tema vive em <html data-theme>. color-scheme deixa o texto ainda sem
+   estilo acompanhar as cores do próprio navegador. */
+
+/* Papel: uma folha só, pintada no html, para a página inteira. Hero e seções
+   não pintam fundo próprio, então a textura segue sem emenda de uma para a
+   outra. Cor de papel levemente quente, grão fino, fibras e manchas largas de
+   polpa, gerados por ruído SVG. Cada frequência vezes o tamanho do ladrilho dá
+   um inteiro, então stitchTiles emenda os ladrilhos sem costura. */
+html {
+  --paper: #f4efe4;
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.75'%20numOctaves='2'%20seed='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.3%200%200%200%200%200.24%200%200%200%200%200.16%201.3%200%200%200%20-0.78'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23g%29'/%3E%3C/svg%3E");
+  --fiber: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='400'%3E%3Cfilter%20id='f'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='turbulence'%20baseFrequency='.0125%20.2'%20numOctaves='2'%20seed='9'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.36%200%200%200%200%200.29%200%200%200%200%200.19%201.6%200%200%200%20-1.18'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23f%29'/%3E%3C/svg%3E");
+  --pulp: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='640'%3E%3Cfilter%20id='p'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.00625%20.009375'%20numOctaves='4'%20seed='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.45%200%200%200%200%200.36%200%200%200%200%200.22%200.34%200%200%200%20-0.135'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23p%29'/%3E%3C/svg%3E");
+
+  background-color: var(--paper);
+  background-image: var(--grain), var(--fiber), var(--pulp);
+  background-size:
+    240px 240px,
+    400px 400px,
+    640px 640px;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* escuro: cartolina preta, com o grão e a fibra clareando em vez de escurecer */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #161412;
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.75'%20numOctaves='2'%20seed='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.92%200%200%200%200%200.88%200%200%200%200%200.82%201.1%200%200%200%20-0.68'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23g%29'/%3E%3C/svg%3E");
+  --fiber: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='400'%3E%3Cfilter%20id='f'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='turbulence'%20baseFrequency='.0125%20.2'%20numOctaves='2'%20seed='9'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.85%200%200%200%200%200.8%200%200%200%200%200.72%201.3%200%200%200%20-0.98'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23f%29'/%3E%3C/svg%3E");
+  --pulp: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='640'%3E%3Cfilter%20id='p'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.00625%20.009375'%20numOctaves='4'%20seed='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.55%200%200%200%200%200.5%200%200%200%200%200.44%200.22%200%200%200%20-0.09'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23p%29'/%3E%3C/svg%3E");
+}
+
+body {
+  margin: 0;
+}
+
+body > main,
+body > footer {
+  margin-inline: 8px;
+}
+
+/* troca de tema: o novo tema se abre num círculo a partir do botão */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: theme-reveal 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-x, 100%) var(--theme-y, 0));
+  }
+  to {
+    clip-path: circle(150vmax at var(--theme-x, 100%) var(--theme-y, 0));
+  }
+}
