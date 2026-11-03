@@ -1,0 +1,162 @@
+/* Stack no mesmo papel da hero e do Sobre: tinta preta, Bricolage. A lista
+   carrega normal; em tela grande a StackScene prende a seção e, rolando,
+   Sísifo entra e os itens são puxados para formar a pedra dele. */
+.stack {
+  --ink: #15130f;
+  --muted: #5c564d;
+  --rule: #bdb5a5;
+
+  position: relative;
+  margin-inline: -8px;
+  padding: clamp(72px, 8vw, 128px) clamp(20px, 3.4vw, 48px) clamp(72px, 8vw, 128px);
+  overflow-x: clip;
+  color: var(--ink);
+  font-family: var(--font-stack), sans-serif;
+  scroll-margin-top: 24px;
+}
+
+:global(html[data-theme="dark"]) .stack {
+  --ink: #efe9df;
+  --muted: #b6afa4;
+  --rule: #514b43;
+}
+
+.stack ::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Sísifo ---------- */
+
+/* fora da cena (celular, menos movimento): Sísifo pronto embaixo da lista */
+.stage {
+  width: min(100%, 380px);
+  margin: clamp(48px, 8vw, 96px) auto 0;
+}
+
+/* Na cena, a seção ocupa a tela presa e Sísifo fica à direita, apoiado no
+   pé da tela e abaixo da frase de abertura, por cima da terceira coluna,
+   que se apaga antes de ele chegar. Corpo, casca e ícones começam
+   invisíveis; a cena os traz. */
+@media (min-width: 1001px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+  .stack {
+    min-height: 100svh;
+    box-sizing: border-box;
+  }
+
+  /* medido pela tela, não pela seção: se a lista for mais alta que a tela,
+     o pé da seção fica abaixo da dobra e cortava as pernas dele. Ele tem
+     72svh de altura e fica com 3svh de folga do chão da tela. */
+  .stage {
+    position: absolute;
+    top: 25svh;
+    right: clamp(20px, 3.4vw, 48px);
+    width: calc(72svh * 846 / 1470);
+    margin: 0;
+  }
+
+  .stage [data-figure],
+  .stage [data-shell],
+  .stage [data-tool] {
+    opacity: 0;
+  }
+}
+
+/* ---------- texto ---------- */
+
+.heading,
+.groups {
+  position: relative;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: start;
+  gap: 48px;
+}
+
+.heading h2 {
+  margin: 0;
+  font-size: clamp(4rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+}
+
+.intro {
+  max-width: 26ch;
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-wrap: pretty;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 64px);
+  margin-top: clamp(56px, 6vw, 96px);
+}
+
+.group {
+  border-top: 1.5px solid var(--ink);
+  padding-top: 18px;
+}
+
+.group h3 {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.description {
+  max-width: 34ch;
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+/* barra entre itens, impressa com a mesma tinta */
+.group li + li::before {
+  content: "/";
+  margin-right: 14px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (max-width: 1000px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .groups {
+    grid-template-columns: 1fr;
+  }
+}

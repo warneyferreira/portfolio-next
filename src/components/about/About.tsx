@@ -1,6 +1,5 @@
 import { Bricolage_Grotesque } from "next/font/google";
 import { about, profile } from "@/data/portfolio";
-import Sisyphus from "./Sisyphus";
 import s from "./about.module.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -12,14 +11,18 @@ const bricolage = Bricolage_Grotesque({
 export default function About() {
   return (
     <section id="sobre" aria-labelledby="about-title" className={`${s.about} ${bricolage.variable}`}>
+      {/* pilar jônico tombado, entrando pela borda direita da tela */}
+      <div className={s.column} aria-hidden="true">
+        <span className={s.columnShape} />
+        <span className={s.columnInk} />
+      </div>
+
       <div className={s.heading}>
         <h2 id="about-title">Sobre<span aria-hidden="true">.</span></h2>
         <p className={s.intro}>{about.intro}</p>
       </div>
 
       <div className={s.body}>
-        <Sisyphus />
-
         <div className={s.story}>
           <div>
             <h3>{about.front.title}</h3>

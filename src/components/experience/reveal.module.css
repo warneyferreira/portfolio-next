@@ -1,0 +1,159 @@
+/* Abertura da Experiência no papel do portfólio. Tudo que é desenho é um par
+   de máscaras: a silhueta tapa o que está atrás (papel no claro, adesivo
+   claro no escuro) e o traço vem por cima, na regra do retrato da hero. */
+.reveal {
+  --ink: #15130f;
+  --fill: var(--paper);
+  --line: var(--ink);
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* largura explícita, não margem negativa dos dois lados: ao prender, o
+     GSAP fixa a largura medida e zera a margem, e a borda direita cortava */
+  width: calc(100% + 16px);
+  height: 100svh;
+  margin-left: -8px;
+  overflow: clip;
+  color: var(--ink);
+  font-family: var(--font-reveal), sans-serif;
+}
+
+:global(html[data-theme="dark"]) .reveal {
+  --ink: #efe9df;
+  --fill: var(--ink);
+  --line: var(--paper);
+}
+
+.title {
+  position: relative;
+  margin: 0;
+  font-size: clamp(3.6rem, 13vw, 12rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+/* ---------- adesivos ---------- */
+
+.shape,
+.ink {
+  position: absolute;
+  inset: 0;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.shape {
+  background-color: var(--fill);
+}
+
+.ink {
+  background-color: var(--line);
+}
+
+/* ---------- nuvens ---------- */
+
+/* Estado final (o que fica sem a cena): abertas, cada uma meio para fora da
+   tela. A cena começa com elas fechadas sobre o título. */
+.cloud {
+  position: absolute;
+  width: min(78vw, 1100px);
+  pointer-events: none;
+}
+
+.cloudLeft {
+  top: 6%;
+  right: 78%;
+}
+
+.cloudRight {
+  bottom: 4%;
+  left: 72%;
+}
+
+.cloudArt {
+  position: relative;
+}
+
+.cloudLeft .cloudArt {
+  aspect-ratio: 1498 / 888;
+}
+
+.cloudRight .cloudArt {
+  aspect-ratio: 1505 / 917;
+}
+
+/* ---------- pombas ---------- */
+
+/* faixa de 9 quadros de 420px; a máscara anda um quadro por passo */
+.flight {
+  position: absolute;
+  display: none;
+  width: clamp(90px, 10vw, 160px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.reveal[data-scene] .flight {
+  display: block;
+}
+
+.flightLtr {
+  top: 14%;
+  left: 0;
+}
+
+.flightRtl {
+  top: 58%;
+  right: 0;
+}
+
+.dove {
+  position: absolute;
+  inset: 0;
+}
+
+.dove .shape,
+.dove .ink {
+  mask-size: 900% 100%;
+  animation: flap 720ms steps(9) infinite;
+}
+
+/* a segunda pomba voa para a esquerda */
+.mirrored {
+  scale: -1 1;
+}
+
+.flightRtl .dove .shape,
+.flightRtl .dove .ink {
+  animation-delay: -330ms;
+}
+
+@keyframes flap {
+  from {
+    mask-position: 0% 0;
+  }
+  to {
+    mask-position: 112.5% 0;
+  }
+}
+
+/* no celular as nuvens ficam bem maiores que a tela, para cobrirem o título
+   de ponta a ponta antes de abrir */
+@media (max-width: 700px) {
+  .cloud {
+    width: 165vw;
+  }
+
+  .cloudLeft {
+    top: 22%;
+    right: 88%;
+  }
+
+  .cloudRight {
+    bottom: 22%;
+    left: 86%;
+  }
+}

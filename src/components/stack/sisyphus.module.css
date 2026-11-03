@@ -1,0 +1,267 @@
+/* Sísifo segura a stack. Mesmo traço e mesma regra do retrato da hero: o
+   desenho são máscaras (silhueta do recorte e traço, separadas em corpo,
+   braço erguido e cabelo) pintadas com as cores do tema, e a pedra é SVG com
+   os ícones de `stack`, então nada sai da paleta. No claro a tinta cai
+   direto no papel; no escuro figura e pedra viram adesivos claros com o
+   traço escuro. */
+.sisyphus {
+  --line: var(--ink);
+  --sticker: transparent;
+  --halo: var(--paper);
+
+  position: relative;
+  width: 100%;
+  aspect-ratio: 846 / 1470;
+  margin: 0;
+}
+
+/* Enquanto a cena de rolagem monta a pedra, os laços (rolar, esforço,
+   braço, cabelo) esperam parados no quadro zero, senão os ícones mirariam
+   uma pedra que já girou; com a pedra pronta (data-formed), tudo anda. Sem
+   a cena (celular, menos movimento, sem JS) nada fica pausado. */
+.sisyphus[data-scene]:not([data-formed]) :is(.boulderSpin, .boulderLift, .sisyphusFigure, .arm, .hair, .strainMarks, .strainMarks path) {
+  animation-play-state: paused;
+}
+
+:global(html[data-theme="dark"]) .sisyphus {
+  --line: var(--paper);
+  --sticker: var(--ink);
+  --halo: var(--ink);
+}
+
+.boulder,
+.sisyphusFigure,
+.part,
+.effort {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.effort {
+  overflow: visible;
+}
+
+.boulder {
+  overflow: visible;
+}
+
+.boulder pattern circle {
+  fill: var(--line);
+}
+
+.boulderSticker {
+  fill: var(--sticker);
+}
+
+.boulderEdge {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 7;
+}
+
+/* traço medido no quadro de 24 do ícone: ~7 unidades depois da escala */
+.boulderIcon {
+  fill: var(--line);
+  stroke: var(--halo);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.boulderSpin {
+  transform-box: view-box;
+  transform-origin: 430px 360px;
+}
+
+.part {
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.shapeBody {
+  background-color: var(--sticker);
+  mask-image: url("/images/about/sisyphus-shape-body.webp");
+}
+
+.shapeArm {
+  background-color: var(--sticker);
+  mask-image: url("/images/about/sisyphus-shape-arm.webp");
+}
+
+.inkBody {
+  background-color: var(--line);
+  mask-image: url("/images/about/sisyphus-ink-body.webp");
+}
+
+.inkArm {
+  background-color: var(--line);
+  mask-image: url("/images/about/sisyphus-ink-arm.webp");
+}
+
+.inkHair {
+  background-color: var(--line);
+  mask-image: url("/images/about/sisyphus-ink-hair.webp");
+}
+
+/* o braço gira no ombro (590, 815 no desenho) */
+.arm {
+  transform-origin: 69.7% 55.4%;
+}
+
+/* o cabelo balança a partir do couro cabeludo (480, 880) */
+.hair {
+  transform-origin: 56.7% 59.9%;
+}
+
+/* as marcas de esforço ficam fora do adesivo, no papel da página */
+.strainMarks {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.strainMarks path {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Um ciclo de esforço de 4,2s, tudo no mesmo compasso: a pedra pesa, o
+   corpo cede a partir dos pés, o braço erguido dobra no ombro, a pedra
+   desce junto e treme no fundo do esforço; o cabelo balança com o tranco e
+   as marcas de esforço piscam nas mãos. Depois ele ergue tudo de novo. Por
+   cima, o cabelo ondula sem parar e a pedra
+   rola devagar. As mãos estão a ~900 unidades da base, então 1,8% de
+   compressão vertical mais a dobra do braço somam os ~18 que a pedra desce. */
+@media (prefers-reduced-motion: no-preference) {
+  .boulderSpin {
+    animation: roll 140s linear infinite;
+  }
+
+  .sisyphusFigure {
+    transform-origin: 50% 100%;
+    animation: strain 4.2s ease-in-out infinite;
+  }
+
+  .boulderLift {
+    animation: sink 4.2s ease-in-out infinite;
+  }
+
+  .arm {
+    animation: arm-give 4.2s ease-in-out infinite;
+  }
+
+  .hair {
+    filter: url(#sisyphus-hair);
+    animation: hair-sway 4.2s ease-in-out infinite;
+  }
+
+  .strainMarks {
+    animation: marks 4.2s ease-out infinite;
+  }
+
+  .strainMarks path {
+    animation: marks-jolt 4.2s ease-out infinite;
+  }
+}
+
+@keyframes roll {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes strain {
+  0%,
+  100% {
+    scale: 1 1;
+  }
+  48%,
+  62% {
+    scale: 1.004 0.982;
+  }
+}
+
+@keyframes sink {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  48% {
+    translate: 0 18px;
+  }
+  52% {
+    translate: -1.5px 18px;
+  }
+  56% {
+    translate: 1.5px 18px;
+  }
+  62% {
+    translate: 0 18px;
+  }
+}
+
+@keyframes arm-give {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  48% {
+    rotate: 0.8deg;
+  }
+  52% {
+    rotate: 1.1deg;
+  }
+  56% {
+    rotate: 0.6deg;
+  }
+  62% {
+    rotate: 0.8deg;
+  }
+}
+
+@keyframes hair-sway {
+  0%,
+  100% {
+    transform: skewX(0deg);
+  }
+  30% {
+    transform: skewX(-1.8deg);
+  }
+  55% {
+    transform: skewX(2.4deg) translateY(1px);
+  }
+  78% {
+    transform: skewX(-0.8deg);
+  }
+}
+
+@keyframes marks {
+  0%,
+  44%,
+  72%,
+  100% {
+    opacity: 0;
+  }
+  50%,
+  64% {
+    opacity: 1;
+  }
+}
+
+@keyframes marks-jolt {
+  0%,
+  44% {
+    scale: 0.5;
+  }
+  50% {
+    scale: 1.15;
+  }
+  56%,
+  100% {
+    scale: 1;
+  }
+}

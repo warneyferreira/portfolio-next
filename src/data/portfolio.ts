@@ -149,23 +149,23 @@ export const experience: {
   },
 ];
 
-export const projectsIntro =
-  "Um só, aberto por dentro. Prefiro mostrar um projeto inteiro a mostrar seis pela capa.";
-
 export const projects = [
   {
-    name: "TerraSense",
-    subtitle: "Monitoramento IoT com IA",
-    type: "Full stack",
+    name: "Estúdio",
+    subtitle: "Conteúdo para redes sociais com IA",
+    type: "Aplicação web",
+    href: "https://studiomkt.com.br",
+    logo: "/images/projects/studio-logo.svg",
+    preview: "/images/projects/studio-screenshot.webp",
     description:
-      "Sistema de monitoramento agrícola em tempo real que liga sensores de solo a análise preditiva.",
+      "Do assunto ao conteúdo pronto: uma plataforma para criar carrosséis e posts, editar vídeos falados e produzir motions de produto com IA.",
     highlights: [
-      "Integração de sensores físicos com processamento em Python e persistência em banco",
-      "RAG com banco vetorial para busca semântica sobre a série histórica",
-      "Embeddings para análise contextual dos dados agrícolas",
-      "Dashboard em Next.js com previsão de métricas de solo via Gemini",
+      "Roteiros, legendas e imagens para carrosséis, com revisão do texto antes de gerar as imagens",
+      "Edição de vídeo pela transcrição, com cortes de hesitações, legendas automáticas e cards",
+      "Motions de produto com cenas, textos e música ajustáveis, exportados em MP4",
+      "Biblioteca de referências para reaproveitar fundos, direção de arte e ideias de posts",
     ],
-    tags: ["Next.js", "Python", "RAG", "Banco vetorial", "Gemini", "IoT"],
+    tags: ["IA generativa", "Carrosséis", "Edição de vídeo", "Motion de produto"],
   },
 ];
 

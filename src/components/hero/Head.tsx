@@ -49,6 +49,20 @@ export default function Head() {
             <polygon points={eye.clip} />
           </clipPath>
         ))}
+        {/* retícula de pontos no rosto, como sombra de screentone: some do lado
+            da luz (alto à esquerda) e adensa embaixo à direita. O traço grosso
+            preto da máscara recua os pontos da borda da silhueta dilatada,
+            então eles ficam dentro do contorno */}
+        <pattern id="portrait-dots" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <circle cx="4.5" cy="4.5" r="2.1" fill="currentColor" />
+        </pattern>
+        <linearGradient id="portrait-shade" x1="0.15" y1="0.1" x2="0.95" y2="1">
+          <stop offset="0.35" stopColor="#000" />
+          <stop offset="1" stopColor="#fff" />
+        </linearGradient>
+        <mask id="portrait-dots-mask">
+          <path d={stickerFacePath} fill="url(#portrait-shade)" stroke="#000" strokeWidth={56} />
+        </mask>
       </defs>
       <g className={s.stickerLayer}>
         <g className={s.sway}>
@@ -58,6 +72,7 @@ export default function Head() {
         </g>
         <path className={s.sticker} d={stickerFacePath} />
       </g>
+      <path d={stickerFacePath} fill="url(#portrait-dots)" mask="url(#portrait-dots-mask)" />
       <path d={facePath} />
       <g className={s.sway}>
         <g className={s.breathe}>
