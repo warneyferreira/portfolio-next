@@ -21,7 +21,7 @@ export default function ProjectPull({ children }: { children: ReactNode }) {
         scrollTrigger: {
           trigger: root,
           start: "top 20%",
-          end: "+=150%",
+          end: "+=300%",
           pin: root.parentElement!,
           scrub: true,
           invalidateOnRefresh: true,

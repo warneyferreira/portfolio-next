@@ -56,7 +56,29 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
   animation: rise 900ms var(--ease) 700ms both;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  display: block;
+  flex: none;
+  padding: 6px 0;
+}
+
+.brand span {
+  display: block;
+  width: 64px;
+  height: 35px;
+  background: var(--ink);
+  mask: url("/images/brand/warney-rego.png") center / contain no-repeat;
 }
 
 .end {
@@ -168,16 +190,16 @@
 .title {
   align-self: center;
   margin: 0;
-  padding-top: 0.28em;
-  font-size: min(25.5vw, 35svh);
+  padding-block: 0.36em 0.08em;
+  font-size: min(24vw, 32svh);
   font-weight: 800;
   font-variation-settings:
     "opsz" 96,
     "wdth" 75;
-  line-height: 0.84;
+  line-height: 0.87;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
 }
 
 .line {
@@ -188,6 +210,7 @@
 
 .line + .line {
   animation-delay: 120ms;
+  text-align: right;
 }
 
 /* o "O" vira o retrato: ocupa o espaço da letra na altura de versal, e o
@@ -288,30 +311,52 @@
   bottom: 0.82em;
   white-space: nowrap;
   text-align: left;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  text-transform: none;
+  animation: rise 800ms var(--ease) 2300ms both;
 }
 
 .tag span {
   display: block;
   font-size: 0.2em;
   font-weight: 800;
-  font-variation-settings:
-    "opsz" 96,
-    "wdth" 100;
   line-height: 1;
   letter-spacing: -0.03em;
-  text-transform: none;
-  animation: rise 800ms var(--ease) 2300ms both;
 }
+
 
 /* ---------- rodapé da hero ---------- */
 
 .foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: end;
+  gap: 28px 48px;
   animation: rise 900ms var(--ease) 820ms both;
+}
+
+.introduction {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+
+.workLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 18px;
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 650;
+  text-decoration: none;
+  transition: background-color 180ms var(--ease), color 180ms var(--ease);
+}
+
+.workLink:hover {
+  background: transparent;
+  color: var(--ink);
 }
 
 .lede {
@@ -327,11 +372,12 @@
 }
 
 .mail {
+  max-width: 100%;
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
   font-weight: 700;
-  font-size: clamp(1.15rem, 1.4vw + 0.7rem, 1.75rem);
+  font-size: clamp(1.15rem, 2vw + 0.35rem, 2.2rem);
   letter-spacing: -0.015em;
   text-decoration: none;
 }
@@ -528,6 +574,32 @@
 }
 
 @media (max-width: 640px) {
+  .bar {
+    gap: 16px;
+    padding-bottom: 16px;
+  }
+
+  .identity {
+    gap: 14px;
+  }
+
+  .brand span {
+    width: 48px;
+    height: 26px;
+  }
+
+  .bar ul {
+    justify-content: space-between;
+    gap: 10px 12px;
+    font-size: 0.875rem;
+  }
+
+  .foot {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 24px;
+  }
+
   /* celular: lugar e botão na primeira linha, seções embaixo */
   .end {
     display: contents;
@@ -563,7 +635,7 @@
   .foot,
   .stroke,
   .tip,
-  .tag span {
+  .tag {
     animation: none;
   }
 }

@@ -118,7 +118,7 @@
 .dove .shape,
 .dove .ink {
   mask-size: 900% 100%;
-  animation: flap 720ms steps(9) infinite;
+  animation: flap 960ms steps(9) infinite;
 }
 
 /* a segunda pomba voa para a esquerda */

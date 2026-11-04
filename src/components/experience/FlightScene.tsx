@@ -26,8 +26,8 @@ export default function FlightScene({ children, ...props }: ComponentProps<"ol">
         const flight = gsap.timeline({
           scrollTrigger: {
             trigger: panel,
-            start: "top bottom+=50%",
-            end: "bottom top-=50%",
+            start: "top bottom+=100%",
+            end: "bottom top-=100%",
             scrub: 1.5,
             invalidateOnRefresh: true,
             onToggle: (trigger) => bird.toggleAttribute("data-flying", trigger.isActive),

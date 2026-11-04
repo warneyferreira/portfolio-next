@@ -31,7 +31,7 @@ export default function RevealScene({ children, ...props }: ComponentProps<"div"
           scrollTrigger: {
             trigger: root,
             start: "top top",
-            end: "+=240%",
+            end: "+=400%",
             pin: true,
             scrub: 1,
           },

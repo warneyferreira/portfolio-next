@@ -39,14 +39,14 @@ export const contact = {
 
 export const about = {
   intro:
-    "Trabalho nas duas pontas do produto: a interface que o usuário toca e a inferência que responde por trás dela.",
+    "Construo produtos de ponta a ponta, da interface à inteligência artificial.",
   front: {
     title: "a ponta que se toca",
-    text: "No ecossistema web são 2+ anos com Next.js, Angular, React e TypeScript, usando RxJS, Angular Material e Tailwind CSS para interfaces responsivas. Em mobile, React Native para iOS e Android, além de PWAs com suporte offline.",
+    text: "Desenvolvo interfaces web e mobile com React, Next.js, Angular e React Native, com foco em usabilidade e desempenho.",
   },
   back: {
     title: "quem responde atrás",
-    text: "No backend, Node.js, Express, Python, Django e Flask sobre SQL (Oracle, PL/SQL) e NoSQL (Supabase, Firebase). Em IA, atuo com LLMs, RAG, embeddings, modelagem de banco vetorial e speech-to-text, integrando OpenAI, Gemini e Whisper com orquestração em LangChain.",
+    text: "No backend, trabalho com PHP, Node.js e Python. Modernizo sistemas legados e integro IA às aplicações.",
   },
 };
 
@@ -102,14 +102,25 @@ export const experience: {
   tags: string[];
 }[] = [
   {
-    period: "2026, atual",
+    period: "out 2026 – atual",
+    company: "Inforgeneses",
+    role: "Engenheiro de Software",
+    summary:
+      "Atuo na evolução de sistemas em PHP, com refatoração de aplicações legadas e integração de inteligência artificial.",
+    details:
+      "Desenvolvimento e manutenção de sistemas em PHP, refatoração de código legado e integração de recursos de IA às aplicações.",
+    results: [],
+    tags: ["PHP", "Sistemas legados", "Refatoração", "Integração de IA"],
+  },
+  {
+    period: "2026 – out 2026",
     company: "MedSafe",
     role: "Engenheiro de Software Pleno",
     promotedTo: "Coordenador de Engenharia de IA",
     summary:
-      "Lidero a engenharia de IA como coordenador hands-on, da arquitetura à entrega em produção, com privacidade e confiabilidade como requisito e não como enfeite.",
+      "Liderei a engenharia de IA como coordenador hands-on, da arquitetura à entrega em produção, com privacidade e confiabilidade como requisito e não como enfeite.",
     details:
-      "Fine-tuning de modelos sobre dados regulatórios da ANVISA para triagem e análise clínica, assistentes conversacionais e geração automatizada de relatórios em infraestrutura privacy-first e descentralizada para dados sensíveis. Avaliação de modelos e provedores, open source contra proprietários, equilibrando custo, janela de contexto e latência, com inferência local otimizada por quantização, tuning de system prompt e uso racional de GPU. Também respondo pela liderança técnica do time mobile do app de saúde usado em todo o Piauí: decisões arquiteturais, revisão de código, mentoria e alinhamento com stakeholders.",
+      "Fine-tuning de modelos sobre dados regulatórios da ANVISA para triagem e análise clínica, assistentes conversacionais e geração automatizada de relatórios em infraestrutura privacy-first e descentralizada para dados sensíveis. Avaliação de modelos e provedores, open source contra proprietários, equilibrando custo, janela de contexto e latência, com inferência local otimizada por quantização, tuning de system prompt e uso racional de GPU. Também respondi pela liderança técnica do time mobile do app de saúde usado em todo o Piauí: decisões arquiteturais, revisão de código, mentoria e alinhamento com stakeholders.",
     results: [
       { value: "65%", label: "de redução no tempo de resposta das telas principais" },
       { value: "55%", label: "de redução no carregamento inicial do app" },
@@ -168,12 +179,6 @@ export const projects = [
     tags: ["IA generativa", "Carrosséis", "Edição de vídeo", "Motion de produto"],
   },
 ];
-
-export const projectsOutro =
-  "O resto do que eu escrevo mora atrás do login de algum cliente. O que dá para abrir, eu abro aqui:";
-
-export const educationIntro =
-  "A parte da tira que acontece dentro da sala de aula — e o que eu fui buscar fora dela.";
 
 export const education = [
   {

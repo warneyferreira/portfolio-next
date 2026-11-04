@@ -1,13 +1,14 @@
 /* O tema vive em <html data-theme>. color-scheme deixa o texto ainda sem
    estilo acompanhar as cores do próprio navegador. */
 
-/* Papel contínuo, com retícula discreta para não competir com as ilustrações. */
+/* Papel com grão, fibras e vincos suaves rasterizados, sem filtros na rolagem. */
 html {
   --paper: #f4efe4;
+  --paper-texture: url("/images/background/paper-light.webp");
 
   background-color: var(--paper);
-  background-image: radial-gradient(circle, var(--paper-dot, #15130f0c) 0.7px, transparent 0.9px);
-  background-size: 14px 14px;
+  background-image: var(--paper-texture);
+  background-size: 1024px 1024px;
 }
 
 html[data-theme="light"] {
@@ -18,7 +19,7 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
   color-scheme: dark;
   --paper: #161412;
-  --paper-dot: #efe9df0c;
+  --paper-texture: url("/images/background/paper-dark.webp");
 }
 
 body {

@@ -2,7 +2,6 @@
   --ink: #15130f;
   --muted: #5c564d;
   --rule: #bdb5a5;
-  margin-inline: -8px;
   color: var(--ink);
   font-family: var(--font-contact), sans-serif;
 }
@@ -52,7 +51,7 @@
 .letter {
   position: relative;
   isolation: isolate;
-  margin-block: clamp(56px, 7vw, 104px);
+  margin-block: 0 clamp(56px, 7vw, 104px);
   padding: clamp(28px, 4vw, 60px);
   border: 2px solid var(--ink);
   background: var(--paper);

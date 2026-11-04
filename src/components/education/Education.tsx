@@ -1,5 +1,6 @@
 import { Bricolage_Grotesque } from "next/font/google";
-import { certifications, certificationsIntro, education, educationIntro } from "@/data/portfolio";
+import { certifications, certificationsIntro, education } from "@/data/portfolio";
+import EducationArt from "./EducationArt";
 import s from "./education.module.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -12,8 +13,10 @@ export default function Education() {
   return (
     <section id="educacao" aria-labelledby="education-title" className={`${s.education} ${bricolage.variable}`}>
       <div className={s.heading}>
-        <h2 id="education-title">Educação<span aria-hidden="true">.</span></h2>
-        <p>{educationIntro}</p>
+        <div className={s.headingTitle}>
+          <h2 id="education-title">Educação<span aria-hidden="true">.</span></h2>
+          <EducationArt kind="owl" />
+        </div>
       </div>
 
       <div className={s.degrees}>
@@ -32,7 +35,10 @@ export default function Education() {
 
       <div className={s.certifications}>
         <div className={s.certHeading}>
-          <h3>Certificações</h3>
+          <div className={s.headingTitle}>
+            <h3>Certificações</h3>
+            <EducationArt kind="diploma" />
+          </div>
           <p>{certificationsIntro}</p>
         </div>
         <ul className={s.certList}>

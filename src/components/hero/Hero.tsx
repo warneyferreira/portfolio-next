@@ -15,9 +15,14 @@ export default function Hero() {
   const o = first.toLowerCase().indexOf("o");
 
   return (
-    <header className={`${s.hero} ${bricolage.variable}`}>
+    <header id="inicio" className={`${s.hero} ${bricolage.variable}`}>
       <div className={s.bar}>
-        <p className={s.place}>{profile.location}</p>
+        <div className={s.identity}>
+          <a className={s.brand} href="#inicio" aria-label={`${profile.shortName}, início`}>
+            <span aria-hidden="true" />
+          </a>
+          <p className={s.place}>{profile.location}</p>
+        </div>
         <div className={s.end}>
           <nav aria-label="Seções">
             <ul>
@@ -57,7 +62,13 @@ export default function Hero() {
       </h1>
 
       <div className={s.foot}>
-        <p className={s.lede}>{profile.description}</p>
+        <div className={s.introduction}>
+          <p className={s.lede}>{profile.description}</p>
+          <a className={s.workLink} href="#projetos">
+            Ver projetos
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6" /></svg>
+          </a>
+        </div>
         <div className={s.actions}>
           <a className={s.mail} href={`mailto:${contact.email}`}>
             {contact.email}

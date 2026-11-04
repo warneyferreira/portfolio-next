@@ -58,6 +58,7 @@ export default function Experience() {
                     </ul>
                   </div>
                 </div>
+                {job.results.length > 0 && (
                 <ul className={s.results} aria-label="Resultados">
                   {job.results.map((result) => (
                     <li key={result.label} className={result.value ? undefined : s.resultNote}>
@@ -66,6 +67,7 @@ export default function Experience() {
                     </li>
                   ))}
                 </ul>
+                )}
               </details>
             </li>
           ))}

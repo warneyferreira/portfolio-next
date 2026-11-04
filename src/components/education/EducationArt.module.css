@@ -1,0 +1,116 @@
+.scene {
+  --art-paper: var(--paper);
+  --art-ink: var(--ink);
+  --frame-position: 100%;
+  position: relative;
+  width: min(100%, 330px);
+  aspect-ratio: 1;
+  isolation: isolate;
+  pointer-events: none;
+  user-select: none;
+}
+
+:global(html[data-theme="dark"]) .scene {
+  --art-paper: #efe9df;
+  --art-ink: #15130f;
+}
+
+.art {
+  position: absolute;
+  aspect-ratio: 1;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.shape {
+  background: var(--art-paper);
+}
+
+.ink {
+  background: var(--art-ink);
+}
+
+.owlArt {
+  inset: 0;
+}
+
+.owlArt .layer {
+  -webkit-mask-size: 600% 100%;
+  mask-size: 600% 100%;
+  -webkit-mask-position: var(--frame-position) 0%;
+  mask-position: var(--frame-position) 0%;
+}
+
+.owlArt .shape {
+  --mask: url("/images/education/owl-book-shape.webp");
+}
+
+.owlArt .ink {
+  --mask: url("/images/education/owl-book-ink.webp");
+}
+
+.diplomaScene {
+  width: min(100%, 310px);
+}
+
+.diploma {
+  width: 88%;
+  left: 2%;
+  top: 10%;
+  transform: rotate(-6deg);
+}
+
+.diploma .shape {
+  --mask: url("/images/education/diploma-shape.webp");
+}
+
+.diploma .ink {
+  --mask: url("/images/education/diploma-ink.webp");
+}
+
+.stamp {
+  width: 40%;
+  left: 30%;
+  top: 32%;
+  transform: rotate(-5deg);
+  transform-origin: 50% 90%;
+}
+
+.stamp .shape {
+  --mask: url("/images/education/stamp-shape.webp");
+}
+
+.stamp .ink {
+  --mask: url("/images/education/stamp-ink.webp");
+}
+
+@media (max-width: 760px) {
+  .scene {
+    width: min(72%, 280px);
+    margin-inline: auto;
+  }
+
+  .diplomaScene {
+    width: min(72%, 260px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    --frame-position: 100%;
+  }
+
+  .stamp {
+    transform: rotate(-5deg);
+  }
+}
