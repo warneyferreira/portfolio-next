@@ -38,7 +38,7 @@ export default function Contact() {
             <li><a href={contact.phone.href}>{contact.phone.label}</a></li>
             <li><a href={contact.linkedin}>LinkedIn</a></li>
             <li><a href={contact.github}>GitHub</a></li>
-            <li><a href={profile.site}>warney.dev</a></li>
+            <li><a href={profile.site}>warneyrego.com</a></li>
           </ul>
         </div>
       </section>

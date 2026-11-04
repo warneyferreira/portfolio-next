@@ -1,6 +1,6 @@
 # Portfólio — Warney Rego
 
-Portfólio de [warney.dev](https://www.warney.dev) em Next.js (App Router), com identidade visual em preto e branco e animações de rolagem.
+Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router), com identidade visual em preto e branco e animações de rolagem.
 
 O fundo usa texturas rasterizadas de papel levemente amassado em `public/images/background/`, com versões clara e escura. A folha tem vincos suaves e é contínua entre as seções, sem grade de pontos nem filtros calculados durante a rolagem.
 

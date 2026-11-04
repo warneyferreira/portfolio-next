@@ -4,10 +4,10 @@ export const profile = {
   role: "Desenvolvedor Full Stack e AI Engineer",
   headline: "Full Stack e AI Engineering",
   location: "Teresina, PI",
-  experienceYears: "2+ anos",
+  experienceYears: "3+ anos",
   description:
-    "Full stack com 2+ anos construindo web, mobile e infraestrutura de IA em produção.",
-  site: "https://www.warney.dev",
+    "Full stack com 3+ anos construindo web, mobile e infraestrutura de IA em produção.",
+  site: "https://warneyrego.com",
   resume: "/curriculo-warney-rego.pdf",
   highlightStack: ["Next.js", "React Native", "Node.js", "PostgreSQL", "LangChain", "Docker"],
 };
@@ -30,7 +30,7 @@ export const contact = {
   intro: "A caixa de correio fica aqui embaixo. Eu abro todo dia, mesmo quando está vazia.",
   letter: "Se você chegou até o último quadro, já dá para a gente conversar.",
   email: "warneydev@gmail.com",
-  phone: { label: "(85) 98574-7716", href: "tel:+5585985747716" },
+  phone: { label: "(86) 99922-9061", href: "tel:+5586999229061" },
   linkedin: "https://www.linkedin.com/in/warney-rego/",
   github: "https://github.com/WarneyRego",
   city: "Teresina, PI",
