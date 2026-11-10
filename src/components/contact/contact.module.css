@@ -1,15 +1,8 @@
 .close {
-  --ink: #15130f;
   --muted: #5c564d;
   --rule: #bdb5a5;
   color: var(--ink);
-  font-family: var(--font-contact), sans-serif;
-}
-
-:global(html[data-theme="dark"]) .close {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --rule: #696258;
+  font-family: var(--font-sans), sans-serif;
 }
 
 .close ::selection {
@@ -46,6 +39,34 @@
   line-height: 1.2;
   letter-spacing: -0.025em;
   text-wrap: pretty;
+}
+
+/* carta + mão que lacra: a leitura fica no cartão; a gravura, contida,
+   acompanha à direita */
+.correspondence {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  margin-block: 0 clamp(56px, 7vw, 104px);
+}
+
+.seal {
+  position: relative;
+  align-self: center;
+  justify-self: end;
+  width: clamp(220px, 24vw, 340px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.sealInk {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+  mask-image: url("/images/contact/sealing-hand-dither.webp");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
 .letter {
@@ -173,6 +194,17 @@
   .details {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  /* no papel estreito a mão fica menor, à direita, sob o cartão */
+  .correspondence {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .seal {
+    justify-self: end;
+    width: min(64%, 300px);
   }
 
   .heading h2 {

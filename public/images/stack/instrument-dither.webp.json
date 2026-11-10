@@ -1,0 +1,9 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "prompt": "Exploded technical engraving of a Renaissance mechanical instrument: a clockwork movement taken apart in an exploded diagram, toothed gears and pinions of different sizes, a balance wheel and escapement, coiled spring, screws, pillars and circular plates floating apart along a diagonal, generous empty paper between the parts. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no lettering, no numbers, no border, no frame.",
+  "pipeline": "1536x1024 gerado; reescalado para 1280x853 (lanczos3); tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
+  "storage": "lossless WebP",
+  "delivery": "public/images/stack/instrument-dither.webp, ao lado da lista da Stack, estática"
+}

@@ -1,17 +1,10 @@
 .projects {
-  --ink: #15130f;
   --sheet: #f4efe4;
   --quiet: #5c564d;
   color: var(--ink);
-  font-family: var(--font-projects), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   padding: clamp(64px, 8vw, 120px) clamp(20px, 3.4vw, 48px) clamp(80px, 9vw, 140px);
   scroll-margin-top: 24px;
-}
-
-:global(html[data-theme="dark"]) .projects {
-  --ink: #efe9df;
-  --sheet: #161412;
-  --quiet: #b6afa4;
 }
 
 .projects ::selection {
@@ -21,66 +14,27 @@
 
 .heading {
   display: grid;
-  grid-template-columns: 1fr;
-  align-items: end;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px clamp(32px, 5vw, 72px);
   margin-bottom: clamp(42px, 6vw, 80px);
 }
 
-.pullScene {
-  --gladiator-width: clamp(110px, 17vw, 220px);
-  min-width: 0;
-  display: grid;
-  align-items: center;
-  min-height: clamp(240px, 52svh, 460px);
-  padding-left: 20px;
-  overflow: clip;
-}
-
-.pullGroup {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.rope {
-  opacity: 0;
-  flex: 1;
-  min-width: 24px;
-  margin-right: calc(var(--gladiator-width) * -0.29);
-  border-top: 2px solid var(--ink);
-  transform: translateY(calc(var(--gladiator-width) * 0.085));
-}
-
-.gladiator {
+/* marca tipográfica: a bancada do gravador, máscara 1 bit de var(--ink) */
+.mark {
   position: relative;
-  z-index: 1;
-  flex: none;
-  width: var(--gladiator-width);
-  aspect-ratio: 3 / 4;
+  width: clamp(180px, 24vw, 360px);
+  aspect-ratio: 1;
+  pointer-events: none;
 }
 
-.standing,
-.sitting {
+.markInk {
   position: absolute;
   inset: 0;
-  background-repeat: no-repeat;
-  background-size: 700% 100%;
-}
-
-.standing {
-  opacity: 0;
-  background-image: url("/images/projects/gladiator-pull.webp");
-  background-position: 0% 0%;
-}
-
-.sitting {
-  background-image: url("/images/projects/gladiator-sit.webp");
-  background-position: 100% 0%;
-}
-
-:global(html[data-theme="dark"]) .gladiator {
-  filter: drop-shadow(0 0 1px #efe9df);
+  background-color: var(--ink);
+  mask-image: url("/images/projects/workbench-dither.webp");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
 .heading h2 {
@@ -311,10 +265,6 @@
 
   .heading h2 {
     font-size: clamp(2.2rem, 9vw, 3.5rem);
-  }
-
-  .pullScene {
-    --gladiator-width: clamp(75px, 23vw, 110px);
   }
 
   .projectDetails {

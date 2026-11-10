@@ -1,26 +1,16 @@
 /* A Experiência é uma tira: cada emprego é um quadro de nanquim colado no
    papel, levemente torto, com uma sombra em retícula impressa ao lado (não
-   um bloco chapado). Letreiro em cima com o período, história no meio,
-   números no rodapé do quadro. Mesmas duas tintas do resto do portfólio;
-   no escuro o quadro vira adesivo claro com traço escuro, como o retrato. */
+   um bloco chapado). Um friso da ponte em obras abre a seção; nada de
+   nuvens, pombas ou cena presa. */
 .experience {
-  --ink: #15130f;
   --muted: #5c564d;
   --sheet: var(--paper);
   --line: var(--ink);
   --line-muted: var(--muted);
 
   color: var(--ink);
-  font-family: var(--font-experience), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   scroll-margin-top: 24px;
-}
-
-:global(html[data-theme="dark"]) .experience {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --sheet: var(--ink);
-  --line: var(--paper);
-  --line-muted: #4d4740;
 }
 
 .experience ::selection {
@@ -37,10 +27,36 @@
   white-space: nowrap;
 }
 
+.title {
+  margin: 0 0 clamp(32px, 4vw, 56px);
+  font-size: clamp(3.6rem, 13vw, 12rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
 .strip {
   margin-inline: -8px;
   padding: clamp(24px, 4vw, 56px) clamp(20px, 3.4vw, 48px) clamp(80px, 9vw, 140px);
   overflow: clip;
+}
+
+/* friso da ponte em obras: máscara 1 bit de var(--ink) sobre o papel */
+.frieze {
+  position: relative;
+  margin: 0 0 clamp(48px, 6vw, 88px);
+  height: clamp(120px, 24vw, 300px);
+  pointer-events: none;
+}
+
+.friezeInk {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+  mask-image: url("/images/experience/bridge-dither.webp");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
 .intro {
@@ -62,26 +78,6 @@
   max-width: 960px;
   padding: 0;
   list-style: none;
-}
-
-/* As pombas cruzam a margem superior de cada quadro, sem cobrir a leitura. */
-.panelFlight {
-  top: clamp(-100px, -7vw, -60px);
-  left: 0;
-  z-index: 2;
-  --fill: var(--sheet);
-}
-
-.panels[data-flights-active] .panelFlight {
-  display: block;
-}
-
-.panelFlight span {
-  animation-play-state: paused;
-}
-
-.panelFlight[data-flying] span {
-  animation-play-state: running;
 }
 
 /* o giro cria um contexto de empilhamento, então a sombra (z -2) e a folha

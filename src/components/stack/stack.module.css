@@ -1,65 +1,35 @@
-/* Stack no papel do portfólio: tinta preta, Bricolage. A lista
-   carrega normal; em tela grande a StackScene prende a seção e, rolando,
-   Sísifo entra e os itens são puxados para formar a pedra dele. */
-.stack {
-  --ink: #15130f;
-  --muted: #5c564d;
-  --rule: #bdb5a5;
+/* Stack no papel do portfólio: um instrumento mecânico renascentista
+   explodido (máscara 1 bit impressa em var(--ink)) acompanha a abertura,
+   e a lista de grupos carrega normal, sem cena presa. */
 
+.stack {
   position: relative;
   margin-inline: -8px;
   padding: clamp(72px, 8vw, 128px) clamp(20px, 3.4vw, 48px) clamp(72px, 8vw, 128px);
   overflow-x: clip;
   color: var(--ink);
-  font-family: var(--font-stack), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   scroll-margin-top: 24px;
 }
 
-:global(html[data-theme="dark"]) .stack {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --rule: #514b43;
+/* ---------- instrumento explodido ---------- */
+
+.instrument {
+  position: relative;
+  align-self: center;
+  justify-self: end;
+  width: clamp(240px, 26vw, 380px);
+  aspect-ratio: 1280 / 853;
+  pointer-events: none;
 }
 
-.stack ::selection {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* ---------- Sísifo ---------- */
-
-/* fora da cena (celular, menos movimento): Sísifo pronto embaixo da lista */
-.stage {
-  width: min(100%, 380px);
-  margin: clamp(48px, 8vw, 96px) auto 0;
-}
-
-/* Na cena, a seção ocupa a tela presa e Sísifo fica à direita, apoiado no
-   pé da tela e abaixo da frase de abertura, por cima da terceira coluna,
-   que se apaga antes de ele chegar. Corpo, casca e ícones começam
-   invisíveis; a cena os traz. */
-@media (min-width: 1001px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
-  .stack {
-    min-height: 100svh;
-    box-sizing: border-box;
-  }
-
-  /* medido pela tela, não pela seção: se a lista for mais alta que a tela,
-     o pé da seção fica abaixo da dobra e cortava as pernas dele. Ele tem
-     72svh de altura e fica com 3svh de folga do chão da tela. */
-  .stage {
-    position: absolute;
-    top: 25svh;
-    right: clamp(20px, 3.4vw, 48px);
-    width: calc(72svh * 846 / 1470);
-    margin: 0;
-  }
-
-  .stage [data-figure],
-  .stage [data-shell],
-  .stage [data-tool] {
-    opacity: 0;
-  }
+.instrumentInk {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+  mask-image: url("/images/stack/instrument-dither.webp");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
 /* ---------- texto ---------- */
@@ -71,9 +41,9 @@
 
 .heading {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: 0.85fr 1.15fr auto;
   align-items: start;
-  gap: 48px;
+  gap: 48px clamp(28px, 4vw, 64px);
 }
 
 .heading h2 {
@@ -154,6 +124,14 @@
   .heading {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  /* no papel estreito o instrumento fica pequeno, à direita, sem
+     disputar a leitura */
+  .instrument {
+    justify-self: end;
+    width: min(64%, 280px);
+    margin-top: 8px;
   }
 
   .groups {

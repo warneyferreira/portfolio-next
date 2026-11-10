@@ -1,31 +1,27 @@
-import { Bricolage_Grotesque } from "next/font/google";
 import { contact, profile } from "@/data/portfolio";
-import ContactArt from "./ContactArt";
 import s from "./contact.module.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-contact",
-});
 
 export default function Contact() {
   return (
-    <div className={`${s.close} ${bricolage.variable}`}>
+    <div className={s.close}>
       <section id="contato" aria-labelledby="contact-title" className={s.contact}>
         <div className={s.heading}>
           <h2 id="contact-title">Contato<span aria-hidden="true">.</span></h2>
           <p>{contact.intro}</p>
         </div>
 
-        <ContactArt />
+        <div className={s.correspondence}>
+          <div className={s.letter}>
+            <p className={s.message}>{contact.letter}</p>
+            <p className={s.email}>
+              <span>Escreva para</span>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </p>
+          </div>
 
-        <div className={s.letter}>
-          <p className={s.message}>{contact.letter}</p>
-          <p className={s.email}>
-            <span>Escreva para</span>
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          </p>
+          <div className={s.seal} aria-hidden="true">
+            <span className={s.sealInk} />
+          </div>
         </div>
 
         <div className={s.details}>

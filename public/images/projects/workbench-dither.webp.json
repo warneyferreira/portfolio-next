@@ -1,0 +1,9 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "prompt": "Engraver's workbench seen from a slight angle: a wooden printing frame with a screw press, composing sticks with loose metal type sorts, engraved copper plates stacked at one end, an ink roller and leather ink ball resting on the bench, sheets of printed paper, a candlestick and small tools at the edges. The workbench fills the plate like a workshop still life; generous empty paper around the objects. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no lettering, no border, no frame.",
+  "pipeline": "1254x1254 gerado; reescalado para 960x960 (lanczos3); tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
+  "storage": "lossless WebP",
+  "delivery": "public/images/projects/workbench-dither.webp, marca tipográfica ao lado do título de Projetos, estática"
+}

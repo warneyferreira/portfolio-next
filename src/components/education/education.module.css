@@ -1,18 +1,11 @@
 .education {
-  --ink: #15130f;
   --muted: #5c564d;
   --rule: #bdb5a5;
   margin-inline: -8px;
   padding: clamp(64px, 7vw, 112px) clamp(20px, 3.4vw, 48px);
   color: var(--ink);
-  font-family: var(--font-education), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   scroll-margin-top: 24px;
-}
-
-:global(html[data-theme="dark"]) .education {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --rule: #514b43;
 }
 
 .education ::selection {
@@ -105,10 +98,29 @@
 
 .certHeading {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) auto;
   gap: 48px;
   align-items: start;
   margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+/* atlas aberto com compasso: máscara 1 bit de var(--ink) */
+.atlas {
+  position: relative;
+  align-self: center;
+  justify-self: end;
+  width: clamp(220px, 24vw, 340px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.atlasInk {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+  mask-image: url("/images/education/atlas-dither.webp");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
 .certHeading h3 {
@@ -188,6 +200,12 @@
   .certHeading {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  /* no papel estreito o atlas fica pequeno, à direita */
+  .atlas {
+    justify-self: end;
+    width: min(64%, 280px);
   }
 
   .certList {

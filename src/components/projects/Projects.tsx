@@ -1,20 +1,15 @@
-import { Bricolage_Grotesque } from "next/font/google";
 import Image from "next/image";
 import { projects } from "@/data/portfolio";
-import ProjectPull from "./ProjectPull";
 import s from "./projects.module.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-projects",
-});
 
 export default function Projects() {
   return (
-    <section id="projetos" aria-labelledby="projects-title" className={`${s.projects} ${bricolage.variable}`}>
+    <section id="projetos" aria-labelledby="projects-title" className={s.projects}>
       <header className={s.heading}>
-        <ProjectPull><h2 id="projects-title">Projetos</h2></ProjectPull>
+        <h2 id="projects-title">Projetos</h2>
+        <div className={s.mark} aria-hidden="true">
+          <span className={s.markInk} />
+        </div>
       </header>
 
       <div className={s.collection}>

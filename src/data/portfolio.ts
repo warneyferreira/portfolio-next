@@ -166,7 +166,7 @@ export const projects = [
     type: "Aplicação web",
     href: "https://studiomkt.com.br",
     logo: "/images/projects/studio-logo.svg",
-    preview: "/images/projects/studio-screenshot.webp",
+    preview: "/images/projects/studio-screenshot-dither.webp",
     description:
       "Do assunto ao conteúdo pronto: uma plataforma para criar carrosséis e posts, editar vídeos falados e produzir motions de produto com IA.",
     highlights: [

@@ -1,0 +1,9 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "prompt": "Wide panoramic architectural engraving of a stone bridge under construction: tall wooden scaffolding and lifting cranes standing on the far bank, masonry arches and cut stone blocks, a riverbank with small figures of workers hauling stone, the bridge receding diagonally across the width of the plate. The bridge spans the whole width like a frieze; generous empty paper above and below the structure. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no lettering, no border, no frame.",
+  "pipeline": "2172x724 gerado; tinta onde cinza < 128, sem matriz de dither (largura nativa, sem redimensionar); máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
+  "storage": "lossless WebP",
+  "delivery": "public/images/experience/bridge-dither.webp, friso panorâmico entre a introdução e os quadros de Experiência, estático"
+}

@@ -1,0 +1,6 @@
+{
+  "source": "public/images/projects/studio-screenshot.webp (captura real do Estúdio enviada pelo usuário, mantida como fonte)",
+  "pipeline": "2462x1258; dither ordenado Bayer 8×8 em tons de cinza, cinza >= 235 vira papel puro (scripts/dither-art.mjs --mode bayer); máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
+  "storage": "lossless WebP",
+  "delivery": "public/images/projects/studio-screenshot-dither.webp, miniatura do cartão do Estúdio; a captura original nunca é exibida em cores (regra de uma tinta)"
+}

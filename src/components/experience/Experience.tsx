@@ -1,36 +1,26 @@
-import { Bricolage_Grotesque } from "next/font/google";
 import { experience, experienceIntro } from "@/data/portfolio";
-import ExperienceReveal from "./ExperienceReveal";
-import FlightScene from "./FlightScene";
-import reveal from "./reveal.module.css";
 import s from "./experience.module.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-experience",
-});
 
 /* Lida como tira: o desfecho primeiro. Cada emprego é um quadro em
    nanquim, com o período e a empresa no letreiro, a história no meio e os
-   números no rodapé do quadro. */
+   números no rodapé do quadro. Um friso da ponte em obras abre a seção. */
 export default function Experience() {
   return (
-    <section id="experiencia" aria-labelledby="experience-title" className={`${s.experience} ${bricolage.variable}`}>
-      <ExperienceReveal title="Experiência" />
+    <section id="experiencia" aria-labelledby="experience-title" className={s.experience}>
+      <h2 id="experience-title" className={s.title}>
+        Experiência<span aria-hidden="true">.</span>
+      </h2>
 
       <div className={s.strip}>
         <p className={s.intro}>{experienceIntro}</p>
 
-        <FlightScene className={s.panels}>
-          {experience.map((job, index) => (
+        <div className={s.frieze} aria-hidden="true">
+          <span className={s.friezeInk} />
+        </div>
+
+        <ol className={s.panels}>
+          {experience.map((job) => (
             <li key={job.company} className={s.panel}>
-              <div className={`${reveal.flight} ${s.panelFlight}`} data-panel-flight aria-hidden="true">
-                <div className={`${reveal.dove} ${index % 2 ? reveal.mirrored : ""}`}>
-                  <span className={reveal.shape} style={{ maskImage: "url(/images/experience/dove-shape.webp)" }} />
-                  <span className={reveal.ink} style={{ maskImage: "url(/images/experience/dove-ink.webp)" }} />
-                </div>
-              </div>
               <details className={s.disclosure}>
                 <summary className={s.cardSummary}>
                   <span className={s.period}>{job.period}</span>
@@ -71,7 +61,7 @@ export default function Experience() {
               </details>
             </li>
           ))}
-        </FlightScene>
+        </ol>
       </div>
     </section>
   );
