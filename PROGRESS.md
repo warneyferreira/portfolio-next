@@ -1,8 +1,8 @@
 # Portfolio progress
 
 ## Status
-Current focus: 2. Design tokens, shade scale and `Dither` utility
-Iteration count: 1
+Current focus: Hero + Sobre in the one-ink system (covers backlog 2, 3a to 3c for these two sections, 5a, 6 and 7). Delegated to the omp agent in herdr terminal t10; brief in `/tmp/portfolio-loop/brief-hero-sobre.md`. This terminal (t6) coordinates and reviews.
+Iteration count: 2
 
 ## Loop notes
 Read these and DESIGN.md before picking a task.
@@ -17,6 +17,7 @@ Read these and DESIGN.md before picking a task.
 - **New assets.** The owner allows GPT Images 2 (`generate_image` tool) for monochrome assets. Match the existing classical engraving and stipple line art, run the result through the dithering pipeline, and write a `<asset>.webp.json` provenance sidecar without absolute local paths.
 - **Dependencies.** `sharp` 0.35.5 is already installed as a dependency of Next. If the dithering script uses it, add it to `devDependencies` and log that here. Nothing else new without a note.
 - **impeccable skill.** `impeccable context` reports NO_PRODUCT_MD and BUILD_INIT_REQUIRED. The owner answered the palette and theme questions in iteration 1 and DESIGN.md pins the visual world, so there is no new interview. `.impeccable/surfaces/src-components-about-about-tsx.md` still describes `#e84b08` and a dark theme; it is stale until the Sobre task rewrites it.
+- **Delegation (owner, 2026-11-10).** The owner wants the hands-on work done by the agent in the same herdr space, with less ceremony: batch the backlog items a section needs instead of one small task per iteration. `/mnt/c/Users/warney67/AppData/Local/Programs/herdr-core/hc.exe ls` lists terminals; the peer is the omp terminal whose `where` matches the coordinator's (`portfolio / 1`: coordinator t6, implementer t10 on 2026-11-10). `hc.exe send <t> "<text>"` gives it work, `hc.exe wait <t>` waits, `hc.exe read <t>` shows its screen. Put a long brief in a file and send the path. The coordinator owns PROGRESS.md and DESIGN.md, reviews screenshots, then logs. Remind the implementer that it can generate assets with GPT Images 2 (`generate_image` tool).
 
 ## Backlog
 Listed in priority order. Split a task here before doing part of it.
