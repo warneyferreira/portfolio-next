@@ -27,6 +27,8 @@
 /* Papel liso: a textura de papel foi aposentada com o tema escuro. */
 html {
   background-color: var(--paper);
+  /* A barra flutua sobre a página: âncoras param abaixo dela. */
+  scroll-padding-top: 88px;
 }
 
 body {

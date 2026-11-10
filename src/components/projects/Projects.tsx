@@ -16,7 +16,12 @@ export default function Projects() {
         {projects.map((project) => (
           <article key={project.name} className={s.project}>
             <div className={s.projectLead}>
-              <Image className={s.preview} src={project.preview} alt="Página inicial do Estúdio com a chamada Escreva o assunto. Receba o carrossel." width={2462} height={1258} sizes="(max-width: 700px) 100vw, 50vw" />
+              <div
+                className={s.preview}
+                role="img"
+                aria-label="Página inicial do Estúdio com a chamada Escreva o assunto. Receba o carrossel."
+                style={{ maskImage: `url("${project.preview}")` }}
+              />
             </div>
             <div className={s.projectDetails}>
               <div className={s.brand}>

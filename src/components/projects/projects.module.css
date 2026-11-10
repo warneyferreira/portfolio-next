@@ -83,10 +83,13 @@
 }
 
 .preview {
-  display: block;
   width: 100%;
-  height: auto;
-  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  aspect-ratio: 2462 / 1258;
+  background-color: var(--ink);
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  image-rendering: pixelated;
 }
 
 .brand {

@@ -26,6 +26,14 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 - Uppercase mono micro-labels (`01 / SOBRE`) as structural markers. Interface copy is Brazilian Portuguese.
 - Grotesk: Bricolage Grotesque (variable `opsz` and `wdth`), set as `--font-sans`. Mono: Martian Mono (variable), set as `--font-mono`. Both load once in `layout.tsx`.
 
+## Brand
+
+- **Mark** (`src/components/brand/BrandMark.tsx`, `src/app/icon.svg`): a 14×14 ink plate on a 16-unit grid, a pixel W knocked out (evenodd), and the site's dithered shadow — a 1-unit checker offset 2 units right and down. Print it at multiples of 16 px (32 px in the nav) so every checker cell is a whole pixel; `shape-rendering: crispEdges`, one colour, `currentColor`. No other mark, no gradient, no second colour.
+- **Lockup**: mark + `WARNEY REGO` in Martian Mono 11 px, uppercase, 0.1em tracking. The hero carries the name at display size; nothing else repeats it.
+- **Navbar** (`src/components/nav/`): one paper plate with a 2 px ink border, centred at the top (16 px from the top, 52 px tall, hugging its content). The mark opens the bar at the left, the name signs beside it, the five anchors follow. Hover and focus invert the cell (ink plate, paper text). ≤860 px: the mark, the name and Contato only.
+- **Opening** (`src/components/intro/`): the glass reveal plays once over a paper veil, then the mark glides into the navbar. Monochrome: dispersion and colour bleed are zero, so the glass bends the mark without splitting it into colour. Skippable (button, Escape); reduced motion, missing WebGL or no JS skip it, and a 7 s failsafe ends it.
+- **Favicon**: the same mark, ink on paper, at 16 units.
+
 ## Layout & components
 
 - Grid-based, generous whitespace, hard edges, 1–2px ink borders, no border-radius (or ≤2px).

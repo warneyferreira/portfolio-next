@@ -1,7 +1,7 @@
 # Portfolio progress
 
 ## Status
-Current focus: Replace the rejected art in Stack, Experiência, Projetos, Educação and Contato. Hero and Sobre are finished and stay unchanged. Implementer: existing herdr peer t10 in `portfolio / 1`; coordinator t6 owns direction, pipeline and acceptance checks.
+Current focus: Commit and push the complete shared worktree, as explicitly requested by the owner. Hero/Sobre and five replacement engravings are integrated; remaining styling and portfolio tasks stay below.
 Iteration count: 3
 
 ## Loop notes
@@ -28,14 +28,14 @@ Listed in priority order. Split a task here before doing part of it.
 - [ ] 3b. Finish font migration and type scale in lower sections. Bricolage Grotesque --font-sans and Martian Mono --font-mono load in layout; Hero/Sobre use them. Remove remaining per-component next/font instances and add shared type tokens.
 - [ ] 3c. Finish the one-ink cutover in lower sections: remove local palettes, muted greys, flat tints and grey rules. Globals already provide flat ivory paper, selection inversion and the 3px focus outline; Hero/Sobre use the shared palette.
 - [ ] 4. Layout shell: nav, footer, page grid. `nav` in `portfolio.ts` is unused and no `<nav>` exists. The README records that nav links, monogram, intro and CTA were moved out of the hero on purpose: the hero holds the name and the art only, so the nav starts below it. Shared section frame with mono micro-labels in page order. Fix the landmarks: `#contato` renders outside `<main>` and the hero `<header>` inside it.
-- [ ] 5b. New lower-section art: replace rejected Sisyphus, clouds/doves, gladiators, owl/diploma/stamp and winged-letter sprites with freshly generated line engravings. Process masks through scripts/dither-art.mjs --mode line. Dither the real Estúdio screenshot and reduce its logo to one ink without inventing project imagery. There is no portrait in the repo.
-- [ ] 8. Stack. Replace Sisyphus with an exploded Renaissance mechanical instrument engraving; integrate the real stack data, global ink and Bayer shading. Rework old sprite-dependent motion rather than retaining rejected artwork.
-- [ ] 9. Experiência. Replace clouds/doves with an architectural bridge/scaffold engraving. Keep the real timeline and accessible details. Use 1–2px hard edges, mono periods, Bayer depth and solid ink text; remove tilt, pills, flat-opacity title reveal and obsolete flight scenes.
-- [ ] 10. Projetos. Replace gladiators with an engraved workbench/printing-frame composition; remove obsolete pull sprites. Retain the real Estúdio screenshot and content, with dithered depth and one-ink logo. Move project-specific alt/link labels into projects[].
+- [x] 5b. New lower-section art: five GPT Images 2 engravings replace the rejected subjects; binary masks and portable provenance are integrated. The real Estúdio screenshot is Bayer-processed and its logo uses one ink. Original sources remain in scripts/sources/.
+- [ ] 8b. Stack finishing: shared type/spacing scale and Bayer interface shading. The new mechanical-instrument art, static layout and global ink are integrated.
+- [ ] 9b. Experiência finishing: replace remaining halftone depth, round toggles and flat tints with square Bayer surfaces. The new bridge frieze, static timeline and keyboard-operated details are integrated.
+- [ ] 10b. Projetos finishing: replace remaining sheet/quiet colours, color-mix fills, pills and halftone depth with shared tokens/Bayer; move project-specific alt/link labels into projects[]. The new workbench, real dithered screenshot and one-ink logo are integrated.
 - [ ] 11. Project detail page. `src/app/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
-- [ ] 12. Educação and Certificações. Replace owl/diploma/stamp with an open-atlas-and-compass engraving. Preserve the degree/certification content; global ink, hard edges, Bayer shading and no obsolete sprite scene.
+- [ ] 12b. Educação finishing: remove remaining grey rules/text and halftone badges. The new atlas/compass engraving and all existing degree/certification content are integrated.
 - [ ] 13. Writing section. No articles exist in the repo. Build the list component and a `writing` array in `portfolio.ts` that renders nothing while empty, marked `TODO(content):`.
-- [ ] 14. Contato and footer links. Replace the winged letter with an engraved hand sealing correspondence. Preserve working contact links and facts; Bayer depth, square edges and global ink.
+- [ ] 14b. Contato finishing: remove remaining muted text and halftone depth. The new sealing-hand engraving, footer and real contact links are integrated.
 - [ ] 15. Responsive pass (360 / 768 / 1280 / 1920).
 - [ ] 16. Accessibility pass (contrast, keyboard nav, alt text, landmarks, reduced motion).
 - [ ] 17. Performance pass (image sizes, canvas cost, fonts, bundle). Baseline first load: 6.9 MB.
@@ -56,12 +56,12 @@ Listed in priority order. Split a task here before doing part of it.
 - Portrait: none in the repo (the animated head was removed; Sobre uses the eye-and-hand engraving). Send a photo only if a dithered portrait is wanted.
 
 ## Found issues
-- `portfolio.ts`: `nav`, `profile.headline` and `profile.highlightStack` remain unused. About now uses hero.resumeLabel for the résumé action.
+- `portfolio.ts`: `profile.headline` and `profile.highlightStack` remain unused. Nav now consumes nav; About uses hero.resumeLabel.
 - `Projects.tsx`: the Estúdio `alt` text and "Visitar o Estúdio" are hard-coded inside `projects.map` (task 10).
-- Landmarks: no `<nav>`; `#contato` sits outside `<main>`; the hero `<header>` sits inside it (tasks 4 and 16).
+- Landmarks: the new global nav is integrated; #contato still sits outside main and the hero header inside it (tasks 4 and 16).
 - The older reference provenance sidecar at `scripts/sources/hero-reference-orange.webp.json` still contains an absolute local source path; newly generated sidecars must use portable paths.
-- Lower-section README art notes must follow the replacement assets; t10 owns this update.
-- Peer-reported reduced-motion issue at 1920: Experiência GSAP pin-spacer can use innerWidth instead of clientWidth, causing 15px horizontal overflow. Check while replacing that scene (task 9).
+- Remaining lower-section greys, flat tints, old paper tokens, halftone shadows and circular toggles are recorded in 3c/8b/9b/10b/12b/14b, not completed by the art replacement.
+- GSAP/@gsap/react/simple-icons have no remaining imports in src after the old scenes were removed; dependency removal remains for the performance pass.
 
 ## Audit (iteration 1, 2026-11-10)
 
@@ -101,3 +101,6 @@ Every scene is off under `prefers-reduced-motion: reduce` and shows a static end
 - 2026-11-10 — Iteration 2: t10 shipped Hero/Sobre and the shared one-ink foundation (104c38e, 8ab2dea); coordinator reviewed 1:1 engraving detail, the restored Sobre grid and the mobile plate. Lint, type-check and production build passed; desktop 1440/1920 and mobile 390/DPR 2 were visually reviewed. (globals/layout, hero/about, dither utility/pipeline, sources/masks, DESIGN.md, Sobre surface brief)
 - 2026-11-10 — Iteration 3 started: owner rejected the lower-section artwork; t10 directed to generate and integrate replacements for Stack, Experiência, Projetos, Educação and Contato using GPT Images 2. Hero/Sobre and factual project content are preserved. (DESIGN.md, PROGRESS.md)
 - 2026-11-10 — Corrected Bayer photo polarity (black prints ink, white stays paper). An isolated seven-tone smoke verified exact Bayer coverage, the line threshold boundary and binary alpha in both modes. Mobile Sobre résumé focus is a visible 3px ink outline, with download semantics and no horizontal overflow at 390px. (scripts/dither-art.mjs, Sobre surface brief)
+- 2026-11-10 — Branding: pixel-W mark on a 16-unit grid, favicon, one centred navbar plate with the mark at its start, and a glass opening that hands the mark to the bar. Monochrome glass (dispersion and colour bleed off); skip, reduced-motion and no-JS paths verified at 1440 and 390. (brand/, nav/, intro/, components/ui/liquid-glass-logo-reveal, layout, globals, icon.svg, DESIGN.md)
+- 2026-11-10 — Iteration 3: t10 committed the five replacement engravings, real Estúdio Bayer preview and obsolete scene removal (639f8db). Coordinator reviewed all five sections at 1440/390, confirmed all 157 factual fields, five keyboard disclosures, contact destinations and binary alpha in every new engraving. No horizontal overflow at either width. (lower sections, art/sources/sidecars, README)
+- 2026-11-10 — Owner requested immediate commit and push of all shared work, including t11's brand/navbar/intro/favicon. Lint, type-check and build passed; coordinator also changed the Estúdio preview to an ink-painted CSS mask so its binary alpha bypasses lossy Next Image optimisation rather than displaying black artwork. Residual styling work stays unchecked.

@@ -1,6 +1,6 @@
 # Portfólio — Warney Rego
 
-Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router), com uma tinta só (`--ink: #c43c00`) sobre papel (`--paper: #fef0d3`). Nada existe como cor fora dos dois tokens: tons intermediários são retículas Bayer de tinta sobre papel, e a arte é gravura de linha impressa na mesma tinta do texto.
+Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router). Direção visual: uma tinta (`--ink: #c43c00`) sobre papel (`--paper: #fef0d3`), com gravuras de linha e retículas Bayer. A arte já usa esses tokens; a migração dos estilos residuais está registrada em `PROGRESS.md`.
 
 Hero e Sobre compartilham uma gravura contínua em `src/app/opening.module.css`: a gravura aprovada da hero (Lady Justiça e Coliseu, gerada no GPT Images) é impressa como máscara 1 bit em `public/images/background/hero-engraving.webp` (3344 × 2229, ~164 KiB), com área central livre para leitura. Um único fundo atravessa as duas seções e não reinicia na seção Sobre. As laterais e a base de Sobre recebem gravuras adicionais geradas no GPT Images: colunas quebradas, cornijas, louros, oliveiras, moedas e fragmentos de mosaico. As máscaras `about-roman-{left,right,bottom}-dither.webp` e `eye-paper-dither.webp` usam dithering ordenado Bayer nas sombras, com cobertura binária, uma única tinta. Não há camada sobre o papel ou os textos. O conteúdo tem recuo lateral e inferior para não disputar espaço com as gravuras.
 
@@ -14,7 +14,7 @@ A seção Sobre usa uma composição aberta em duas colunas. A ilustração `pub
 
 O currículo para download fica em `public/curriculo-warney-rego.pdf`: PDF de duas páginas com texto selecionável e links, incluindo Inforgeneses, encerramento da MedSafe em outubro de 2026, Estúdio e certificações.
 
-O cartão do Estúdio destaca a captura real do site, reticulada em 1 bit (`studio-screenshot-dither.webp`, Bayer, a captura original nunca é exibida em cores), e mantém a descrição compacta; a logo fica em uma única tinta. Os detalhes de recursos ficam em uma área expansível, sem JavaScript adicional.
+O cartão do Estúdio destaca a captura real do site, reticulada em 1 bit (`studio-screenshot-dither.webp`, Bayer). A prévia usa uma máscara CSS pintada com `var(--ink)`, sem recompressão pelo Next Image nem exibição do original em cores. A logo usa uma única tinta; os detalhes de recursos ficam em uma área expansível, sem JavaScript adicional.
 
 A branch `main` abre diretamente o design de uma tinta em `/`, sem seletor de estética. A versão com as duas estéticas e a tela de escolha está preservada na branch `twodesigns`.
 
@@ -28,7 +28,7 @@ As gravuras das seções seguintes foram geradas no GPT Images 2 a partir da gra
 
 O projeto em destaque é o [Estúdio](https://studiomkt.com.br), com descrição baseada no site público. A logo oficial e a captura enviada pelo usuário estão em `public/images/projects/studio-*`; a captura em cores contínua fica em `scripts/sources/studio-screenshot.webp` como fonte da retícula.
 
-O monograma WR continua disponível em `public/images/brand/warney-rego.png` e `warney-rego-light.png`, mas não é exibido na hero. O favicon em `src/app/favicon.ico` usa o monograma sobre fundo creme.
+A marca pixel-W aparece na barra de navegação e no favicon `src/app/icon.svg`. A abertura de vidro monocromático entrega a marca à barra; pode ser pulada e fica desativada com movimento reduzido ou sem JavaScript. Os monogramas antigos permanecem em `public/images/brand/` até a revisão de arquivos sem uso.
 
 As importações CSS geram URLs com hash; `hero-engraving.webp.json` registra a referência, o modelo e o pipeline da gravura.
 
