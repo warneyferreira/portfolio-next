@@ -1,24 +1,21 @@
-import { Bricolage_Grotesque } from "next/font/google";
-import { about, profile } from "@/data/portfolio";
+import { about, hero, profile } from "@/data/portfolio";
 import s from "./about.module.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
-  variable: "--font-about",
-});
 
 export default function About() {
   return (
-    <section id="sobre" aria-labelledby="about-title" className={`${s.about} ${bricolage.variable}`}>
-      <div className={s.composition}>
-        <h2 id="about-title" className={s.title}>
-          Sobre<span aria-hidden="true">.</span>
-        </h2>
-        <p className={s.intro}>{about.intro}</p>
+    <section id="sobre" aria-labelledby="about-title" className={s.about}>
+      <p className={s.label} aria-hidden="true">{about.label}</p>
 
-        <div className={s.artwork} aria-hidden="true">
-          <span className={s.artworkInk} />
+      <div className={s.composition}>
+        <div>
+          <h2 id="about-title" className={s.title}>
+            Sobre<span aria-hidden="true">.</span>
+          </h2>
+          <p className={s.intro}>{about.intro}</p>
+
+          <div className={s.artwork} aria-hidden="true">
+            <span className={s.artworkInk} />
+          </div>
         </div>
 
         <div className={s.story}>
@@ -49,7 +46,7 @@ export default function About() {
           </div>
         </dl>
         <a className={s.resume} href={profile.resume} download>
-          Baixar currículo
+          {hero.resumeLabel}
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
             <path d="M12 3v13m-5-5 5 5 5-5M5 17v4h14v-4" />
           </svg>

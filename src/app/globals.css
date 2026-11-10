@@ -1,25 +1,32 @@
-/* O tema vive em <html data-theme>. color-scheme deixa o texto ainda sem
-   estilo acompanhar as cores do próprio navegador. */
+/* Uma tinta (#c43c00) sobre um papel (#fef0d3). Nada mais existe como cor:
+   tons intermediários são retículas Bayer de tinta sobre papel, nunca
+   cinzas, transparências ou gradientes suaves. Um tema só, claro. */
 
-/* Papel com grão, fibras e vincos suaves rasterizados, sem filtros na rolagem. */
-html {
-  --paper: #f4efe4;
-  --paper-texture: url("/images/background/paper-light.webp");
-
-  background-color: var(--paper);
-  background-image: var(--paper-texture);
-  background-size: 1024px 1024px;
-}
-
-html[data-theme="light"] {
+:root {
+  --ink: #c43c00;
+  --paper: #fef0d3;
+  --line: 2px;
   color-scheme: light;
+
+  /* Escala de retículas --shade-0 (papel) … --shade-8 (tinta sólida),
+     geradas por shadeTile(0..8) de src/lib/dither.ts e coladas aqui.
+     Tile de 8×8 px: matriz 4×4, células de 2 px. Usar como máscara por
+     cima de background-color: var(--ink), sempre no tamanho nativo
+     8px 8px — nunca fracionário. Não editar à mão. */
+  --shade-0: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3C/svg%3E");
+  --shade-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-4: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-5: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='2' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='6' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-6: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='2' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='6' y='0' width='2' height='2'/%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='2' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='6' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-7: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2'/%3E%3Crect x='2' y='0' width='2' height='2'/%3E%3Crect x='4' y='0' width='2' height='2'/%3E%3Crect x='6' y='0' width='2' height='2'/%3E%3Crect x='0' y='2' width='2' height='2'/%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='0' y='4' width='2' height='2'/%3E%3Crect x='2' y='4' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='6' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='4' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3C/svg%3E");
+  --shade-8: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8'/%3E%3C/svg%3E");
 }
 
-/* A mesma folha acompanha os dois temas. */
-html[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #161412;
-  --paper-texture: url("/images/background/paper-dark.webp");
+/* Papel liso: a textura de papel foi aposentada com o tema escuro. */
+html {
+  background-color: var(--paper);
 }
 
 body {
@@ -31,22 +38,14 @@ body > footer {
   margin-inline: 8px;
 }
 
-/* troca de tema: o novo tema se abre num círculo a partir do botão */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+/* Seleção: prato de tinta, texto em papel. */
+::selection {
+  background-color: var(--ink);
+  color: var(--paper);
 }
 
-::view-transition-new(root) {
-  animation: theme-reveal 650ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes theme-reveal {
-  from {
-    clip-path: circle(0 at var(--theme-x, 100%) var(--theme-y, 0));
-  }
-  to {
-    clip-path: circle(150vmax at var(--theme-x, 100%) var(--theme-y, 0));
-  }
+/* Foco sempre visível: contorno grosso de tinta. */
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
 }

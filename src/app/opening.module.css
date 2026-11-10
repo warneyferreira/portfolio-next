@@ -1,6 +1,8 @@
+/* A gravura compartilhada por Hero e Sobre, impressa em uma tinta:
+   a máscara 1-bit (gerada por scripts/dither-art.mjs) recorta o
+   background-color var(--ink). O papel liso vem de globals.css. */
+
 .opening {
-  --scene-paper: #fef0d3;
-  --paper: var(--scene-paper);
   position: relative;
   isolation: isolate;
   margin-inline: -8px;
@@ -12,27 +14,19 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: var(--scene-paper);
-  background-image: url("../../public/images/background/hero-about-continuous.webp");
-  background-repeat: no-repeat;
-  /* A largura cobre a hero; a imagem não reinicia na seção Sobre. */
-  background-size: max(100%, 177.6833svh) auto;
-  background-position: center calc((100svh - max(56.2799vw, 100svh)) / 2);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 180px), transparent 100%);
-}
-
-:global(html[data-theme="dark"]) .opening {
-  --scene-paper: #161412;
-}
-
-:global(html[data-theme="dark"]) .opening::before {
-  background-image: url("../../public/images/background/hero-about-continuous-dark.webp");
+  background-color: var(--ink);
+  mask-image: url("../../public/images/background/hero-about-dither.webp");
+  mask-repeat: no-repeat;
+  /* A largura cobre a hero (faixa de arte = 1115/1928 da imagem);
+     a imagem não reinicia na seção Sobre. */
+  mask-size: max(100%, 149.9552svh) auto;
+  mask-position: center calc((100svh - max(66.6867vw, 100svh)) / 2);
 }
 
 @media (max-width: 900px) {
-  .opening::before { background-position-x: 32%; }
+  .opening::before { mask-position: 32% calc((100svh - max(66.6867vw, 100svh)) / 2); }
 }
 
 @media (max-width: 640px) {
-  .opening::before { background-position-x: 20%; }
+  .opening::before { mask-position: 20% calc((100svh - max(66.6867vw, 100svh)) / 2); }
 }

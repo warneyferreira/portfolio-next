@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque, Martian_Mono } from "next/font/google";
 import { profile } from "@/data/portfolio";
 import "./globals.css";
 
 const title = `${profile.name} | ${profile.role}`;
 
-/* Aplica o tema salvo (ou o do sistema) antes da primeira pintura. */
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+const sans = Bricolage_Grotesque({
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+  variable: "--font-sans",
+});
+
+const mono = Martian_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
@@ -23,10 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" data-theme="light" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

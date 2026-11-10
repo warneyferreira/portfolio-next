@@ -1,31 +1,23 @@
+/* Sobre: uma tinta só (--ink sobre --paper). Hierarquia vem de tamanho e
+   peso; divisores são retículas Bayer (--shade-*), nunca cinzas. */
+
 .about {
   position: relative;
   isolation: isolate;
-  --ink: #15130f;
-  --muted: #5c564d;
-  --rule: #bdb5a5;
-  --engraving-ink: #e84b08;
-  margin-inline: 0;
   padding: clamp(80px, 8vw, 128px) clamp(32px, 10vw, 160px) clamp(112px, 15vw, 220px);
   color: var(--ink);
-  font-family: var(--font-about), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   scroll-margin-top: 24px;
 }
 
-:global(html[data-theme="dark"]) .about {
-  --ink: #efe9df;
-  --muted: #b6afa4;
-  --rule: #514b43;
-  --engraving-ink: #efe9df;
-}
-
+/* Fragmentos romanos nas bordas, impressos na mesma tinta. */
 .about::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: var(--engraving-ink);
+  background-color: var(--ink);
   mask-image:
     url("/images/background/about-roman-left-dither.webp"),
     url("/images/background/about-roman-right-dither.webp"),
@@ -38,10 +30,13 @@
   mask-repeat: no-repeat;
 }
 
-
-.about ::selection {
-  background: var(--ink);
-  color: var(--paper);
+.label {
+  margin: 0 0 clamp(40px, 5vw, 72px);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .composition {
@@ -86,11 +81,9 @@
   inset: 0;
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
-  background: var(--engraving-ink);
+  background-color: var(--ink);
   mask-image: url("/images/about/eye-paper-dither.webp");
 }
-
-
 
 .story {
   display: grid;
@@ -110,21 +103,32 @@
 .story p {
   max-width: 52ch;
   margin: 0;
-  color: var(--muted);
   font-size: 1.125rem;
   line-height: 1.7;
   text-wrap: pretty;
 }
 
+/* Divisor em retícula: faixa de 8 px de tinta pontilhada, sem hairline cinza. */
 .bottom {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 32px 48px;
   margin-top: clamp(48px, 5vw, 72px);
-  border-top: 1px solid var(--rule);
-  padding-top: 28px;
+  padding-top: 36px;
+}
+
+.bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: var(--ink);
+  mask: var(--shade-3) 0 0 / 8px 8px repeat;
 }
 
 .facts {
@@ -136,8 +140,11 @@
 
 .facts dt {
   margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 0.875rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .facts dd {
@@ -156,8 +163,7 @@
   min-height: 52px;
   box-sizing: border-box;
   padding: 12px 20px;
-  border: 1.5px solid var(--ink);
-  border-radius: 4px;
+  border: 2px solid var(--ink);
   background: var(--ink);
   color: var(--paper);
   font-size: 1rem;
@@ -175,14 +181,10 @@
   stroke-linejoin: round;
 }
 
+/* Inversão no hover: prato de papel, texto de tinta, borda de 2 px. */
 .resume:hover {
-  background: transparent;
+  background: var(--paper);
   color: var(--ink);
-}
-
-.resume:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 5px;
 }
 
 @media (max-width: 800px) {

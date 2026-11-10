@@ -1,23 +1,18 @@
+/* A hero: só o nome e a gravura reticulada. A arte vive em
+   opening.module.css, impressa em tinta única por baixo deste texto. */
+
 .hero {
-  --paper: var(--scene-paper);
-  --ink: #201c18;
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-rows: auto 1fr;
   align-items: center;
   min-height: 100svh;
   box-sizing: border-box;
   padding: clamp(16px, 2.5vw, 40px);
   overflow: hidden;
   color: var(--ink);
-  font-family: var(--font-hero), sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
-
-:global(html[data-theme="dark"]) .hero {
-  --ink: #efe9df;
-}
-
 
 .center {
   position: relative;
@@ -43,42 +38,7 @@
   margin-top: 0.12em;
 }
 
-.hero ::selection {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.themeBar {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.themeToggle {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-}
-
-.themeToggle:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.themeToggle:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 4px;
-}
-
-
+/* No celular o nome fica num prato liso de papel, nunca sobre a arte. */
 @media (max-width: 640px) {
   .center {
     margin: 64px 0;

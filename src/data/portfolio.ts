@@ -36,6 +36,7 @@ export const contact = {
 };
 
 export const about = {
+  label: "01 / Sobre",
   intro:
     "Construo produtos de ponta a ponta, da interface à inteligência artificial.",
   front: {
