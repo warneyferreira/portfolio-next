@@ -1,9 +1,9 @@
 {
   "model": "gpt-image-2-codex",
   "provider": "openai-codex",
-  "reference": "public/images/background/hero-about-continuous.webp (composição aprovada)",
+  "reference": "scripts/sources/hero-reference-orange.webp (composição aprovada)",
   "prompt": "Classical copperplate engraving for a portfolio hero background: blindfolded Lady Justice statue standing at the far left edge, holding balanced scales high in her right hand, a sword pointing down in her left hand, laurel branch entering from the top left corner, Roman Colosseum ruins at the far right edge with broken masonry and stones along the bottom ground, small cypress trees and hills in the distance. The statue and ruins frame empty paper: the middle of the width stays almost blank and the ground dissolves into plain paper toward the bottom edge. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no border, no frame. Central 60 percent of the width kept almost empty light paper for text.",
-  "pipeline": "1536x1024 gerado; reescalado para 1672x1115 no topo de um papel 1672x1928 em branco; retículado 1 bit por scripts/dither-art.mjs (Bayer 8x8, modo gray); máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
+  "pipeline": "1536x1024 gerado; reescalado para 3344x2229 (lanczos3); tinta onde cinza < 128, sem matriz de dither — o traço da gravura já carrega o próprio pontilhado; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
   "storage": "lossless WebP",
-  "delivery": "Uma máscara compartilhada por hero e Sobre; a arte ocupa a faixa superior de 1115 px e o resto fica em papel"
+  "delivery": "Máscara de só a faixa de arte (3344x2229), compartilhada por hero e Sobre; a imagem não reinicia na seção Sobre"
 }

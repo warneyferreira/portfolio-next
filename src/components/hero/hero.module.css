@@ -38,12 +38,25 @@
   margin-top: 0.12em;
 }
 
-/* No celular o nome fica num prato liso de papel, nunca sobre a arte. */
+/* No celular o nome fica num prato de papel com borda de tinta e um
+   bloco reticulado deslocado 8 px para a direita e para baixo. */
 @media (max-width: 640px) {
   .center {
+    position: relative;
     margin: 64px 0;
     padding: 28px 16px;
+    border: var(--line) solid var(--ink);
     background: var(--paper);
   }
+
+  .center::before {
+    content: "";
+    position: absolute;
+    inset: 8px -8px -8px 8px;
+    z-index: -1;
+    background-color: var(--ink);
+    mask: var(--shade-4) 0 0 / 8px 8px repeat;
+  }
+
   .title { font-size: clamp(4.5rem, 19vw, 8rem); }
 }

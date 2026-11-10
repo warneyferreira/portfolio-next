@@ -25,8 +25,8 @@ export const BAYER8: readonly (readonly number[])[] = Array.from(
     Array.from({ length: 8 }, (_, x) => {
       const q = BAYER4[y % 4][x % 4];
       const quadrant = (y >> 2) * 2 + (x >> 2);
-      // [0, 2; 3, 1] * 16 + valor da 4×4
-      return [0, 2, 3, 1][quadrant] * 16 + q;
+      // valor da 4×4 * 4 + quadrante [0, 2; 3, 1]
+      return q * 4 + [0, 2, 3, 1][quadrant];
     }),
 );
 

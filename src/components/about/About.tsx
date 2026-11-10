@@ -7,15 +7,13 @@ export default function About() {
       <p className={s.label} aria-hidden="true">{about.label}</p>
 
       <div className={s.composition}>
-        <div>
-          <h2 id="about-title" className={s.title}>
-            Sobre<span aria-hidden="true">.</span>
-          </h2>
-          <p className={s.intro}>{about.intro}</p>
+        <h2 id="about-title" className={s.title}>
+          Sobre<span aria-hidden="true">.</span>
+        </h2>
+        <p className={s.intro}>{about.intro}</p>
 
-          <div className={s.artwork} aria-hidden="true">
-            <span className={s.artworkInk} />
-          </div>
+        <div className={s.artwork} aria-hidden="true">
+          <span className={s.artworkInk} />
         </div>
 
         <div className={s.story}>

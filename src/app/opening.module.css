@@ -15,18 +15,18 @@
   z-index: -1;
   pointer-events: none;
   background-color: var(--ink);
-  mask-image: url("../../public/images/background/hero-about-dither.webp");
+  mask-image: url("../../public/images/background/hero-engraving.webp");
   mask-repeat: no-repeat;
-  /* A largura cobre a hero (faixa de arte = 1115/1928 da imagem);
+  /* A largura cobre a hero (a máscara é só a faixa de arte, 3344×2229);
      a imagem não reinicia na seção Sobre. */
-  mask-size: max(100%, 149.9552svh) auto;
-  mask-position: center calc((100svh - max(66.6867vw, 100svh)) / 2);
+  mask-size: max(100%, 150.0224svh) auto;
+  mask-position: center calc((100svh - max(66.6567vw, 100svh)) / 2);
 }
 
 @media (max-width: 900px) {
-  .opening::before { mask-position: 32% calc((100svh - max(66.6867vw, 100svh)) / 2); }
+  .opening::before { mask-position: 32% calc((100svh - max(66.6567vw, 100svh)) / 2); }
 }
 
 @media (max-width: 640px) {
-  .opening::before { mask-position: 20% calc((100svh - max(66.6867vw, 100svh)) / 2); }
+  .opening::before { mask-position: 20% calc((100svh - max(66.6567vw, 100svh)) / 2); }
 }
