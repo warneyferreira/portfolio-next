@@ -66,7 +66,7 @@ for (let y = 0; y < h; y++) {
   const row = BAYER8[y % 8];
   for (let x = 0; x < w; x++) {
     const grey = data[y * w * channels + x * channels];
-    const on = mode === "line" ? grey < threshold : grey < 235 && grey * 64 > row[x % 8] * 255 + 128;
+    const on = mode === "line" ? grey < threshold : grey < 235 && (255 - grey) * 64 > row[x % 8] * 255 + 128;
     const o = (y * w + x) * 4;
     out[o] = 0;
     out[o + 1] = 0;

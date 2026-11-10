@@ -1,8 +1,8 @@
 # Portfolio progress
 
 ## Status
-Current focus: Hero + Sobre in the one-ink system (covers backlog 2, 3a to 3c for these two sections, 5a, 6 and 7). Delegated to the omp agent in herdr terminal t10; brief in `/tmp/portfolio-loop/brief-hero-sobre.md`. This terminal (t6) coordinates and reviews.
-Iteration count: 2
+Current focus: Replace the rejected art in Stack, Experiência, Projetos, Educação and Contato. Hero and Sobre are finished and stay unchanged. Implementer: existing herdr peer t10 in `portfolio / 1`; coordinator t6 owns direction, pipeline and acceptance checks.
+Iteration count: 3
 
 ## Loop notes
 Read these and DESIGN.md before picking a task.
@@ -15,29 +15,27 @@ Read these and DESIGN.md before picking a task.
 - **Commits.** `git add -A && git commit`. 22 unused work-in-progress images (52 MB: `hero-angel-*`, `hero-lady-justice-*`, `hero-ruins-*`, `lady_justice_hero_4k.png`, `about-roman-{left,right,bottom}.webp`, `janus-*`) stay on disk and out of git through `.git/info/exclude`, by owner decision. Never delete or force-add them. If a task starts using one, remove its line from the exclude file and log it: `about-roman-*.webp` are the continuous-tone sources of the `*-dither` masks, and `hero-lady-justice-desktop.webp` is the sharpened upper panel of the hero composite.
 - **Content.** Every string comes from `src/data/portfolio.ts`, in pt-BR. Labels stay pt-BR (`01 / SOBRE`). Never invent content.
 - **New assets.** The owner allows GPT Images 2 (`generate_image` tool) for monochrome assets. Match the existing classical engraving and stipple line art, run the result through the dithering pipeline, and write a `<asset>.webp.json` provenance sidecar without absolute local paths.
-- **Dependencies.** `sharp` 0.35.5 is already installed as a dependency of Next. If the dithering script uses it, add it to `devDependencies` and log that here. Nothing else new without a note.
-- **impeccable skill.** `impeccable context` reports NO_PRODUCT_MD and BUILD_INIT_REQUIRED. The owner answered the palette and theme questions in iteration 1 and DESIGN.md pins the visual world, so there is no new interview. `.impeccable/surfaces/src-components-about-about-tsx.md` still describes `#e84b08` and a dark theme; it is stale until the Sobre task rewrites it.
+- **Dependencies.** `sharp` ^0.35.5 is now an explicit devDependency for `scripts/dither-art.mjs`: deterministic lossless 1-bit image preprocessing. It was already installed through Next; no new runtime library was added.
+- **impeccable skill.** `impeccable context` reports NO_PRODUCT_MD and BUILD_INIT_REQUIRED. Owner answers and DESIGN.md pin the visual world; no new interview is needed. The Sobre surface brief now records the approved one-ink composition and the checks actually exercised.
 - **Delegation (owner, 2026-11-10).** The owner wants the hands-on work done by the agent in the same herdr space, with less ceremony: batch the backlog items a section needs instead of one small task per iteration. `/mnt/c/Users/warney67/AppData/Local/Programs/herdr-core/hc.exe ls` lists terminals; the peer is the omp terminal whose `where` matches the coordinator's (`portfolio / 1`: coordinator t6, implementer t10 on 2026-11-10). `hc.exe send <t> "<text>"` gives it work, `hc.exe wait <t>` waits, `hc.exe read <t>` shows its screen. Put a long brief in a file and send the path. The coordinator owns PROGRESS.md and DESIGN.md, reviews screenshots, then logs. Remind the implementer that it can generate assets with GPT Images 2 (`generate_image` tool).
+- **Asset rejection (owner, 2026-11-10).** Existing lower-section art is not approved. Replace Stack, Experiência, Projetos, Educação and Contato illustrations with new GPT Images 2 engravings, not recolours. Hero/Sobre stay. Real Estúdio imagery and factual copy must not be fabricated. t10 has this replacement task; use static art rather than retaining rejected sprite subjects merely to keep their old animation.
 
 ## Backlog
 Listed in priority order. Split a task here before doing part of it.
 
-- [ ] 2. Design tokens, shade scale and `Dither` utility. Global `--ink` and `--paper`, border and spacing tokens; `--shade-0…8` from 4×4 and 8×8 Bayer matrices as pixel-aligned tiles; a generator module plus a component or class API. Module-local `--ink` definitions shadow the global one until 3c, so sections should look the same after this task.
-- [ ] 3a. Remove the dark theme (owner decision). `ThemeToggle.tsx`; the theme script, `data-theme` and `suppressHydrationWarning` in `layout.tsx`; every `html[data-theme="dark"]` rule (12 CSS modules and `globals.css`); the dead `::view-transition` theme-reveal CSS; `hero-about-continuous-dark.webp`, `paper-dark.webp`; the gladiator `drop-shadow`. Set `color-scheme: light`.
-- [ ] 3b. Fonts and type scale. One Bricolage Grotesque instance in `layout.tsx` (today there are 8 `next/font` calls, one per component, each with its own CSS variable); add one mono; global type tokens for display, heading, body and mono micro-label; record the mono in DESIGN.md.
-- [ ] 3c. Colour cutover, reset and focus. Every module reads the global `--ink` and `--paper`; delete the per-component palettes (`--ink` ×8, `--muted`, `--rule`, `--sheet`, `--quiet`, `--line`, `--line-muted`, `--scene-paper`, `--engraving-ink`). Muted grey text becomes ink; grey hairlines become ink or dither dividers. Replace the continuous-tone `paper-light.webp` background with flat paper; the README documents the crumpled-paper texture as deliberate, so a sparse 1-bit grain may stand in for it if it shows no moiré. Global reset, `::selection`, thick ink `:focus-visible`.
+- [ ] 2b. Finish shared spacing/type tokens and a reusable pixelated Dither class API. Ink/paper, 2px border, Bayer4/Bayer8, shadeTile and --shade-0…8 already landed with Hero/Sobre.
+- [ ] 3a. Remove remaining dead dark-theme rules in lower-section CSS modules and the gladiator drop-shadow. Hero/Sobre, globals and layout are migrated; ThemeToggle, theme script and dark background assets are gone.
+- [ ] 3b. Finish font migration and type scale in lower sections. Bricolage Grotesque --font-sans and Martian Mono --font-mono load in layout; Hero/Sobre use them. Remove remaining per-component next/font instances and add shared type tokens.
+- [ ] 3c. Finish the one-ink cutover in lower sections: remove local palettes, muted greys, flat tints and grey rules. Globals already provide flat ivory paper, selection inversion and the 3px focus outline; Hero/Sobre use the shared palette.
 - [ ] 4. Layout shell: nav, footer, page grid. `nav` in `portfolio.ts` is unused and no `<nav>` exists. The README records that nav links, monogram, intro and CTA were moved out of the hero on purpose: the hero holds the name and the art only, so the nav starts below it. Shared section frame with mono micro-labels in page order. Fix the landmarks: `#contato` renders outside `<main>` and the hero `<header>` inside it.
-- [ ] 5a. Image dithering pipeline. A script in `scripts/` or a runtime canvas component that prints 1-bit `--ink` aligned to device pixels. The current pre-dithered masks are scaled fractionally by `mask-size`, which DESIGN.md forbids. First input: the hero composite `hero-about-continuous.webp` (1672×1928 RGB, orange baked on ivory, 2.7 MB lossless).
-- [ ] 5b. Run the remaining art through the pipeline: gladiator sprites (grey RGBA rasters, 7 frames each, 1.4 MB), `studio-screenshot.webp` (full colour), `studio-logo.svg` (three colours, `rx="9"`), and the soft-alpha ink masks (6–23% partially transparent pixels: Sisyphus, clouds, dove, owl, diploma, stamp, winged letter). There is no portrait in the repo.
-- [ ] 6. Hero. The approved engraving as the dithered signature piece, name in ink. A threshold shimmer is optional and must stay within 5 ms/frame with a static reduced-motion frame; the README documents the hero as static, so a static piece is acceptable. The smooth `mask-image: linear-gradient` fade at the bottom of `opening.module.css` becomes a stepped dither ramp. Mobile keeps the name on a solid paper plate.
-- [ ] 7. Sobre. Global tokens, grey rule and muted text out, 4px radius off the résumé button, hover by inversion, dither divider; rewrite the `.impeccable` surface brief.
-- [ ] 8. Stack and Sisyphus. The boulder shade uses rotated halftone-dot SVG patterns: switch to pixel-aligned Bayer. Grey `/` separators and group rules to ink or dither. Keep the GSAP scene and check the patterns under its `scale: 1.18`.
-- [ ] 9. Experiência (timeline). Cards: 3px borders to 1–2px, drop the ±0.6° tilt (it breaks pixel alignment), halftone `radial-gradient` shadow to an offset Bayer block, round toggle and pill tags to hard edges, period as mono micro-label, `color-mix` text out. `RevealScene` holds the title at `opacity: 0.2`, which is a flat tint: use a stepped or dithered reveal. Keep the `<details>` behaviour, clouds and doves.
-- [ ] 10. Projetos: grid and cards with dithered depth. Shadow to Bayer block, `color-mix` fills and borders out, pill tags to hard edges, dithered thumbnail, one-ink logo. Move the Estúdio-only `alt` text and link label from `Projects.tsx` into `projects[]` so the grid works for any project.
+- [ ] 5b. New lower-section art: replace rejected Sisyphus, clouds/doves, gladiators, owl/diploma/stamp and winged-letter sprites with freshly generated line engravings. Process masks through scripts/dither-art.mjs --mode line. Dither the real Estúdio screenshot and reduce its logo to one ink without inventing project imagery. There is no portrait in the repo.
+- [ ] 8. Stack. Replace Sisyphus with an exploded Renaissance mechanical instrument engraving; integrate the real stack data, global ink and Bayer shading. Rework old sprite-dependent motion rather than retaining rejected artwork.
+- [ ] 9. Experiência. Replace clouds/doves with an architectural bridge/scaffold engraving. Keep the real timeline and accessible details. Use 1–2px hard edges, mono periods, Bayer depth and solid ink text; remove tilt, pills, flat-opacity title reveal and obsolete flight scenes.
+- [ ] 10. Projetos. Replace gladiators with an engraved workbench/printing-frame composition; remove obsolete pull sprites. Retain the real Estúdio screenshot and content, with dithered depth and one-ink logo. Move project-specific alt/link labels into projects[].
 - [ ] 11. Project detail page. `src/app/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
-- [ ] 12. Educação and Certificações. Tokens, grey rules, badge halftone to Bayer, owl and diploma/stamp art.
+- [ ] 12. Educação and Certificações. Replace owl/diploma/stamp with an open-atlas-and-compass engraving. Preserve the degree/certification content; global ink, hard edges, Bayer shading and no obsolete sprite scene.
 - [ ] 13. Writing section. No articles exist in the repo. Build the list component and a `writing` array in `portfolio.ts` that renders nothing while empty, marked `TODO(content):`.
-- [ ] 14. Contato and footer links. Letter card shadow to Bayer block, facts, links, footer line.
+- [ ] 14. Contato and footer links. Replace the winged letter with an engraved hand sealing correspondence. Preserve working contact links and facts; Bayer depth, square edges and global ink.
 - [ ] 15. Responsive pass (360 / 768 / 1280 / 1920).
 - [ ] 16. Accessibility pass (contrast, keyboard nav, alt text, landmarks, reduced motion).
 - [ ] 17. Performance pass (image sizes, canvas cost, fonts, bundle). Baseline first load: 6.9 MB.
@@ -47,6 +45,10 @@ Listed in priority order. Split a task here before doing part of it.
 
 ## Done
 - [x] 1. Audit the current portfolio: pages, components, content, gaps. Findings are under Audit.
+- [x] 2a. Shared ink/paper/border tokens, Bayer4/Bayer8 and shadeTile, --shade-0…8; global light-only foundation.
+- [x] 5a. Image pipeline: scripts/dither-art.mjs supports line thresholding and Bayer photos; hero source/provenance retained, deployed 3344×2229 binary mask is 164 KiB.
+- [x] 6. Hero: new GPT Images 2 line engraving from the approved composition, static name-only layout, crisp desktop art and bordered mobile paper plate with Bayer offset.
+- [x] 7. Sobre: restored two-column composition, one ink, global fonts, mono labels, dither divider, square résumé inversion and updated surface brief.
 
 ## Needs owner input
 - Writing/blog: the repo has no articles or external posts. Send titles, links and dates, or the section stays empty and hidden (task 13).
@@ -54,12 +56,12 @@ Listed in priority order. Split a task here before doing part of it.
 - Portrait: none in the repo (the animated head was removed; Sobre uses the eye-and-hand engraving). Send a photo only if a dithered portrait is wanted.
 
 ## Found issues
-- `globals.css`: the `::view-transition` theme-reveal rules are dead; nothing calls `document.startViewTransition` (removed by 3a).
-- `portfolio.ts`: `nav`, `hero.resumeLabel`, `profile.headline` and `profile.highlightStack` are unused; `About.tsx` hard-codes "Baixar currículo".
+- `portfolio.ts`: `nav`, `profile.headline` and `profile.highlightStack` remain unused. About now uses hero.resumeLabel for the résumé action.
 - `Projects.tsx`: the Estúdio `alt` text and "Visitar o Estúdio" are hard-coded inside `projects.map` (task 10).
 - Landmarks: no `<nav>`; `#contato` sits outside `<main>`; the hero `<header>` sits inside it (tasks 4 and 16).
-- The provenance sidecars (`*.webp.json`) committed in the snapshot contain an absolute local path (`/mnt/c/Users/…/htp.png`).
-- `README.md` and `.impeccable/surfaces/src-components-about-about-tsx.md` describe the pre-loop design (tasks 7 and 20).
+- The older reference provenance sidecar at `scripts/sources/hero-reference-orange.webp.json` still contains an absolute local source path; newly generated sidecars must use portable paths.
+- Lower-section README art notes must follow the replacement assets; t10 owns this update.
+- Peer-reported reduced-motion issue at 1920: Experiência GSAP pin-spacer can use innerWidth instead of clientWidth, causing 15px horizontal overflow. Check while replacing that scene (task 9).
 
 ## Audit (iteration 1, 2026-11-10)
 
@@ -96,3 +98,6 @@ Every scene is off under `prefers-reduced-motion: reduce` and shows a static end
 
 ## Log
 - 2026-11-10 — Iteration 1: audited routes, components, content, assets and baseline metrics (screenshots at 1440 in both themes and 390 in light). Owner fixed the palette (ink `#c43c00`, paper `#fef0d3`), dropped the dark theme and kept 22 unused images out of git. The owner's uncommitted work went into its own snapshot commit first. No UI changed. (DESIGN.md, PROGRESS.md, .git/info/exclude)
+- 2026-11-10 — Iteration 2: t10 shipped Hero/Sobre and the shared one-ink foundation (104c38e, 8ab2dea); coordinator reviewed 1:1 engraving detail, the restored Sobre grid and the mobile plate. Lint, type-check and production build passed; desktop 1440/1920 and mobile 390/DPR 2 were visually reviewed. (globals/layout, hero/about, dither utility/pipeline, sources/masks, DESIGN.md, Sobre surface brief)
+- 2026-11-10 — Iteration 3 started: owner rejected the lower-section artwork; t10 directed to generate and integrate replacements for Stack, Experiência, Projetos, Educação and Contato using GPT Images 2. Hero/Sobre and factual project content are preserved. (DESIGN.md, PROGRESS.md)
+- 2026-11-10 — Corrected Bayer photo polarity (black prints ink, white stays paper). An isolated seven-tone smoke verified exact Bayer coverage, the line threshold boundary and binary alpha in both modes. Mobile Sobre résumé focus is a visible 3px ink outline, with download semantics and no horizontal overflow at 390px. (scripts/dither-art.mjs, Sobre surface brief)
