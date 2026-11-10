@@ -148,7 +148,7 @@ export default function Sisyphus() {
           <clipPath id="boulder-clip">
             <circle cx={CX} cy={CY} r={R} />
           </clipPath>
-          {/* cabelo vivo, como o do retrato da hero: ruído lento deslocando os cachos */}
+          {/* cabelo vivo: ruído lento deslocando os cachos */}
           <filter id="sisyphus-hair" x="-10%" y="-10%" width="120%" height="120%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03 0.045" numOctaves={2} seed={7} result="noise">
               <animate

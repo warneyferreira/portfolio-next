@@ -21,8 +21,6 @@ export const nav = [
 ] as const;
 
 export const hero = {
-  /* duas linhas da manchete; o primeiro "o" da primeira linha vira o retrato */
-  title: ["Software", "Engineer"],
   resumeLabel: "Baixar currículo",
 };
 

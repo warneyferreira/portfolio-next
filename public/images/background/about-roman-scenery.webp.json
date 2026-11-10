@@ -1,0 +1,10 @@
+{
+  "provider": "openai-codex",
+  "model": "gpt-image-2-codex",
+  "reference": "/mnt/c/Users/warney67/Downloads/htp.png",
+  "generatedDimensions": [1536, 1024],
+  "subject": "Sparse Roman scenery at left, right and bottom: broken fluted column, cornice, laurel and olive branches, fallen capital, coins, stone and mosaic fragments; central area blank; orange engraved stippling on white",
+  "processing": "Orange ink extracted to alpha from red-green difference; three lossless WebP masks; original object proportions retained; crop boundaries feathered",
+  "masks": {"left": [180, 800], "right": [180, 800], "bottom": [1536, 288]},
+  "theme": "Orange ink in light mode; light ink at 50 percent opacity in dark mode"
+}

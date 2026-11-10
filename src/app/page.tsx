@@ -5,13 +5,16 @@ import Experience from "@/components/experience/Experience";
 import Projects from "@/components/projects/Projects";
 import Education from "@/components/education/Education";
 import Contact from "@/components/contact/Contact";
+import s from "./opening.module.css";
 
 export default function Home() {
   return (
     <>
-      <Hero />
       <main>
-        <About />
+        <div className={s.opening}>
+          <Hero />
+          <About />
+        </div>
         <Stack />
         <Experience />
         <Projects />

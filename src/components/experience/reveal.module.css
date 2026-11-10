@@ -1,6 +1,6 @@
 /* Abertura da Experiência no papel do portfólio. Tudo que é desenho é um par
    de máscaras: a silhueta tapa o que está atrás (papel no claro, adesivo
-   claro no escuro) e o traço vem por cima, na regra do retrato da hero. */
+   claro no escuro) e o traço vem por cima, preservando a gravura nos dois temas. */
 .reveal {
   --ink: #15130f;
   --fill: var(--paper);

@@ -11,18 +11,16 @@ const bricolage = Bricolage_Grotesque({
 export default function About() {
   return (
     <section id="sobre" aria-labelledby="about-title" className={`${s.about} ${bricolage.variable}`}>
-      {/* pilar jônico tombado, entrando pela borda direita da tela */}
-      <div className={s.column} aria-hidden="true">
-        <span className={s.columnShape} />
-        <span className={s.columnInk} />
-      </div>
-
-      <div className={s.heading}>
-        <h2 id="about-title">Sobre<span aria-hidden="true">.</span></h2>
+      <div className={s.composition}>
+        <h2 id="about-title" className={s.title}>
+          Sobre<span aria-hidden="true">.</span>
+        </h2>
         <p className={s.intro}>{about.intro}</p>
-      </div>
 
-      <div className={s.body}>
+        <div className={s.artwork} aria-hidden="true">
+          <span className={s.artworkInk} />
+        </div>
+
         <div className={s.story}>
           <div>
             <h3>{about.front.title}</h3>
@@ -37,13 +35,24 @@ export default function About() {
 
       <div className={s.bottom}>
         <dl className={s.facts}>
-          <div><dt>Função</dt><dd>{profile.role}</dd></div>
-          <div><dt>Base</dt><dd>{profile.location}</dd></div>
-          <div><dt>Estrada</dt><dd>{profile.experienceYears}</dd></div>
+          <div className={s.role}>
+            <dt>Atuação</dt>
+            <dd>{profile.role}</dd>
+          </div>
+          <div>
+            <dt>Base</dt>
+            <dd>{profile.location}</dd>
+          </div>
+          <div>
+            <dt>Experiência</dt>
+            <dd>{profile.experienceYears}</dd>
+          </div>
         </dl>
         <a className={s.resume} href={profile.resume} download>
           Baixar currículo
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M5 17v4h14v-4" /></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M12 3v13m-5-5 5 5 5-5M5 17v4h14v-4" />
+          </svg>
         </a>
       </div>
     </section>

@@ -1,0 +1,9 @@
+{
+  "provider": "openai-codex",
+  "model": "gpt-image-2-codex",
+  "references": ["User attached eye and hand through torn sky paper", "htp.png engraving palette and stippling"],
+  "subject": "Original surreal engraving: one eye and a hand peeking through organic torn paper with sparse clouds; orange ink on white, no bust or full head",
+  "dimensions": [1024, 1536],
+  "processing": "Extract orange ink via red-green difference; ordered alpha dithering with 4x4 Bayer matrix and 2px cells; binary coverage; lossless WebP",
+  "themes": "CSS ink color, orange on ivory or light on charcoal"
+}

@@ -1,0 +1,12 @@
+{
+  "provider": "openai-codex",
+  "model": "gpt-image-2-codex",
+  "reference": "/mnt/c/Users/warney67/Downloads/htp.png",
+  "upperPanel": "hero-lady-justice-desktop.webp; previously sharpened reference",
+  "generatedPanel": {"width": 1536, "height": 1024},
+  "prompt": "Lower continuation of the reference: ancient Roman stone ground, broken masonry, small laurel plants and foundations. Match orange engraved stippling and warm ivory paper. Detail at left and right edges; central 75 percent clean for text. No new statue, person or Colosseum. Sparse scenery fades into plain paper toward the bottom. No text or borders.",
+  "composition": {"width": 1672, "height": 1928, "extensionHeight": 1115, "overlapPixels": 128, "blend": "Linear crossfade at the join"},
+  "darkVariant": "Luminance mapped to portfolio dark paper and light ink",
+  "storage": "lossless WebP",
+  "delivery": "One shared CSS background for hero and About; no restart at section boundary"
+}
