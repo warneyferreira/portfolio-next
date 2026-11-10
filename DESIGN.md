@@ -16,15 +16,15 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 - Build a reusable tone scale `--shade-0` … `--shade-8` (0 = paper, 8 = ink), each a tiling pattern (SVG data-URI or CSS `background-image`) with `image-rendering: pixelated`.
 - Shading is used for: section backgrounds, card depth/shadows (offset dithered block instead of blur shadows), gradients (stepped dither ramps, never smooth gradients), hover states (density shift), dividers.
 - **Images**: project thumbnails and portrait are rendered 1-bit dithered (preprocess with a script in `scripts/`, or a `<canvas>` component that dithers at runtime). The full-colour original is never shown, not even on hover or focus.
-- **Illustrations**: the engravings (hero, Sobre, Sisyphus, clouds and doves, gladiator, owl, diploma and stamp, winged letter) are printed 1-bit in `--ink` like any other image.
-- **Hero**: one signature piece. Here it is the owner-approved Lady Justice and Colosseum engraving, dithered in `--ink`; any motion is a slowly shifting threshold on its shading. Must respect `prefers-reduced-motion` (static frame) and stay under ~5 ms/frame.
+- **Illustrations**: the engravings (hero, Sobre, Sisyphus, clouds and doves, gladiator, owl, diploma and stamp, winged letter) are printed 1-bit in `--ink`. Line engravings are thresholded at about twice their display width and never re-dithered: they already carry their own stipple and hatching. The ordered Bayer dither is for interface shades and continuous-tone images.
+- **Hero**: one signature piece. Here it is the Lady Justice and Colosseum engraving, redrawn in black line from the owner-approved composition and printed 1-bit in `--ink`. It is static. Any motion added later must respect `prefers-reduced-motion` (static frame) and stay under ~5 ms/frame.
 - Pixel crispness: align patterns to device pixels; avoid patterns scaled by fractional values.
 
 ## Typography
 
 - One grotesk/sans for body, one mono for labels, metadata, nav, tags. Large, tight display headings.
 - Uppercase mono micro-labels (`01 / SOBRE`) as structural markers. Interface copy is Brazilian Portuguese.
-- Grotesk: Bricolage Grotesque (already in the repo, variable `opsz` and `wdth`). Mono: chosen in the fonts task and recorded here.
+- Grotesk: Bricolage Grotesque (variable `opsz` and `wdth`), set as `--font-sans`. Mono: Martian Mono (variable), set as `--font-mono`. Both load once in `layout.tsx`.
 
 ## Layout & components
 
@@ -47,5 +47,7 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 | 2026-11-10 | Dark mode = inverted (paper on ink), same patterns | No dark mode, no toggle | Owner, iteration 1: "No dark theme: remove the toggle, light only". |
 | 2026-11-10 | Original image on hover/focus is optional | Never shown | Follows from the one-ink rule: an original brings other colours back. |
 | 2026-11-10 | Illustrations not mentioned | Printed 1-bit in `--ink` | Owner: art included in the one ink. Soft-alpha masks would print flat tints. |
-| 2026-11-10 | Hero: e.g. a dithered gradient, threshold field or 3D/noise shape | The existing Lady Justice and Colosseum engraving, dithered | The owner approved this art, drawn from their own reference; the loop forbids re-architecting what works. |
+| 2026-11-10 | Hero: e.g. a dithered gradient, threshold field or 3D/noise shape | The Lady Justice and Colosseum engraving, redrawn in black line with GPT Images 2 from the approved composition, static | The owner approved this composition and allowed GPT Images for assets. The old raster had orange baked in and a soft upscale; a black-on-white source prints cleanly. |
+| 2026-11-10 | Ordered Bayer for all shading, images included | Line engravings are thresholded 1-bit at about 2× display width; Bayer stays for interface shades and continuous-tone images | Reviewed at 1:1 in iteration 2: the ordered dither turned the hero engraving into checkerboard blocks and moiré and left dust on blank paper. |
+| 2026-11-10 | Mono left open | Martian Mono | Sturdy at small uppercase sizes in the orange ink; variable weight. |
 | 2026-11-10 | Component list; label example `01 / PROJECTS` | Adds stack and education + certifications; labels in pt-BR | Both sections exist in the repo; all site copy is pt-BR. |
