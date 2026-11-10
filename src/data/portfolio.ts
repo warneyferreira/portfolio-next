@@ -25,8 +25,7 @@ export const hero = {
 };
 
 export const contact = {
-  intro: "A caixa de correio fica aqui embaixo. Eu abro todo dia, mesmo quando está vazia.",
-  letter: "Se você chegou até o último quadro, já dá para a gente conversar.",
+  letter: "Vamos conversar sobre seu próximo projeto.",
   email: "warneydev@gmail.com",
   phone: { label: "(86) 99922-9061", href: "tel:+5586999229061" },
   linkedin: "https://www.linkedin.com/in/warney-rego/",
@@ -48,9 +47,6 @@ export const about = {
     text: "No backend, trabalho com PHP, Node.js e Python. Modernizo sistemas legados e integro IA às aplicações.",
   },
 };
-
-export const stackIntro =
-  "Ferramenta não é personalidade: é só o que estava na mão quando o problema apareceu.";
 
 export const stack = [
   {
@@ -84,9 +80,6 @@ export const stack = [
     items: ["Docker", "Docker Compose", "Kubernetes", "Portainer", "CI/CD"],
   },
 ];
-
-export const experienceIntro =
-  "Publicadas do fim para o começo, como quem lê tira: primeiro o desfecho, depois o que levou até ele.";
 
 export type Result = { value?: string; label: string };
 

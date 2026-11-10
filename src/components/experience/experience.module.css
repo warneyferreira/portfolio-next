@@ -59,15 +59,6 @@
   mask-repeat: no-repeat;
 }
 
-.intro {
-  max-width: 30ch;
-  margin: 0 0 clamp(48px, 6vw, 88px);
-  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  text-wrap: pretty;
-}
 
 /* ---------- quadros ---------- */
 

@@ -1,8 +1,8 @@
 # Portfolio progress
 
 ## Status
-Current focus: Commit and push the complete shared worktree, as explicitly requested by the owner. Hero/Sobre and five replacement engravings are integrated; remaining styling and portfolio tasks stay below.
-Iteration count: 3
+Current focus: Stack redesigned directly by the coordinator; requested intro removals and contact invitation are implemented. Next backlog item: shared spacing/type tokens (2b).
+Iteration count: 4
 
 ## Loop notes
 Read these and DESIGN.md before picking a task.
@@ -19,6 +19,7 @@ Read these and DESIGN.md before picking a task.
 - **impeccable skill.** `impeccable context` reports NO_PRODUCT_MD and BUILD_INIT_REQUIRED. Owner answers and DESIGN.md pin the visual world; no new interview is needed. The Sobre surface brief now records the approved one-ink composition and the checks actually exercised.
 - **Delegation (owner, 2026-11-10).** The owner wants the hands-on work done by the agent in the same herdr space, with less ceremony: batch the backlog items a section needs instead of one small task per iteration. `/mnt/c/Users/warney67/AppData/Local/Programs/herdr-core/hc.exe ls` lists terminals; the peer is the omp terminal whose `where` matches the coordinator's (`portfolio / 1`: coordinator t6, implementer t10 on 2026-11-10). `hc.exe send <t> "<text>"` gives it work, `hc.exe wait <t>` waits, `hc.exe read <t>` shows its screen. Put a long brief in a file and send the path. The coordinator owns PROGRESS.md and DESIGN.md, reviews screenshots, then logs. Remind the implementer that it can generate assets with GPT Images 2 (`generate_image` tool).
 - **Asset rejection (owner, 2026-11-10).** Existing lower-section art is not approved. Replace Stack, Experiência, Projetos, Educação and Contato illustrations with new GPT Images 2 engravings, not recolours. Hero/Sobre stay. Real Estúdio imagery and factual copy must not be fabricated. t10 has this replacement task; use static art rather than retaining rejected sprite subjects merely to keep their old animation.
+- **Iteration 4 override (owner, 2026-11-10).** The coordinator implements this Stack redesign personally, without delegation. No Stack artwork or asset placeholder: the owner will provide assets later. Remove the three specified intros and replace the contact invitation with direct pt-BR copy.
 
 ## Backlog
 Listed in priority order. Split a task here before doing part of it.
@@ -27,9 +28,8 @@ Listed in priority order. Split a task here before doing part of it.
 - [ ] 3a. Remove remaining dead dark-theme rules in lower-section CSS modules and the gladiator drop-shadow. Hero/Sobre, globals and layout are migrated; ThemeToggle, theme script and dark background assets are gone.
 - [ ] 3b. Finish font migration and type scale in lower sections. Bricolage Grotesque --font-sans and Martian Mono --font-mono load in layout; Hero/Sobre use them. Remove remaining per-component next/font instances and add shared type tokens.
 - [ ] 3c. Finish the one-ink cutover in lower sections: remove local palettes, muted greys, flat tints and grey rules. Globals already provide flat ivory paper, selection inversion and the 3px focus outline; Hero/Sobre use the shared palette.
-- [ ] 4. Layout shell: nav, footer, page grid. `nav` in `portfolio.ts` is unused and no `<nav>` exists. The README records that nav links, monogram, intro and CTA were moved out of the hero on purpose: the hero holds the name and the art only, so the nav starts below it. Shared section frame with mono micro-labels in page order. Fix the landmarks: `#contato` renders outside `<main>` and the hero `<header>` inside it.
+- [ ] 4. Finish the layout shell. Global nav and footer are integrated. Finish shared section framing and landmarks: #contato sits outside main and the hero header inside it.
 - [x] 5b. New lower-section art: five GPT Images 2 engravings replace the rejected subjects; binary masks and portable provenance are integrated. The real Estúdio screenshot is Bayer-processed and its logo uses one ink. Original sources remain in scripts/sources/.
-- [ ] 8b. Stack finishing: shared type/spacing scale and Bayer interface shading. The new mechanical-instrument art, static layout and global ink are integrated.
 - [ ] 9b. Experiência finishing: replace remaining halftone depth, round toggles and flat tints with square Bayer surfaces. The new bridge frieze, static timeline and keyboard-operated details are integrated.
 - [ ] 10b. Projetos finishing: replace remaining sheet/quiet colours, color-mix fills, pills and halftone depth with shared tokens/Bayer; move project-specific alt/link labels into projects[]. The new workbench, real dithered screenshot and one-ink logo are integrated.
 - [ ] 11. Project detail page. `src/app/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
@@ -49,6 +49,11 @@ Listed in priority order. Split a task here before doing part of it.
 - [x] 5a. Image pipeline: scripts/dither-art.mjs supports line thresholding and Bayer photos; hero source/provenance retained, deployed 3344×2229 binary mask is 164 KiB.
 - [x] 6. Hero: new GPT Images 2 line engraving from the approved composition, static name-only layout, crisp desktop art and bordered mobile paper plate with Bayer offset.
 - [x] 7. Sobre: restored two-column composition, one ink, global fonts, mono labels, dither divider, square résumé inversion and updated surface brief.
+- [x] 8b. Stack redesigned as an asset-free index: sticky desktop title rail, six ruled categories, mono technology lists, shared ink/paper and native Bayer divider. All 41 technologies and existing category descriptions are retained; no new dependency or client-side interaction.
+- [x] Remove the Stack introduction requested by the owner.
+- [x] Remove the Experiência introduction requested by the owner.
+- [x] Remove the Contato introduction requested by the owner.
+- [x] Rewrite the closing invitation: “Vamos conversar sobre seu próximo projeto.”
 
 ## Needs owner input
 - Writing/blog: the repo has no articles or external posts. Send titles, links and dates, or the section stays empty and hidden (task 13).
@@ -60,7 +65,7 @@ Listed in priority order. Split a task here before doing part of it.
 - `Projects.tsx`: the Estúdio `alt` text and "Visitar o Estúdio" are hard-coded inside `projects.map` (task 10).
 - Landmarks: the new global nav is integrated; #contato still sits outside main and the hero header inside it (tasks 4 and 16).
 - The older reference provenance sidecar at `scripts/sources/hero-reference-orange.webp.json` still contains an absolute local source path; newly generated sidecars must use portable paths.
-- Remaining lower-section greys, flat tints, old paper tokens, halftone shadows and circular toggles are recorded in 3c/8b/9b/10b/12b/14b, not completed by the art replacement.
+- Remaining lower-section greys, flat tints, old paper tokens, halftone shadows and circular toggles are recorded in 3c/9b/10b/12b/14b. The redesigned Stack uses only global ink/paper and Bayer shading.
 - GSAP/@gsap/react/simple-icons have no remaining imports in src after the old scenes were removed; dependency removal remains for the performance pass.
 
 ## Audit (iteration 1, 2026-11-10)
@@ -104,3 +109,5 @@ Every scene is off under `prefers-reduced-motion: reduce` and shows a static end
 - 2026-11-10 — Branding: pixel-W mark on a 16-unit grid, favicon, one centred navbar plate with the mark at its start, and a glass opening that hands the mark to the bar. Monochrome glass (dispersion and colour bleed off); skip, reduced-motion and no-JS paths verified at 1440 and 390. (brand/, nav/, intro/, components/ui/liquid-glass-logo-reveal, layout, globals, icon.svg, DESIGN.md)
 - 2026-11-10 — Iteration 3: t10 committed the five replacement engravings, real Estúdio Bayer preview and obsolete scene removal (639f8db). Coordinator reviewed all five sections at 1440/390, confirmed all 157 factual fields, five keyboard disclosures, contact destinations and binary alpha in every new engraving. No horizontal overflow at either width. (lower sections, art/sources/sidecars, README)
 - 2026-11-10 — Owner requested immediate commit and push of all shared work, including t11's brand/navbar/intro/favicon. Lint, type-check and build passed; coordinator also changed the Estúdio preview to an ink-painted CSS mask so its binary alpha bypasses lossy Next Image optimisation rather than displaying black artwork. Residual styling work stays unchecked.
+- 2026-11-10 — Iteration 4: coordinator redesigned Stack as an asset-free technical index, preserving all six groups and 41 technologies. Removed the three requested introductions and rewrote the closing invitation; deleted their unused exports and CSS. (Stack, Experience, Contact, portfolio.ts, DESIGN.md, README.md)
+- 2026-11-10 — Verified Stack at 360/768/1280/1440/1920, mobile/desktop contact and the mobile experience opening: no horizontal overflow or clipped technology names, approved ink only, no Stack art. Desktop title sticks at 104px below the 68px navbar. Lint, tsc --noEmit and production build pass; LSP was unavailable, so targeted caller lookup plus type-check covered the removed exports.

@@ -1,140 +1,118 @@
-/* Stack no papel do portfólio: um instrumento mecânico renascentista
-   explodido (máscara 1 bit impressa em var(--ink)) acompanha a abertura,
-   e a lista de grupos carrega normal, sem cena presa. */
-
 .stack {
-  position: relative;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(0, 2.3fr);
+  align-items: start;
+  gap: clamp(40px, 6vw, 96px);
   margin-inline: -8px;
-  padding: clamp(72px, 8vw, 128px) clamp(20px, 3.4vw, 48px) clamp(72px, 8vw, 128px);
-  overflow-x: clip;
+  padding: clamp(72px, 8vw, 128px) clamp(20px, 3.4vw, 48px);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
-  scroll-margin-top: 24px;
-}
-
-/* ---------- instrumento explodido ---------- */
-
-.instrument {
-  position: relative;
-  align-self: center;
-  justify-self: end;
-  width: clamp(240px, 26vw, 380px);
-  aspect-ratio: 1280 / 853;
-  pointer-events: none;
-}
-
-.instrumentInk {
-  position: absolute;
-  inset: 0;
-  background-color: var(--ink);
-  mask-image: url("/images/stack/instrument-dither.webp");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-}
-
-/* ---------- texto ---------- */
-
-.heading,
-.groups {
-  position: relative;
+  scroll-margin-top: 96px;
 }
 
 .heading {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr auto;
-  align-items: start;
-  gap: 48px clamp(28px, 4vw, 64px);
+  position: sticky;
+  top: 104px;
 }
 
 .heading h2 {
   margin: 0;
   font-size: clamp(4rem, 7vw, 6rem);
   font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 100;
   line-height: 0.95;
   letter-spacing: -0.04em;
-  font-variation-settings: "opsz" 96, "wdth" 100;
 }
 
-.intro {
-  max-width: 26ch;
-  margin: 0;
-  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  text-wrap: pretty;
+.heading::after {
+  display: block;
+  width: min(100%, 160px);
+  height: 16px;
+  margin-top: 24px;
+  background-color: var(--ink);
+  mask: var(--shade-3) 0 0 / 8px 8px repeat;
+  image-rendering: pixelated;
+  content: "";
 }
 
 .groups {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 64px);
-  margin-top: clamp(56px, 6vw, 96px);
+  min-width: 0;
+  border-bottom: var(--line) solid var(--ink);
 }
 
 .group {
-  border-top: 1.5px solid var(--ink);
-  padding-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 3vw, 48px);
+  padding-block: 28px;
+  border-top: var(--line) solid var(--ink);
+}
+
+.groupHeading {
+  min-width: 0;
 }
 
 .group h3 {
-  margin: 0 0 8px;
-  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
-  font-weight: 800;
-  line-height: 1.1;
+  margin: 0;
+  font-size: clamp(1.75rem, 2.2vw, 2rem);
+  font-weight: 750;
+  line-height: 1.05;
   letter-spacing: -0.03em;
 }
 
 .description {
-  max-width: 34ch;
-  margin: 0 0 16px;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.55;
+  max-width: 32ch;
+  margin: 12px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
 .group ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 12px 24px;
+  min-width: 0;
   margin: 0;
-  padding: 0;
+  padding: 4px 0 0;
   list-style: none;
-  font-size: 1.05rem;
-  font-weight: 650;
-  line-height: 1.35;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
-/* barra entre itens, impressa com a mesma tinta */
-.group li + li::before {
-  content: "/";
-  margin-right: 14px;
-  color: var(--muted);
-  font-weight: 400;
+.group li {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1440px) {
+  .group ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 1000px) {
-  .groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .stack {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .heading {
+    position: static;
   }
 }
 
-@media (max-width: 800px) {
-  .heading {
-    grid-template-columns: 1fr;
+@media (max-width: 640px) {
+  .group {
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
+    padding-block: 24px;
   }
 
-  /* no papel estreito o instrumento fica pequeno, à direita, sem
-     disputar a leitura */
-  .instrument {
-    justify-self: end;
-    width: min(64%, 280px);
-    margin-top: 8px;
-  }
-
-  .groups {
-    grid-template-columns: 1fr;
+  .group ul {
+    padding: 0;
   }
 }

@@ -7,7 +7,6 @@ export default function Contact() {
       <section id="contato" aria-labelledby="contact-title" className={s.contact}>
         <div className={s.heading}>
           <h2 id="contact-title">Contato<span aria-hidden="true">.</span></h2>
-          <p>{contact.intro}</p>
         </div>
 
         <div className={s.correspondence}>

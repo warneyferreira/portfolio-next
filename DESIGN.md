@@ -16,7 +16,7 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 - Build a reusable tone scale `--shade-0` … `--shade-8` (0 = paper, 8 = ink), each a tiling pattern (SVG data-URI or CSS `background-image`) with `image-rendering: pixelated`.
 - Shading is used for: section backgrounds, card depth/shadows (offset dithered block instead of blur shadows), gradients (stepped dither ramps, never smooth gradients), hover states (density shift), dividers.
 - **Images**: project thumbnails and portrait are rendered 1-bit dithered (preprocess with a script in `scripts/`, or a `<canvas>` component that dithers at runtime). The full-colour original is never shown, not even on hover or focus.
-- **Illustrations**: printed 1-bit in `--ink`. Line engravings are thresholded at about twice their display width and never re-dithered: they already carry their own stipple and hatching. The ordered Bayer dither is for interface shades and continuous-tone images. Hero and Sobre retain their approved composition. The existing art in Stack, Experiência, Projetos, Educação and Contato is rejected and must be replaced, not merely recoloured.
+- **Illustrations**: printed 1-bit in `--ink`. Line engravings are thresholded at about twice their display width and never re-dithered: they already carry their own stipple and hatching. The ordered Bayer dither is for interface shades and continuous-tone images. Hero and Sobre retain their approved composition; the lower-section replacements share that engraving language. Stack is intentionally asset-free until the owner supplies artwork.
 - **Hero**: one signature piece. Here it is the Lady Justice and Colosseum engraving, redrawn in black line from the owner-approved composition and printed 1-bit in `--ink`. It is static. Any motion added later must respect `prefers-reduced-motion` (static frame) and stay under ~5 ms/frame.
 - Pixel crispness: align patterns to device pixels; avoid patterns scaled by fractional values.
 
@@ -39,6 +39,7 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 - Grid-based, generous whitespace, hard edges, 1–2px ink borders, no border-radius (or ≤2px).
 - Components: nav, hero, about, stack, project cards + project detail page, experience/timeline, education + certifications, writing/blog list, contact, footer. All share the shade scale.
 - Interaction: hover = pattern density step or inversion; focus states clearly visible (thick ink outline), never removed.
+- **Stack**: an open typographic index, not a card grid. A sticky title rail on desktop accompanies six ruled rows: category and description beside a mono technology list. Tablet moves the title above the index; mobile stacks each category above its list. Use only global ink/paper, 2px rules and a native 8px Bayer divider. No illustration, empty artwork slot, intro slogan, fake proficiency meter or interactive-looking technology chips.
 
 ## Quality bars
 
@@ -60,3 +61,4 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 | 2026-11-10 | Mono left open | Martian Mono | Sturdy at small uppercase sizes in the orange ink; variable weight. |
 | 2026-11-10 | Component list; label example `01 / PROJECTS` | Adds stack and education + certifications; labels in pt-BR | Both sections exist in the repo; all site copy is pt-BR. |
 | 2026-11-10 | Existing lower-section illustrations retained | New GPT Images 2 engravings for Stack, Experiência, Projetos, Educação and Contato; Hero and Sobre stay | Owner rejected all of the lower-section assets. Replace the subjects and compositions while preserving factual content, the one-ink palette and crisp line treatment. Real project screenshots remain truthful, not generated substitutes. |
+| 2026-11-10 | Stack opened with an illustration and an intro slogan | Asset-free technical index with a sticky title rail, ruled categories and mono lists | Owner specifically requested the coordinator's Stack redesign and will add artwork later. The Stack, Experiência and Contato intros were removed; the closing invitation is direct, without the comic-strip metaphor. |

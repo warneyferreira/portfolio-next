@@ -18,6 +18,8 @@ O cartão do Estúdio destaca a captura real do site, reticulada em 1 bit (`stud
 
 A branch `main` abre diretamente o design de uma tinta em `/`, sem seletor de estética. A versão com as duas estéticas e a tela de escolha está preservada na branch `twodesigns`.
 
+A seção Stack funciona como um índice técnico, sem ilustração ou espaço vazio reservado: título fixo à esquerda no desktop, seis áreas separadas por linhas de tinta e tecnologias em listas mono. No tablet o título passa para cima; no mobile cada descrição antecede sua lista. As 41 tecnologias existentes são preservadas; a arte será fornecida pelo proprietário depois.
+
 Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/experience/Experience.tsx`, com um friso da ponte em obras abrindo a seção. Os cartões podem ser abertos para exibir detalhes, tecnologias e resultados. Nada de cenas presas à rolagem: a arte das seções seguintes é estática e respeita a preferência por movimento reduzido.
 
 Vínculos profissionais ficam em ordem do mais recente para o mais antigo. Quando não há resultados informados, o cartão não exibe uma faixa vazia de métricas.

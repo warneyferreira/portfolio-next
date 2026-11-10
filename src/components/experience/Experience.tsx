@@ -1,4 +1,4 @@
-import { experience, experienceIntro } from "@/data/portfolio";
+import { experience } from "@/data/portfolio";
 import s from "./experience.module.css";
 
 /* Lida como tira: o desfecho primeiro. Cada emprego é um quadro em
@@ -12,8 +12,6 @@ export default function Experience() {
       </h2>
 
       <div className={s.strip}>
-        <p className={s.intro}>{experienceIntro}</p>
-
         <div className={s.frieze} aria-hidden="true">
           <span className={s.friezeInk} />
         </div>
