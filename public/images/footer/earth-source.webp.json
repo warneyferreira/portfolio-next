@@ -1,0 +1,9 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "prompt": "Planet Earth as seen from space, full globe centred: continents of Africa, Europe and South America visible with coastlines, swirling cloud bands and oceans, a few stars around the globe. The globe hangs alone in the void, lit from the upper left. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no lettering, no border, no frame.",
+  "pipeline": "1254x1254 gerado; reescalado para 900x900; fonte de amostragem do EarthCanvas (Canvas2D): grade de células com luminância média e dither ordenado Bayer 8×8 em var(--ink) sobre var(--paper), com shimmer lento de limiar; menos movimento = quadro estático",
+  "storage": "WebP qualidade 88",
+  "delivery": "public/images/footer/earth-source.webp, planeta no rodapé"
+}

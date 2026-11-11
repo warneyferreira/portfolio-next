@@ -1,0 +1,17 @@
+/* O planeta do rodapé: dither Bayer desenhado em Canvas2D, tinta única.
+   Células alinhadas ao pixel do dispositivo; nada de escala fracionária. */
+
+.earth {
+  display: block;
+  width: clamp(168px, 20vw, 300px);
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 700px) {
+  .earth {
+    width: min(52vw, 220px);
+  }
+}

@@ -1,0 +1,180 @@
+/* Túnel da Stack: pratos de papel com o ícone de cada ferramenta em tinta.
+   Sem raio, sem gradiente, sem sombra desfocada — a profundidade vem da
+   perspectiva e do bloco reticulado deslocado atrás de cada prato. */
+
+.wrapper {
+  position: relative;
+  height: 240vh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  overflow: hidden;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.anchor {
+  position: relative;
+  z-index: 0;
+  text-align: center;
+  will-change: transform;
+}
+
+.anchor h2 {
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.rule {
+  display: block;
+  width: min(40vw, 220px);
+  height: 16px;
+  margin: 28px auto 0;
+  background-color: var(--ink);
+  mask: var(--shade-3) 0 0 / 8px 8px repeat;
+  image-rendering: pixelated;
+}
+
+/* ---------- pratos ---------- */
+
+.cards {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  will-change: transform, opacity;
+}
+
+.plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  padding: 14px;
+  border: var(--line) solid var(--ink);
+  background-color: var(--paper);
+  color: var(--ink);
+  text-align: center;
+}
+
+/* bloco reticulado deslocado: a profundidade permitida */
+.plate::before {
+  content: "";
+  position: absolute;
+  inset: 6px -6px -6px 6px;
+  z-index: -1;
+  background-color: var(--ink);
+  mask: var(--shade-4) 0 0 / 8px 8px repeat;
+  image-rendering: pixelated;
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+  fill: var(--ink);
+}
+
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  box-sizing: border-box;
+  border: var(--line) solid var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.name {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.group {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* inversão no hover: prato de tinta, ícone e texto em papel */
+.card:hover .plate {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.card:hover .icon {
+  fill: var(--paper);
+}
+
+.card:hover .monogram {
+  border-color: var(--paper);
+}
+
+/* ---------- menos movimento: grade estática ---------- */
+
+.staticWrap {
+  padding: clamp(72px, 8vw, 128px) clamp(20px, 3.4vw, 48px) 0;
+}
+
+.staticHeading h2 {
+  margin: 0;
+  font-size: clamp(4rem, 7vw, 6rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.staticHeading .rule {
+  width: min(100%, 160px);
+  margin: 24px 0 0;
+}
+
+.staticGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  margin: clamp(32px, 4vw, 56px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.staticCard .plate {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    height: 200vh;
+  }
+
+  .staticGrid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

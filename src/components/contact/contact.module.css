@@ -167,7 +167,12 @@
 }
 
 .footer {
-  padding: 24px clamp(20px, 3.4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px 32px;
+  padding: 24px clamp(20px, 3.4vw, 48px) 0;
   border-top: 1px solid var(--rule);
   font-size: 0.875rem;
   line-height: 1.5;

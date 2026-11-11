@@ -1,4 +1,5 @@
 import { contact, profile } from "@/data/portfolio";
+import EarthCanvas from "@/components/footer/EarthCanvas";
 import s from "./contact.module.css";
 
 export default function Contact() {
@@ -39,6 +40,7 @@ export default function Contact() {
       </section>
       <footer className={s.footer}>
         <p>{profile.name} · {profile.location} · 2026</p>
+        <EarthCanvas />
       </footer>
     </div>
   );
