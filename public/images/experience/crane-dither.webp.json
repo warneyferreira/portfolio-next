@@ -1,0 +1,10 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "nenhuma; gravura de linha branca descrita no prompt, para a chapa em negativo",
+  "source": "scripts/sources/experience-crane.webp",
+  "prompt": "A Roman treadwheel crane of heavy timber: a tall leaning A-frame jib with iron pulleys and taut ropes rising from a large spoked wooden treadwheel at its foot, a carved stone block with a cornice moulding hanging in mid-air from the rope, a short run of wooden scaffolding with a ladder behind the crane. Tall vertical page-margin ornament for the RIGHT edge of a web page. The subject sits hard against the right edge: the right edge of the image cuts through it, so it seems to continue beyond the page. It is isolated on blank black: no landscape, no sky, no horizon, no floor plane, no background scene filling the frame. Toward the left the silhouette ends in an irregular organic outline with a few sparse wood shavings and rope ends, and the left 40 percent of the image stays completely blank black. Blank black above the top of the subject and below its base: nothing touches the top or bottom edges of the image. White-line engraving like a scratchboard or a 19th-century wood engraving printed in negative: fine pure white hatching, crosshatching and stipple scratched out of a solid pure black ground. Only pure white lines on pure black: no grey, no colour, no gradients, no text, no lettering, no numbers, no signature, no border, no frame.",
+  "pipeline": "1024x1536 gerado; node scripts/dither-art.mjs scripts/sources/experience-crane.webp public/images/experience/crane-dither.webp --mode line --width 640 --threshold 128 --invert --trim → 640x1292; invertida antes do limiar: os traços brancos viram a máscara, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color",
+  "storage": "lossless WebP",
+  "delivery": "public/images/experience/crane-dither.webp, ala direita de Experiência (components/wings), pousada no topo da seção; impressa em var(--paper) sobre a chapa de var(--ink); estática, decorativa (aria-hidden)"
+}

@@ -63,3 +63,31 @@ export function shadeTile(level: number): string {
     `shape-rendering='crispEdges'>${on.join("")}</svg>`;
   return svgDataUri(svg);
 }
+
+/**
+ * Data-URI de uma rampa vertical de 8 px de largura: os níveis 7…1 de
+ * cima para baixo, `rows` tiles de 8 px por nível (altura 7 × rows × 8 px).
+ * Repetida em x no pé de uma área, dissolve a tinta em papel em degraus de
+ * retícula, nunca num gradiente suave. Para subir em vez de descer, vire o
+ * elemento (`scale: 1 -1`).
+ */
+export function rampTile(rows = 2): string {
+  const on: string[] = [];
+  for (let step = 0; step < 7; step++) {
+    const level = 7 - step;
+    for (let row = 0; row < rows; row++) {
+      const top = (step * rows + row) * 8;
+      for (let y = 0; y < 4; y++) {
+        for (let x = 0; x < 4; x++) {
+          if (BAYER4[y][x] < level * 2) {
+            on.push(`<rect x='${x * 2}' y='${top + y * 2}' width='2' height='2'/>`);
+          }
+        }
+      }
+    }
+  }
+  const svg =
+    `<svg xmlns='http://www.w3.org/2000/svg' width='8' height='${7 * rows * 8}' ` +
+    `shape-rendering='crispEdges'>${on.join("")}</svg>`;
+  return svgDataUri(svg);
+}

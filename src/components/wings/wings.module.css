@@ -1,0 +1,63 @@
+/* Alas: as gravuras laterais das seções de baixo. A arte (máscara 1 bit
+   pintada com --wing-ink) encosta na borda da página, que a corta, e
+   ocupa só a margem --gutter: nunca entra na coluna de leitura. A seção
+   escolhe a tinta (--wing-ink: papel sobre a chapa da Experiência) e pode
+   afastar as alas do topo e do pé com --wings-top e --wings-bottom. */
+
+.wings {
+  position: absolute;
+  inset: var(--wings-top, 48px) 0 var(--wings-bottom, 48px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.wing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(calc(var(--gutter) - 32px), 480px);
+  background-color: var(--wing-ink, var(--ink));
+  mask-image: var(--art);
+  mask-position: var(--art-position);
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.left {
+  --art-position: left var(--anchor);
+  left: 0;
+}
+
+.right {
+  --art-position: right var(--anchor);
+  right: 0;
+}
+
+/* Sem margem lateral no celular: as duas alas abrem a seção como uma
+   vinheta acima do título. Aparece o alto de cada gravura, que se
+   dissolve para baixo na rampa Bayer (--ramp) em vez de um corte reto. */
+@media (max-width: 860px) {
+  .wings {
+    position: relative;
+    inset: auto;
+    height: clamp(240px, 72vw, 400px);
+    margin: 0 calc(var(--gutter) * -1) 28px;
+  }
+
+  .wing {
+    width: 50%;
+    mask-image: var(--art), var(--ramp), linear-gradient(#000 0 0);
+    mask-position: var(--art-position), 0 100%, 0 0;
+    mask-repeat: no-repeat, repeat-x, no-repeat;
+    mask-size: 100% auto, 8px 112px, 100% calc(100% - 112px);
+    mask-composite: intersect, add, add;
+  }
+
+  .left {
+    --art-position: left top;
+  }
+
+  .right {
+    --art-position: right top;
+  }
+}

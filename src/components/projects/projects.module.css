@@ -1,9 +1,15 @@
+/* Projetos: o ateliê. A estátua que sai do bloco e o busto no cavalete
+   ficam nas margens (components/wings); o projeto ocupa a coluna. */
 .projects {
   --sheet: #f4efe4;
   --quiet: #5c564d;
+
+  position: relative;
+  isolation: isolate;
+  margin-inline: -8px;
+  padding: clamp(64px, 8vw, 120px) var(--gutter) clamp(80px, 9vw, 140px);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
-  padding: clamp(64px, 8vw, 120px) clamp(20px, 3.4vw, 48px) clamp(80px, 9vw, 140px);
   scroll-margin-top: 24px;
 }
 
@@ -12,36 +18,11 @@
   background: var(--ink);
 }
 
-.heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 24px clamp(32px, 5vw, 72px);
-  margin-bottom: clamp(42px, 6vw, 80px);
-}
-
-/* marca tipográfica: a bancada do gravador, máscara 1 bit de var(--ink) */
-.mark {
-  position: relative;
-  width: clamp(180px, 24vw, 360px);
-  aspect-ratio: 1;
-  pointer-events: none;
-}
-
-.markInk {
-  position: absolute;
-  inset: 0;
-  background-color: var(--ink);
-  mask-image: url("/images/projects/workbench-dither.webp");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-}
-
-.heading h2 {
-  margin: 0;
-  font-size: clamp(3.5rem, 8vw, 7rem);
+.title {
+  margin: 0 0 clamp(42px, 6vw, 80px);
+  font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.04em;
 }
 
@@ -255,24 +236,15 @@
   padding-top: 8px;
 }
 
-
-@media (max-width: 700px) {
-  .heading,
+/* A coluna entre as alas fica estreita antes do celular: o projeto
+   empilha prévia e texto. */
+@media (max-width: 960px) {
   .project {
     grid-template-columns: 1fr;
-  }
-
-  .heading {
-    gap: 20px;
-  }
-
-  .heading h2 {
-    font-size: clamp(2.2rem, 9vw, 3.5rem);
   }
 
   .projectDetails {
     border-top: 3px solid var(--ink);
     border-left: 0;
   }
-
 }

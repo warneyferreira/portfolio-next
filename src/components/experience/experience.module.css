@@ -1,21 +1,55 @@
-/* A Experiência é uma tira: cada emprego é um quadro de nanquim colado no
-   papel, levemente torto, com uma sombra em retícula impressa ao lado (não
-   um bloco chapado). Um friso da ponte em obras abre a seção; nada de
-   nuvens, pombas ou cena presa. */
+/* Experiência: a chapa em negativo do site. A seção é tinta e tudo nela é
+   papel: letras, réguas e as duas gravuras de linha branca nas margens. Ela
+   entra e sai do papel por rampas de retícula (--ramp), não por um corte
+   reto. Os empregos formam uma linha do tempo: o período na régua à
+   esquerda, um marco quadrado na faixa reticulada e, ao lado, a empresa, o
+   resumo e os resultados em livro-razão. */
 .experience {
-  --muted: #5c564d;
-  --sheet: var(--paper);
-  --line: var(--ink);
-  --line-muted: var(--muted);
+  --wing-ink: var(--paper);
+  --wings-top: clamp(48px, 6vw, 96px);
+  --wings-bottom: clamp(48px, 6vw, 96px);
+  --rail: 10.5rem;
+  --rail-gap: clamp(40px, 4vw, 64px);
 
-  color: var(--ink);
+  position: relative;
+  isolation: isolate;
+  margin: 112px -8px;
+  padding: clamp(72px, 8vw, 128px) var(--gutter) clamp(96px, 10vw, 160px);
+  background: var(--ink);
+  color: var(--paper);
   font-family: var(--font-sans), sans-serif;
   scroll-margin-top: 24px;
 }
 
 .experience ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.experience :focus-visible {
+  outline-color: var(--paper);
+}
+
+/* Bordas da chapa: a tinta chega e vai embora em degraus de retícula. */
+.experience::before,
+.experience::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 112px;
+  background-color: var(--ink);
+  mask: var(--ramp) 0 0 / 8px 112px repeat-x;
+  pointer-events: none;
+}
+
+.experience::before {
+  bottom: 100%;
+  scale: 1 -1;
+}
+
+.experience::after {
+  top: 100%;
 }
 
 .srOnly {
@@ -28,175 +62,97 @@
 }
 
 .title {
-  margin: 0 0 clamp(32px, 4vw, 56px);
-  font-size: clamp(3.6rem, 13vw, 12rem);
+  margin: 0 0 clamp(56px, 7vw, 104px);
+  font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 800;
   font-variation-settings: "opsz" 96, "wdth" 100;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
 }
 
-.strip {
-  margin-inline: -8px;
-  padding: clamp(24px, 4vw, 56px) clamp(20px, 3.4vw, 48px) clamp(80px, 9vw, 140px);
-  overflow: clip;
-}
+/* ---------- linha do tempo ---------- */
 
-/* friso da ponte em obras: máscara 1 bit de var(--ink) sobre o papel */
-.frieze {
-  position: relative;
-  margin: 0 0 clamp(48px, 6vw, 88px);
-  height: clamp(120px, 24vw, 300px);
-  pointer-events: none;
-}
+.timeline {
+  --gap: clamp(72px, 8vw, 120px);
 
-.friezeInk {
-  position: absolute;
-  inset: 0;
-  background-color: var(--ink);
-  mask-image: url("/images/experience/bridge-dither.webp");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-}
-
-
-/* ---------- quadros ---------- */
-
-.panels {
   display: grid;
-  gap: clamp(55px, 6vw, 80px);
-  margin: 0 auto;
-  max-width: 960px;
+  gap: var(--gap);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* o giro cria um contexto de empilhamento, então a sombra (z -2) e a folha
-   (z -1) vão em pseudo-elementos: o fundo do próprio quadro ficaria por
-   baixo da sombra */
-.panel {
+/* O marco fica na altura do meio da primeira linha da empresa. */
+.job {
+  --company-size: clamp(2.25rem, 3.6vw, 3.5rem);
+  --node-y: calc(var(--company-size) * 0.48);
+
   position: relative;
-  border: 3px solid var(--line);
-  color: var(--line);
-  rotate: -0.6deg;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  column-gap: var(--rail-gap);
+  align-items: start;
 }
 
-.panel:nth-child(even) {
-  rotate: 0.5deg;
-}
-
-.panel::before,
-.panel::after {
+/* Faixa reticulada de papel ligando este marco ao do emprego seguinte. */
+.job::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  top: var(--node-y);
+  bottom: calc(-1 * (var(--gap) + var(--node-y)));
+  left: calc(var(--rail) + var(--rail-gap) / 2 - 4px);
+  width: 8px;
+  background-color: var(--paper);
+  mask: var(--shade-3) 0 0 / 8px 8px repeat;
 }
 
-.panel::before {
-  z-index: -1;
-  background: var(--sheet);
-}
-
-/* sombra impressa: retícula deslocada para baixo e à direita */
-.panel::after {
-  z-index: -2;
-  translate: 14px 14px;
-  background-image: radial-gradient(circle, var(--ink) 1.6px, transparent 2.1px);
-  background-size: 8px 8px;
-}
-
-/* ---------- letreiro ---------- */
-
-.cardSummary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px 24px;
-  padding: clamp(20px, 2.5vw, 32px);
-  cursor: pointer;
-  list-style: none;
-}
-
-.cardSummary::-webkit-details-marker {
-  display: none;
-}
-
-.cardSummary:focus-visible {
-  outline: 3px solid var(--line);
-  outline-offset: 5px;
-}
-
-.cardSummary:hover .toggle {
-  text-decoration: underline;
+.job:last-child::before {
+  content: none;
 }
 
 .period {
+  position: relative;
   margin: 0;
-  grid-column: 1 / -1;
-  font-size: 0.9rem;
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  padding-top: calc(var(--node-y) - 0.5lh);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-align: right;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
-/* ---------- história ---------- */
+/* Marco: quadrado de papel com um anel de tinta que o separa da faixa. */
+.period::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--node-y) - 8px);
+  right: calc(var(--rail-gap) / -2 - 8px);
+  width: 16px;
+  height: 16px;
+  background: var(--paper);
+  outline: 4px solid var(--ink);
+}
 
-.body {
-  padding: 0 clamp(20px, 2.5vw, 32px) 28px;
+.entry {
+  min-width: 0;
 }
 
 .company {
-  grid-column: 1;
   margin: 0;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: var(--company-size);
   font-weight: 800;
   font-variation-settings: "opsz" 96, "wdth" 100;
-  line-height: 0.92;
-  letter-spacing: -0.045em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .role {
-  grid-column: 1;
-}
-
-.toggle {
-  grid-column: 2;
-  grid-row: 2 / 4;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.toggleIcon {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  line-height: 1;
-}
-
-.closeLabel,
-.disclosure[open] .openLabel {
-  display: none;
-}
-
-.disclosure[open] .closeLabel {
-  display: inline;
-}
-
-.disclosure[open] .toggleIcon {
-  rotate: 45deg;
-}
-
-.role {
-  margin: 0;
-  font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.3rem);
+  margin: 12px 0 0;
+  font-size: clamp(1.0625rem, 0.4vw + 0.95rem, 1.25rem);
   font-weight: 650;
   line-height: 1.35;
   text-wrap: pretty;
@@ -211,109 +167,180 @@
   fill: none;
   stroke: currentColor;
   stroke-width: 2.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-linecap: square;
 }
 
 .summary {
-  margin: 0 0 16px;
-  font-size: clamp(1.1rem, 0.5vw + 0.95rem, 1.3rem);
-  font-weight: 600;
-  line-height: 1.45;
+  max-width: 60ch;
+  margin: 20px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
-.details {
-  max-width: 65ch;
-  margin: 0 0 22px;
-  color: var(--line-muted);
-  font-size: 1rem;
-  line-height: 1.7;
-  text-wrap: pretty;
-}
-
-:global(html[data-theme="dark"]) .details {
-  color: color-mix(in oklab, var(--line) 78%, var(--sheet));
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tags li {
-  padding: 4px 10px;
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 650;
-}
-
-/* ---------- números ---------- */
+/* ---------- resultados: livro-razão ---------- */
 
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  margin: 0;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: clamp(20px, 2.4vw, 32px);
+  max-width: 44rem;
+  margin: 28px 0 0;
   padding: 0;
-  border-top: 3px solid var(--line);
+  border-top: 2px solid var(--paper);
   list-style: none;
 }
 
 .results li {
   display: grid;
-  align-content: start;
-  gap: 6px;
-  padding: clamp(16px, 2vw, 24px) clamp(16px, 2.4vw, 28px);
-}
-
-.results li + li {
-  border-left: 3px solid var(--line);
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--paper);
 }
 
 .results strong {
-  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  font-size: clamp(1.625rem, 2.2vw, 2.125rem);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .results span {
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  line-height: 1.45;
   text-wrap: pretty;
 }
 
-/* resultado sem número: a frase faz o papel do número */
-.resultNote span {
-  font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.25rem);
+/* Resultado sem número: a frase ocupa a linha inteira. */
+.note span {
+  grid-column: 1 / -1;
   font-weight: 700;
-  line-height: 1.3;
 }
 
-@media (max-width: 800px) {
-  .cardSummary {
-    grid-template-columns: 1fr;
+/* ---------- detalhes ---------- */
+
+.more {
+  margin-top: 24px;
+}
+
+.more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  list-style: none;
+}
+
+.more summary::-webkit-details-marker {
+  display: none;
+}
+
+.more summary:focus-visible {
+  outline-offset: 6px;
+}
+
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  box-sizing: border-box;
+  border: var(--line) solid var(--paper);
+}
+
+.toggle svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: rotate 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover inverte o quadrado: papel chapado, cruz de tinta. */
+.more summary:hover .toggle {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.more[open] .toggle svg {
+  rotate: 45deg;
+}
+
+.closeLabel,
+.more[open] .openLabel {
+  display: none;
+}
+
+.more[open] .closeLabel {
+  display: inline;
+}
+
+.details {
+  max-width: 62ch;
+  margin: 22px 0 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle svg {
+    transition: none;
+  }
+}
+
+/* Sem régua: o período sobe para cima da empresa e a faixa corre na
+   borda esquerda da coluna. */
+@media (max-width: 760px) {
+  .job {
+    --node-y: 10px;
+
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 36px;
   }
 
-  .toggle {
-    grid-column: 1;
-    grid-row: auto;
-    justify-self: start;
-    margin-top: 8px;
+  .job::before {
+    left: 4px;
   }
 
-  .results li + li {
-    border-left: 0;
-    border-top: 3px solid var(--line);
+  .period {
+    margin-bottom: 12px;
+    padding-top: 0;
+    text-align: left;
   }
 
-  .panel::after {
-    translate: 8px 8px;
+  .period::after {
+    top: calc(0.5lh - 8px);
+    right: auto;
+    left: -36px;
+  }
+
+  .results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .results li {
+    gap: 6px;
   }
 }

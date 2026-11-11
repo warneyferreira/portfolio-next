@@ -1,9 +1,0 @@
-{
-  "model": "gpt-image-2-codex",
-  "provider": "openai-codex",
-  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
-  "prompt": "An open atlas lying on a table: thick raised pages curved in the gutter, a map of coastlines, archipelagos and rhumb lines spreading across both pages with a compass rose, a brass divider compass resting open on the map, a small magnifier and a folded letter beside it. The atlas lies open seen from a slight angle, the compass casting a small shadow on the page. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, map has coastlines and rhumb lines but no lettering, no words, no numbers, no border, no frame.",
-  "pipeline": "1254x1254 gerado; reescalado para 800x800 (lanczos3); tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
-  "storage": "lossless WebP",
-  "delivery": "public/images/education/atlas-dither.webp, ao lado das Certificações, estática"
-}

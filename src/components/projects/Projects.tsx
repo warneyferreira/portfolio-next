@@ -1,16 +1,17 @@
 import Image from "next/image";
+import Wings from "@/components/wings/Wings";
 import { projects } from "@/data/portfolio";
 import s from "./projects.module.css";
 
 export default function Projects() {
   return (
     <section id="projetos" aria-labelledby="projects-title" className={s.projects}>
-      <header className={s.heading}>
-        <h2 id="projects-title">Projetos</h2>
-        <div className={s.mark} aria-hidden="true">
-          <span className={s.markInk} />
-        </div>
-      </header>
+      <Wings
+        left={{ src: "/images/projects/statue-dither.webp", anchor: "top" }}
+        right={{ src: "/images/projects/stand-dither.webp", anchor: "bottom" }}
+      />
+
+      <h2 id="projects-title" className={s.title}>Projetos</h2>
 
       <div className={s.collection}>
         {projects.map((project) => (

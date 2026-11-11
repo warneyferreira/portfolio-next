@@ -3,7 +3,7 @@
  * preto com alfa 0 ou 255 — usar sobre `background-color: var(--ink)`.
  *
  * Uso:
- *   node scripts/dither-art.mjs <entrada> <saída> --mode line --width <px> --threshold <0-255>
+ *   node scripts/dither-art.mjs <entrada> <saída> --mode line --width <px> --threshold <0-255> [--invert] [--trim] [--shave <px>]
  *   node scripts/dither-art.mjs <entrada> <saída> --mode bayer
  *
  *   --mode line   Gravura de linha: tons de cinza, redimensiona para
@@ -12,6 +12,13 @@
  *                 próprio pontilhado; re-reticular cria moiré.
  *   --mode bayer  Dither ordenado Bayer 8×8 em tons de cinza, com
  *                 cinza >= 235 tratado como papel puro (para fotos).
+ *   --invert      Inverte antes do limiar: gravura de linha branca sobre
+ *                 fundo preto vira máscara dos traços brancos (para
+ *                 imprimir var(--paper) sobre a chapa de var(--ink)).
+ *   --trim        Recorta o papel vazio em volta da arte antes de
+ *                 redimensionar: a máscara começa e termina no desenho.
+ *   --shave <px>  Raspa <px> de cada borda da fonte antes de tudo, para
+ *                 tirar o fio de moldura que o gerador às vezes deixa.
  *
  * Exemplo:
  *   node scripts/dither-art.mjs scripts/sources/hero-engraving.webp \
@@ -43,16 +50,33 @@ const widthIndex = args.indexOf("--width");
 const width = widthIndex !== -1 ? Number(args[widthIndex + 1]) : null;
 const thresholdIndex = args.indexOf("--threshold");
 const threshold = thresholdIndex !== -1 ? Number(args[thresholdIndex + 1]) : 128;
+const invert = args.includes("--invert");
+const trim = args.includes("--trim");
+const shaveIndex = args.indexOf("--shave");
+const shave = shaveIndex !== -1 ? Number(args[shaveIndex + 1]) : 0;
 
 if (!input || !output || !mode || (mode === "line" && !width)) {
   console.error(
-    "Uso: node scripts/dither-art.mjs <entrada> <saída> --mode line --width <px> --threshold <0-255>\n" +
+    "Uso: node scripts/dither-art.mjs <entrada> <saída> --mode line --width <px> --threshold <0-255> [--invert] [--trim] [--shave <px>]\n" +
       "      node scripts/dither-art.mjs <entrada> <saída> --mode bayer",
   );
   process.exit(1);
 }
 
-let pipeline = sharp(input).grayscale();
+let pipeline = sharp(input);
+if (shave > 0) {
+  const { width: sw, height: sh } = await pipeline.metadata();
+  pipeline = pipeline.extract({ left: shave, top: shave, width: sw - 2 * shave, height: sh - 2 * shave });
+}
+pipeline = pipeline.grayscale();
+if (invert) {
+  pipeline = pipeline.negate();
+}
+if (trim) {
+  // Materializa antes do recorte: o trim do sharp lê a imagem já
+  // invertida e em cinza, com o papel branco como fundo.
+  pipeline = sharp(await pipeline.png().toBuffer()).trim({ background: "#ffffff", threshold: 64 });
+}
 if (mode === "line") {
   pipeline = pipeline.resize(width, null, { kernel: "lanczos3" });
 }

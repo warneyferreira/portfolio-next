@@ -10,8 +10,14 @@
   background: var(--ink);
 }
 
+/* Contato: Mercúrio e a correspondência pousam no pé da seção, nas
+   margens (components/wings); a carta ocupa a coluna. */
 .contact {
-  padding: clamp(64px, 7vw, 112px) clamp(20px, 3.4vw, 48px) clamp(64px, 7vw, 112px);
+  --wings-bottom: 0px;
+
+  position: relative;
+  isolation: isolate;
+  padding: clamp(64px, 7vw, 112px) var(--gutter);
   scroll-margin-top: 24px;
 }
 
@@ -26,35 +32,6 @@
   line-height: 0.95;
   letter-spacing: -0.04em;
   font-variation-settings: "opsz" 96, "wdth" 100;
-}
-
-
-/* carta + mão que lacra: a leitura fica no cartão; a gravura, contida,
-   acompanha à direita */
-.correspondence {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: clamp(28px, 4vw, 56px);
-  margin-block: 0 clamp(56px, 7vw, 104px);
-}
-
-.seal {
-  position: relative;
-  align-self: center;
-  justify-self: end;
-  width: clamp(220px, 24vw, 340px);
-  aspect-ratio: 1;
-  pointer-events: none;
-}
-
-.sealInk {
-  position: absolute;
-  inset: 0;
-  background-color: var(--ink);
-  mask-image: url("/images/contact/sealing-hand-dither.webp");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
 }
 
 .letter {
@@ -186,17 +163,6 @@
   .details {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-
-  /* no papel estreito a mão fica menor, à direita, sob o cartão */
-  .correspondence {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .seal {
-    justify-self: end;
-    width: min(64%, 300px);
   }
 
   .heading h2 {

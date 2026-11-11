@@ -1,9 +1,15 @@
+import Wings from "@/components/wings/Wings";
 import { certifications, certificationsIntro, education } from "@/data/portfolio";
 import s from "./education.module.css";
 
 export default function Education() {
   return (
     <section id="educacao" aria-labelledby="education-title" className={s.education}>
+      <Wings
+        left={{ src: "/images/education/scrolls-dither.webp", anchor: "bottom" }}
+        right={{ src: "/images/education/sphere-dither.webp", anchor: "top" }}
+      />
+
       <div className={s.heading}>
         <div className={s.headingTitle}>
           <h2 id="education-title">Educação<span aria-hidden="true">.</span></h2>
@@ -30,9 +36,6 @@ export default function Education() {
             <h3>Certificações</h3>
           </div>
           <p>{certificationsIntro}</p>
-          <div className={s.atlas} aria-hidden="true">
-            <span className={s.atlasInk} />
-          </div>
         </div>
         <ul className={s.certList}>
           {certifications.map((cert) => (

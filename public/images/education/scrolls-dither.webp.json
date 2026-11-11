@@ -1,0 +1,10 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "source": "scripts/sources/education-scrolls.webp",
+  "prompt": "Image 1 is a style reference only: match its engraving technique, line weight and stipple density exactly. Do not copy its subjects, figures or layout. A tall Roman library cabinet (armarium) of carved wood with open pigeonholes filled with rolled papyrus scrolls, small tags hanging from the scroll ends, a few scrolls stacked on its top cornice, and a wooden library ladder leaning against its front. Tall vertical page-margin ornament for the LEFT edge of a web page. The subject sits hard against the left edge: the left edge of the image cuts through it, so it seems to continue beyond the page. It is isolated on blank white paper: no landscape, no sky, no horizon, no floor plane, no background scene filling the frame. Toward the right the silhouette ends in an irregular organic outline with a few sparse loose scrolls, and the right 40 percent of the image stays completely blank white paper. Blank white paper above the top of the subject and below its base: nothing touches the top or bottom edges of the image. Antique copperplate engraving in the manner of 18th-century architectural and scientific plates: fine parallel hatching, crosshatching and stipple, crisp pure black ink lines on pure white paper. No colour, no grey wash, no gradients, no paper texture, no text, no lettering, no numbers, no signature, no border, no frame.",
+  "pipeline": "1024x1536 gerado; node scripts/dither-art.mjs scripts/sources/education-scrolls.webp public/images/education/scrolls-dither.webp --mode line --width 640 --threshold 128 --trim → 640x1494; tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color",
+  "storage": "lossless WebP",
+  "delivery": "public/images/education/scrolls-dither.webp, ala esquerda de Educação (components/wings), pousada no pé da seção; estática, decorativa (aria-hidden)"
+}

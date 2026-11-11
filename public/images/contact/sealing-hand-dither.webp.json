@@ -1,9 +1,0 @@
-{
-  "model": "gpt-image-2-codex",
-  "provider": "openai-codex",
-  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
-  "prompt": "A hand pressing a wax seal onto a folded letter on a writing desk: the envelope lies flat with a pool of sealing wax at its flap, the hand grips an ornate brass seal stamp above the wax, an inkwell with a quill, a small stack of waiting letters and a candlestick sit at the edges of the desk. The hand presses the seal down onto the wax at the centre of the plate. Antique copperplate engraving with fine crosshatch and stipple, pure black lines on pure white paper, no colour, no grey wash, no text, no lettering, no wings, no birds, no border, no frame.",
-  "pipeline": "1254x1254 gerado; reescalado para 760x760 (lanczos3); tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color var(--ink)",
-  "storage": "lossless WebP",
-  "delivery": "public/images/contact/sealing-hand-dither.webp, ao lado do cartão-carta em Contato, estática"
-}

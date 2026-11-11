@@ -1,0 +1,10 @@
+{
+  "model": "gpt-image-2-codex",
+  "provider": "openai-codex",
+  "reference": "scripts/sources/hero-engraving.webp (referência de estilo aprovada)",
+  "source": "scripts/sources/education-sphere.webp",
+  "prompt": "Image 1 is a style reference only: match its engraving technique, line weight and stipple density exactly. Do not copy its subjects, figures or layout. A brass armillary sphere with nested rings, a zodiac band and a small central globe, mounted on a tall ornate baluster pedestal with three scrolled feet; a stack of leather-bound books and a pair of brass dividers at the foot of the pedestal. Tall vertical page-margin ornament for the RIGHT edge of a web page. The subject sits hard against the right edge: the right edge of the image cuts through it, so it seems to continue beyond the page. It is isolated on blank white paper: no landscape, no sky, no horizon, no floor plane, no background scene filling the frame. Toward the left the silhouette ends in an irregular organic outline with a few sparse loose pages, and the left 40 percent of the image stays completely blank white paper. Blank white paper above the top of the subject and below its base: nothing touches the top or bottom edges of the image. Antique copperplate engraving in the manner of 18th-century architectural and scientific plates: fine parallel hatching, crosshatching and stipple, crisp pure black ink lines on pure white paper. No colour, no grey wash, no gradients, no paper texture, no text, no lettering, no numbers, no signature, no border, no frame.",
+  "pipeline": "1024x1536 gerado; node scripts/dither-art.mjs scripts/sources/education-sphere.webp public/images/education/sphere-dither.webp --mode line --width 640 --threshold 128 --trim → 640x1875; tinta onde cinza < 128, sem matriz de dither; máscara WebP sem perda, preto com alfa 0/255, pintada em CSS com background-color",
+  "storage": "lossless WebP",
+  "delivery": "public/images/education/sphere-dither.webp, ala direita de Educação (components/wings), pousada no topo da seção; estática, decorativa (aria-hidden)"
+}

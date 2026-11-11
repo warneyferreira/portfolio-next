@@ -20,13 +20,15 @@ A branch `main` abre diretamente o design de uma tinta em `/`, sem seletor de es
 
 A seção Stack funciona como um índice técnico, sem ilustração ou espaço vazio reservado: título fixo à esquerda no desktop, seis áreas separadas por linhas de tinta e tecnologias em listas mono. No tablet o título passa para cima; no mobile cada descrição antecede sua lista. As 41 tecnologias existentes são preservadas; a arte será fornecida pelo proprietário depois.
 
-Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/experience/Experience.tsx`, com um friso da ponte em obras abrindo a seção. Os cartões podem ser abertos para exibir detalhes, tecnologias e resultados. Nada de cenas presas à rolagem: a arte das seções seguintes é estática e respeita a preferência por movimento reduzido.
+Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/experience/Experience.tsx`: uma chapa de tinta que entra e sai do papel por rampas de retícula, com os empregos numa linha do tempo. Período, empresa, cargo, resumo e resultados ficam à vista; "Ver detalhes" abre o relato completo e as tecnologias. Nada de cenas presas à rolagem: a arte é estática e respeita a preferência por movimento reduzido.
 
-Vínculos profissionais ficam em ordem do mais recente para o mais antigo. Quando não há resultados informados, o cartão não exibe uma faixa vazia de métricas.
+Vínculos profissionais ficam em ordem do mais recente para o mais antigo. Quando não há resultados informados, o emprego não exibe um livro-razão vazio.
 
-Projetos, educação e contato ficam em componentes próprios em `src/components/`, com os textos e links também definidos em `src/data/portfolio.ts`. Em Projetos, a marca tipográfica da bancada do gravador acompanha o título; a captura do Estúdio é reticulada, nunca exibida em cores. Em Educação, o atlas aberto com compasso acompanha as certificações; em Contato, a mão que lacra a correspondência acompanha o cartão-carta, sem asas.
+Projetos, educação e contato ficam em componentes próprios em `src/components/`, com os textos e links também definidos em `src/data/portfolio.ts`. A captura do Estúdio é reticulada, nunca exibida em cores.
 
-As gravuras das seções seguintes foram geradas no GPT Images 2 a partir da gravura aprovada da hero como referência de estilo, reticuladas por `scripts/dither-art.mjs --mode line` em ~2x a largura de exibição, e registradas em provenance sidecars (`*.webp.json`) sem caminhos absolutos. As fontes contínuas ficam em `scripts/sources/`.
+Da Experiência ao Contato, cada seção fica entre duas gravuras laterais nas bordas da página, como a hero (`src/components/wings/`): a coluna espiral dos construtores e o guindaste de roda (Experiência, em papel sobre a tinta), a estátua inacabada e o busto no cavalete (Projetos), o armário de rolos e a esfera armilar (Educação), Mercúrio e a correspondência sobre um capitel (Contato). O texto fica numa coluna central; no celular as duas alas viram uma vinheta acima do título que se dissolve em retícula.
+
+As gravuras foram geradas no GPT Images 2 (as do papel com a gravura aprovada da hero como referência de estilo; as da Experiência em linha branca), convertidas em máscaras 1 bit por `scripts/dither-art.mjs --mode line` (`--invert` para linha branca, `--trim` para recortar o papel vazio, `--shave` para raspar fios de moldura) e registradas em provenance sidecars (`*.webp.json`) sem caminhos absolutos. As fontes ficam em `scripts/sources/`.
 
 O projeto em destaque é o [Estúdio](https://studiomkt.com.br), com descrição baseada no site público. A logo oficial e a captura enviada pelo usuário estão em `public/images/projects/studio-*`; a captura em cores contínua fica em `scripts/sources/studio-screenshot.webp` como fonte da retícula.
 

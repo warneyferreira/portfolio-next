@@ -1,7 +1,7 @@
 # Portfolio progress
 
 ## Status
-Current focus: Stack redesigned directly by the coordinator; requested intro removals and contact invitation are implemented. Next backlog item: shared spacing/type tokens (2b).
+Current focus: lateral wings now frame Experiência, Projetos, Educação and Contato, and Experiência is a timeline ledger. Next backlog item: shared spacing/type tokens (2b).
 Iteration count: 4
 
 ## Loop notes
@@ -12,6 +12,7 @@ Read these and DESIGN.md before picking a task.
 - **Checks.** `npm run lint`, `npx tsc --noEmit`, `npm run build`. All three pass at baseline. There is no test runner.
 - **Servers.** The owner may have `next dev` on :3000; never stop it. `next build` is safe next to it because dev writes to `.next/dev`.
 - **Visual check.** Start `npx next start --port 3020` as a named service. Managed Chromium does not start on this machine (`libnspr4.so` missing). Look in `proc://` for a live `chrome-headless-shell` service; otherwise start `~/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell --no-sandbox --remote-debugging-port=9333 --user-data-dir=/tmp/portfolio-loop-browser about:blank` as a service. Attach with `browser.open({ app: { cdp_url: "http://127.0.0.1:<port>" } })`. With motion on, the GSAP pins make the page 16–23k px tall, so emulate `prefers-reduced-motion: reduce` for per-section screenshots (`#inicio`, `#sobre`, `#stack`, `#experiencia`, `#projetos`, `#educacao`, `#contato`), then check the scenes with motion on by scrolling into `#stack`, `#experiencia` and `#projetos`. Stop the services you start.
+- **Headless browser.** Open the dev server as `http://localhost:3000`, not 127.0.0.1: dev-origin blocking stops hydration and the intro veil never lifts. Start chrome-headless-shell with `LD_LIBRARY_PATH=~/.cache/omp-chrome-libs/root/usr/lib/x86_64-linux-gnu` to supply the missing libnspr4.
 - **Commits.** `git add -A && git commit`. 22 unused work-in-progress images (52 MB: `hero-angel-*`, `hero-lady-justice-*`, `hero-ruins-*`, `lady_justice_hero_4k.png`, `about-roman-{left,right,bottom}.webp`, `janus-*`) stay on disk and out of git through `.git/info/exclude`, by owner decision. Never delete or force-add them. If a task starts using one, remove its line from the exclude file and log it: `about-roman-*.webp` are the continuous-tone sources of the `*-dither` masks, and `hero-lady-justice-desktop.webp` is the sharpened upper panel of the hero composite.
 - **Content.** Every string comes from `src/data/portfolio.ts`, in pt-BR. Labels stay pt-BR (`01 / SOBRE`). Never invent content.
 - **New assets.** The owner allows GPT Images 2 (`generate_image` tool) for monochrome assets. Match the existing classical engraving and stipple line art, run the result through the dithering pipeline, and write a `<asset>.webp.json` provenance sidecar without absolute local paths.
@@ -30,12 +31,12 @@ Listed in priority order. Split a task here before doing part of it.
 - [ ] 3c. Finish the one-ink cutover in lower sections: remove local palettes, muted greys, flat tints and grey rules. Globals already provide flat ivory paper, selection inversion and the 3px focus outline; Hero/Sobre use the shared palette.
 - [ ] 4. Finish the layout shell. Global nav and footer are integrated. Finish shared section framing and landmarks: #contato sits outside main and the hero header inside it.
 - [x] 5b. New lower-section art: five GPT Images 2 engravings replace the rejected subjects; binary masks and portable provenance are integrated. The real Estúdio screenshot is Bayer-processed and its logo uses one ink. Original sources remain in scripts/sources/.
-- [ ] 9b. Experiência finishing: replace remaining halftone depth, round toggles and flat tints with square Bayer surfaces. The new bridge frieze, static timeline and keyboard-operated details are integrated.
-- [ ] 10b. Projetos finishing: replace remaining sheet/quiet colours, color-mix fills, pills and halftone depth with shared tokens/Bayer; move project-specific alt/link labels into projects[]. The new workbench, real dithered screenshot and one-ink logo are integrated.
+- [x] 9b. Experiência finishing: timeline ledger with square markers and a dithered spine, square toggle, mono technology list, ramp edges; no halftone, pills or round controls remain.
+- [ ] 10b. Projetos finishing: replace remaining sheet/quiet colours, color-mix fills, pills and halftone depth with shared tokens/Bayer; move project-specific alt/link labels into projects[]. Lateral wings, real dithered screenshot and one-ink logo are integrated.
 - [ ] 11. Project detail page. `src/app/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
-- [ ] 12b. Educação finishing: remove remaining grey rules/text and halftone badges. The new atlas/compass engraving and all existing degree/certification content are integrated.
+- [ ] 12b. Educação finishing: remove remaining grey rules/text and halftone badges. Lateral wings and all existing degree/certification content are integrated.
 - [ ] 13. Writing section. No articles exist in the repo. Build the list component and a `writing` array in `portfolio.ts` that renders nothing while empty, marked `TODO(content):`.
-- [ ] 14b. Contato finishing: remove remaining muted text and halftone depth. The new sealing-hand engraving, footer and real contact links are integrated.
+- [ ] 14b. Contato finishing: remove remaining muted text and halftone depth (letter shadow, grey footer rule). Lateral wings, footer and real contact links are integrated.
 - [ ] 15. Responsive pass (360 / 768 / 1280 / 1920).
 - [ ] 16. Accessibility pass (contrast, keyboard nav, alt text, landmarks, reduced motion).
 - [ ] 17. Performance pass (image sizes, canvas cost, fonts, bundle). Baseline first load: 6.9 MB.
@@ -65,7 +66,8 @@ Listed in priority order. Split a task here before doing part of it.
 - `Projects.tsx`: the Estúdio `alt` text and "Visitar o Estúdio" are hard-coded inside `projects.map` (task 10).
 - Landmarks: the new global nav is integrated; #contato still sits outside main and the hero header inside it (tasks 4 and 16).
 - The older reference provenance sidecar at `scripts/sources/hero-reference-orange.webp.json` still contains an absolute local source path; newly generated sidecars must use portable paths.
-- Remaining lower-section greys, flat tints, old paper tokens, halftone shadows and circular toggles are recorded in 3c/9b/10b/12b/14b. The redesigned Stack uses only global ink/paper and Bayer shading.
+- Remaining lower-section greys, flat tints, old paper tokens, halftone shadows and pills are recorded in 3c/10b/12b/14b. Stack, Experiência and the lateral wings use only global ink/paper and Bayer shading.
+- `StackTunnel.tsx` (owner work in progress) throws a hydration mismatch under reduced motion: the server renders the motion tree, the client the static one (seen in the dev overlay, 2026-11-11).
 - GSAP/@gsap/react/simple-icons have no remaining imports in src after the old scenes were removed; dependency removal remains for the performance pass.
 
 ## Audit (iteration 1, 2026-11-10)
@@ -111,3 +113,5 @@ Every scene is off under `prefers-reduced-motion: reduce` and shows a static end
 - 2026-11-10 — Owner requested immediate commit and push of all shared work, including t11's brand/navbar/intro/favicon. Lint, type-check and build passed; coordinator also changed the Estúdio preview to an ink-painted CSS mask so its binary alpha bypasses lossy Next Image optimisation rather than displaying black artwork. Residual styling work stays unchecked.
 - 2026-11-10 — Iteration 4: coordinator redesigned Stack as an asset-free technical index, preserving all six groups and 41 technologies. Removed the three requested introductions and rewrote the closing invitation; deleted their unused exports and CSS. (Stack, Experience, Contact, portfolio.ts, DESIGN.md, README.md)
 - 2026-11-10 — Verified Stack at 360/768/1280/1440/1920, mobile/desktop contact and the mobile experience opening: no horizontal overflow or clipped technology names, approved ink only, no Stack art. Desktop title sticks at 104px below the 68px navbar. Lint, tsc --noEmit and production build pass; LSP was unavailable, so targeted caller lookup plus type-check covered the removed exports.
+- 2026-11-10 — Owner inverted Experiência: the section is now a full-bleed ink plate with paper type, paper frames, a paper dither shadow and a paper bridge frieze; selection inverts back and the dead dark-theme tint is gone. Lint and tsc --noEmit pass; the dev server compiled the new rules. (experience.module.css)
+- 2026-11-11 — Owner: square lower-section art "placed beside" content was too simple; wanted art on the page sides like Hero/Sobre and better Experiência cards. Eight GPT Images 2 engravings became lateral wings (`components/wings`, `--column`/`--gutter` tokens): column + crane (white-line, paper on ink), statue + modelling stand, scroll armarium + armillary sphere, Mercury + correspondence; mobile shows them as a headpiece dissolving through the new `--ramp` token (`rampTile()` in dither.ts). Experiência became a timeline ledger with ramp edges; obsolete bridge, workbench, atlas and sealing-hand assets removed. `dither-art.mjs` gained `--invert`, `--trim`, `--shave`. Verified 360/390/768/1024/1280/1440/1920 (no overflow), DPR 2 mobile, 1:1 art crispness, keyboard focus/open and hover on the disclosure. Lint, tsc --noEmit, impeccable detect and production build pass.
