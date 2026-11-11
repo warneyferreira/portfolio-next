@@ -1,6 +1,7 @@
 import { contact, profile } from "@/data/portfolio";
 import EarthCanvas from "@/components/footer/EarthCanvas";
 import Wings from "@/components/wings/Wings";
+import { mercuryRig } from "./mercury-rig";
 import s from "./contact.module.css";
 
 export default function Contact() {
@@ -8,7 +9,7 @@ export default function Contact() {
     <div className={s.close}>
       <section id="contato" aria-labelledby="contact-title" className={s.contact}>
         <Wings
-          left={{ src: "/images/contact/mercury-dither.webp", anchor: "bottom" }}
+          left={{ src: "/images/contact/mercury-dither.webp", anchor: "bottom", rig: mercuryRig }}
           right={{ src: "/images/contact/letters-dither.webp", anchor: "bottom" }}
         />
 

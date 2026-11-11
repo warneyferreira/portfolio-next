@@ -11,7 +11,10 @@
   pointer-events: none;
 }
 
+/* --fit conta ao LiveWing como a máscara está enquadrada. */
 .wing {
+  --fit: contain;
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -33,6 +36,26 @@
   right: 0;
 }
 
+/* Ala viva (LiveWing): a tela WebGL redesenha a mesma máscara com
+   movimento. Até o primeiro quadro ficar pronto vale a máscara estática;
+   depois o span perde a máscara e mostra a tela. */
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.wing[data-live] {
+  background: none;
+  mask: none;
+}
+
+.wing[data-live] > .canvas {
+  visibility: visible;
+}
+
 /* Sem margem lateral no celular: as duas alas abrem a seção como uma
    vinheta acima do título. Aparece o alto de cada gravura, que se
    dissolve para baixo na rampa Bayer (--ramp) em vez de um corte reto. */
@@ -45,6 +68,8 @@
   }
 
   .wing {
+    --fit: width;
+
     width: 50%;
     mask-image: var(--art), var(--ramp), linear-gradient(#000 0 0);
     mask-position: var(--art-position), 0 100%, 0 0;
@@ -59,5 +84,14 @@
 
   .right {
     --art-position: right top;
+  }
+
+  /* Na vinheta a tela viva mantém só a rampa que dissolve o pé. */
+  .wing[data-live] {
+    mask-image: var(--ramp), linear-gradient(#000 0 0);
+    mask-position: 0 100%, 0 0;
+    mask-repeat: repeat-x, no-repeat;
+    mask-size: 8px 112px, 100% calc(100% - 112px);
+    mask-composite: add;
   }
 }
