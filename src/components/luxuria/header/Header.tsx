@@ -1,4 +1,3 @@
-import Link from "next/link";
 import frame from "@/components/luxuria/frame/frame.module.css";
 import { nav, profile } from "@/data/portfolio";
 import s from "./header.module.css";
@@ -10,7 +9,7 @@ export default function Header() {
   return (
     <header className={s.header}>
       <div className={`${frame.frame} ${s.bar}`}>
-        <a href="#top" className={s.brand} aria-label={`${profile.shortName}, início`}>
+        <a href="#inicio" className={s.brand} aria-label={`${profile.shortName}, início`}>
           {profile.shortName}
         </a>
         <nav aria-label="Principal" className={s.nav}>
@@ -26,10 +25,9 @@ export default function Header() {
         <svg className={s.drop} viewBox="4 3 5 7" aria-hidden>
           <path d="M6.5 9.8C5.028 8.348 4.2 6.852 4.2 5.4a2.3 2.3 0 0 1 4.6 0c0 1.452-.828 2.948-2.3 4.4z" />
         </svg>
-        {/* Outro layout raiz: a navegação recarrega a página, pré-carregar não serve. */}
-        <Link href="/" prefetch={false} className={s.switch}>
+        <a href="/gravura#inicio" className={s.switch}>
           Trocar design
-        </Link>
+        </a>
       </div>
     </header>
   );

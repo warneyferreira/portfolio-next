@@ -2,6 +2,7 @@ import { mono, sans } from "@/components/gravura/fonts";
 import Intro from "@/components/gravura/intro/Intro";
 import Nav from "@/components/gravura/nav/Nav";
 import { siteMetadata } from "@/lib/metadata";
+import "../design-transition.css";
 import "./globals.css";
 
 export const metadata = siteMetadata;

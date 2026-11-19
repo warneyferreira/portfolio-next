@@ -44,8 +44,10 @@
 }
 
 /* Enquanto a abertura toca, a marca da barra espera a que vem voando. */
-:global(html[data-intro="playing"]) .mark {
-  visibility: hidden;
+@media (prefers-reduced-motion: no-preference) {
+  :global(html[data-intro="playing"]:not(:has(#inicio:target))) .mark {
+    visibility: hidden;
+  }
 }
 
 .word {

@@ -28,9 +28,8 @@ export default function Intro() {
     setGone(true)
   }, [])
 
-  // Sem movimento: a abertura não existe, a barra já nasce com a marca.
   React.useEffect(() => {
-    if (reduced()) finish()
+    if (reduced() || window.location.hash === "#inicio") finish()
   }, [finish])
 
   // Enquanto o véu está de pé a página não rola por baixo dele.

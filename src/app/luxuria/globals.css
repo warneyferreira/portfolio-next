@@ -12,6 +12,13 @@
 html {
   background-color: var(--carmim);
   color: var(--creme);
+  scroll-padding-top: 112px;
+}
+
+@media (max-width: 860px) {
+  html {
+    scroll-padding-top: 128px;
+  }
 }
 
 body {

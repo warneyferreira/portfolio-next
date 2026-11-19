@@ -13,6 +13,16 @@
   opacity: 0;
 }
 
+:global(html:has(#inicio:target)) .veil {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .veil {
+    display: none;
+  }
+}
+
 /* A marca em voo: sai do centro no tamanho em que o vidro a deixou e
    pousa exatamente sobre a marca da barra. */
 .clone {

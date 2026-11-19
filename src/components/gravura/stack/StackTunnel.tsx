@@ -3,12 +3,11 @@
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { stack } from "@/data/portfolio";
 import { stackIcon, type StackIcon } from "@/lib/stack-icons";
 import s from "./stack-tunnel.module.css";
@@ -35,6 +34,13 @@ type TunnelCard = {
 
 const GOLDEN_ANGLE = 137.5 * (Math.PI / 180);
 const STAGGER = 0.55;
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+
+function subscribeToReducedMotion(onChange: () => void) {
+  const media = window.matchMedia(REDUCED_MOTION);
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
 
 const CARDS: TunnelCard[] = stack
   .flatMap((group) => group.items.map((name) => ({ name, group: group.name })))
@@ -152,7 +158,11 @@ function TunnelCardView({
 
 export default function StackTunnel() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false,
+  );
   const stage = useStage();
   const pointer = usePointerParallax(!reduce);
 
@@ -161,6 +171,7 @@ export default function StackTunnel() {
   const progress = useSpring(rawProgress, { stiffness: 80, damping: 30, restDelta: 0.0001 });
 
   useEffect(() => {
+    if (reduce) return;
     const el = wrapperRef.current;
     if (!el) return;
     let frame = 0;
@@ -182,7 +193,7 @@ export default function StackTunnel() {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, [rawProgress]);
+  }, [rawProgress, reduce]);
 
   const titleScale = useTransform(progress, [0, 0.5, 1], [0.72, 1, 1.3]);
   const titleOpacity = useTransform(progress, [0, 0.12, 0.85, 1], [1, 1, 1, 0.35]);
