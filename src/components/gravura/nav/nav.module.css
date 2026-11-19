@@ -77,18 +77,33 @@
   white-space: nowrap;
 }
 
+/* A troca de design: última célula, separada das seções por um fio de tinta. */
+.switch {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 12px;
+  border-left: var(--line) solid var(--ink);
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .brand:hover,
-.links a:hover {
+.links a:hover,
+.switch:hover {
   background: var(--ink);
   color: var(--paper);
 }
 
 .brand:focus-visible,
-.links a:focus-visible {
+.links a:focus-visible,
+.switch:focus-visible {
   outline-offset: -5px;
 }
 
-/* Estreito: a barra encolhe, o nome sai e sobra Contato ao lado da marca. */
+/* Estreito: a barra encolhe e sobra Contato entre a marca e a troca de
+   design; no celular o nome sai e a marca assina sozinha. */
 @media (max-width: 860px) {
   .nav {
     top: 8px;
@@ -97,4 +112,8 @@
     padding-right: 8px;
   }
   .links li:not(:last-child) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .word { display: none; }
 }

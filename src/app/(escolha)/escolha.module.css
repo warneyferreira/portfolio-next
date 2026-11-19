@@ -1,0 +1,234 @@
+/* O seletor: Gravura à esquerda (tinta laranja sobre papel), Luxúria à
+   direita (creme sobre carmim). A pergunta atravessa a costura, metade em
+   cada design. */
+
+.choice {
+  /* Cópias das cores de app/gravura/globals.css e app/luxuria/globals.css:
+     o seletor não carrega o CSS global de nenhum dos dois. */
+  --ink: #c43c00;
+  --paper: #fef0d3;
+  --carmim: #871c21;
+  --vinho: #4b0f13;
+  --creme: #e4cfb4;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100svh;
+}
+
+.question {
+  position: absolute;
+  inset: clamp(32px, 8svh, 80px) 0 auto;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+  margin: 0;
+  font-size: clamp(2.25rem, 4.4vw, 4rem);
+  font-weight: inherit;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.question span:first-child {
+  justify-self: end;
+  padding-right: 0.15em;
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 85;
+  letter-spacing: -0.035em;
+}
+
+.question span:last-child {
+  justify-self: start;
+  padding-left: 0.15em;
+  color: var(--creme);
+  font-family: var(--font-gotica), serif;
+}
+
+.side {
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: calc(clamp(32px, 8svh, 80px) + clamp(2.25rem, 4.4vw, 4rem) + 48px) clamp(24px, 5vw, 72px) clamp(40px, 8svh, 80px);
+  text-align: center;
+  text-decoration: none;
+}
+
+.name,
+.about {
+  margin: 0;
+}
+
+.name {
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 1;
+}
+
+.about {
+  max-width: 32ch;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
+.enter {
+  padding: 12px 18px;
+  border: 2px solid;
+}
+
+/* Gravura: o nome em placa de papel com borda de tinta e a sombra em
+   xadrez de 2 px deslocada 8 px, como o nome da hero no celular. */
+.gravura {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.plate {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 28px 32px 24px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  font-size: clamp(3rem, 6.4vw, 6rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 85;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.plate span {
+  display: block;
+}
+
+.plate span + span {
+  margin-top: 0.12em;
+}
+
+.plate::before {
+  content: "";
+  position: absolute;
+  inset: 8px -8px -8px 8px;
+  z-index: -1;
+  background: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
+}
+
+.gravura .name {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gravura .enter {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gravura:hover .enter {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.gravura:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: -12px;
+}
+
+/* Luxúria: o nome em gótica dentro da moldura das capas, como um título
+   de disco. */
+.luxuria {
+  background: var(--carmim);
+  color: var(--creme);
+  font-family: var(--font-romana), serif;
+}
+
+.cover {
+  --band: 20px;
+  margin-bottom: 20px;
+  padding: 36px 44px;
+  font-family: var(--font-gotica), serif;
+  font-size: clamp(2.5rem, 4.6vw, 4.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.luxuria .name {
+  font-family: var(--font-gotica), serif;
+  font-weight: inherit;
+}
+
+.luxuria .about {
+  font-size: 1.1875rem;
+}
+
+.luxuria .enter {
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.luxuria:hover .enter {
+  background: var(--creme);
+  color: var(--vinho);
+}
+
+.luxuria:focus-visible {
+  outline: 2px solid var(--creme);
+  outline-offset: -12px;
+}
+
+/* Celular: um design sobre o outro, a pergunta inteira no papel. */
+@media (max-width: 760px) {
+  .choice {
+    grid-template-columns: 1fr;
+  }
+
+  /* A fonte vai no h1, não só nos spans: o espaço entre eles é do h1. */
+  .question {
+    display: block;
+    inset-block-start: 28px;
+    padding-inline: 24px;
+    color: var(--ink);
+    font-family: var(--font-sans), sans-serif;
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    font-weight: 800;
+    font-variation-settings: "opsz" 96, "wdth" 85;
+    letter-spacing: -0.035em;
+    text-align: center;
+  }
+
+  .question span:first-child,
+  .question span:last-child {
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+  }
+
+  .side {
+    gap: 16px;
+    padding: 48px 24px;
+  }
+
+  .gravura {
+    padding-top: calc(28px + clamp(2rem, 10vw, 2.75rem) + 40px);
+  }
+
+  .plate {
+    margin-bottom: 12px;
+    font-size: clamp(3rem, 17vw, 4.5rem);
+  }
+
+  .cover {
+    --band: 16px;
+    margin-bottom: 12px;
+    padding: 24px 28px;
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+}

@@ -1,6 +1,6 @@
 import { contact, profile } from "@/data/portfolio";
-import EarthCanvas from "@/components/footer/EarthCanvas";
-import Wings from "@/components/wings/Wings";
+import EarthCanvas from "@/components/gravura/footer/EarthCanvas";
+import Wings from "@/components/gravura/wings/Wings";
 import { mercuryRig } from "./mercury-rig";
 import s from "./contact.module.css";
 

@@ -1,4 +1,4 @@
-import Wings from "@/components/wings/Wings";
+import Wings from "@/components/gravura/wings/Wings";
 import { experience } from "@/data/portfolio";
 import s from "./experience.module.css";
 

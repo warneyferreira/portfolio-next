@@ -1,8 +1,8 @@
 ---
 version: 1
-slug: "src-components-about-about-tsx"
-primary_target: "src/components/about/About.tsx"
-related_targets: ["src/components/about/about.module.css"]
+slug: "src-components-gravura-about-about-tsx"
+primary_target: "src/components/gravura/about/About.tsx"
+related_targets: ["src/components/gravura/about/about.module.css"]
 ---
 
 # Sobre — portfolio

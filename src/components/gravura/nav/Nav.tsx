@@ -1,9 +1,11 @@
-import BrandMark from "@/components/brand/BrandMark";
+import Link from "next/link";
+import BrandMark from "@/components/gravura/brand/BrandMark";
 import { nav, profile } from "@/data/portfolio";
 import s from "./nav.module.css";
 
 /* Uma barra só, centrada na página: a marca abre a barra à esquerda, o
-   nome assina ao lado dela e os links seguem em linha. */
+   nome assina ao lado dela, os links seguem em linha e a troca de design
+   fecha a barra, de volta ao seletor em /. */
 export default function Nav() {
   return (
     <nav className={s.nav} aria-label="Principal">
@@ -19,6 +21,10 @@ export default function Nav() {
           </li>
         ))}
       </ul>
+      {/* Outro layout raiz: a navegação recarrega a página, pré-carregar não serve. */}
+      <Link href="/" prefetch={false} className={s.switch}>
+        Trocar design
+      </Link>
     </nav>
   );
 }

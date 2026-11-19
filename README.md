@@ -1,8 +1,13 @@
 # Portfólio — Warney Rego
 
-Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router). Direção visual: uma tinta (`--ink: #c43c00`) sobre papel (`--paper: #fef0d3`), com gravuras de linha e retículas Bayer. A arte já usa esses tokens; a migração dos estilos residuais está registrada em `PROGRESS.md`.
+Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router), com dois designs. Quem entra em `/` escolhe um deles numa tela dividida ao meio:
 
-Hero e Sobre compartilham uma gravura contínua em `src/app/opening.module.css`: a gravura aprovada da hero (Lady Justiça e Coliseu, gerada no GPT Images) é impressa como máscara 1 bit em `public/images/background/hero-engraving.webp` (3344 × 2229, ~164 KiB), com área central livre para leitura. Um único fundo atravessa as duas seções e não reinicia na seção Sobre. As laterais e a base de Sobre recebem gravuras adicionais geradas no GPT Images: colunas quebradas, cornijas, louros, oliveiras, moedas e fragmentos de mosaico. As máscaras `about-roman-{left,right,bottom}-dither.webp` e `eye-paper-dither.webp` usam dithering ordenado Bayer nas sombras, com cobertura binária, uma única tinta. Não há camada sobre o papel ou os textos. O conteúdo tem recuo lateral e inferior para não disputar espaço com as gravuras.
+- **Gravura** (`/gravura`): uma tinta (`--ink: #c43c00`) sobre papel (`--paper: #fef0d3`), com gravuras de linha e retículas Bayer. É o design descrito no resto deste README. A arte já usa esses tokens; a migração dos estilos residuais está registrada em `PROGRESS.md`.
+- **Luxúria** (`/luxuria`): creme sobre carmim, a partir da capa de "Luxúria" (Xamã part. Matuê) e de "Pecado Capital": moldura de gotas em V, nome em letra gótica (UnifrakturCook) e links em versaletes (IM Fell English SC). Por enquanto só a header existe.
+
+Cada design é um layout raiz próprio (`src/app/gravura/`, `src/app/luxuria/` e o seletor em `src/app/(escolha)/`), com fontes e CSS global só seus; trocar de design recarrega a página. Os componentes ficam em `src/components/gravura/` e `src/components/luxuria/`; o conteúdo, compartilhado, em `src/data/portfolio.ts`. As duas barras de navegação têm "Trocar design", que volta ao seletor. Endereços inexistentes caem em `src/app/global-not-found.tsx` (`experimental.globalNotFound`), já que nenhum layout raiz cobre os três.
+
+Hero e Sobre compartilham uma gravura contínua em `src/app/gravura/opening.module.css`: a gravura aprovada da hero (Lady Justiça e Coliseu, gerada no GPT Images) é impressa como máscara 1 bit em `public/images/background/hero-engraving.webp` (3344 × 2229, ~164 KiB), com área central livre para leitura. Um único fundo atravessa as duas seções e não reinicia na seção Sobre. As laterais e a base de Sobre recebem gravuras adicionais geradas no GPT Images: colunas quebradas, cornijas, louros, oliveiras, moedas e fragmentos de mosaico. As máscaras `about-roman-{left,right,bottom}-dither.webp` e `eye-paper-dither.webp` usam dithering ordenado Bayer nas sombras, com cobertura binária, uma única tinta. Não há camada sobre o papel ou os textos. O conteúdo tem recuo lateral e inferior para não disputar espaço com as gravuras.
 
 A hero mantém a gravura à esquerda e o nome em tinta contrastante na área livre. No mobile, uma superfície opaca de papel com borda de tinta e um bloco reticulado deslocado protegem a leitura do nome sobre o recorte da imagem.
 
@@ -16,17 +21,17 @@ O currículo para download fica em `public/curriculo-warney-rego.pdf`: PDF de du
 
 O cartão do Estúdio destaca a captura real do site, reticulada em 1 bit (`studio-screenshot-dither.webp`, Bayer). A prévia usa uma máscara CSS pintada com `var(--ink)`, sem recompressão pelo Next Image nem exibição do original em cores. A logo usa uma única tinta; os detalhes de recursos ficam em uma área expansível, sem JavaScript adicional.
 
-A branch `main` abre diretamente o design de uma tinta em `/`, sem seletor de estética. A versão com as duas estéticas e a tela de escolha está preservada na branch `twodesigns`.
+A branch `twodesigns` guarda um seletor antigo (colagem e monocromático), só como referência.
 
 A seção Stack funciona como um índice técnico, sem ilustração ou espaço vazio reservado: título fixo à esquerda no desktop, seis áreas separadas por linhas de tinta e tecnologias em listas mono. No tablet o título passa para cima; no mobile cada descrição antecede sua lista. As 41 tecnologias existentes são preservadas; a arte será fornecida pelo proprietário depois.
 
-Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/experience/Experience.tsx`: uma chapa de tinta que entra e sai do papel por rampas de retícula, com os empregos numa linha do tempo. Período, empresa, cargo, resumo e resultados ficam à vista; "Ver detalhes" abre o relato completo e as tecnologias. Nada de cenas presas à rolagem: a arte é estática e respeita a preferência por movimento reduzido.
+Os dados de conteúdo ficam em `src/data/portfolio.ts`. A seção de experiência é renderizada por `src/components/gravura/experience/Experience.tsx`: uma chapa de tinta que entra e sai do papel por rampas de retícula, com os empregos numa linha do tempo. Período, empresa, cargo, resumo e resultados ficam à vista; "Ver detalhes" abre o relato completo e as tecnologias. Nada de cenas presas à rolagem: a arte é estática e respeita a preferência por movimento reduzido.
 
 Vínculos profissionais ficam em ordem do mais recente para o mais antigo. Quando não há resultados informados, o emprego não exibe um livro-razão vazio.
 
-Projetos, educação e contato ficam em componentes próprios em `src/components/`, com os textos e links também definidos em `src/data/portfolio.ts`. A captura do Estúdio é reticulada, nunca exibida em cores.
+Projetos, educação e contato ficam em componentes próprios em `src/components/gravura/`, com os textos e links também definidos em `src/data/portfolio.ts`. A captura do Estúdio é reticulada, nunca exibida em cores.
 
-Da Experiência ao Contato, cada seção fica entre duas gravuras laterais nas bordas da página, como a hero (`src/components/wings/`): a coluna espiral dos construtores e o guindaste de roda (Experiência, em papel sobre a tinta), a estátua inacabada e o busto no cavalete (Projetos), o armário de rolos e a esfera armilar (Educação), Mercúrio e a correspondência sobre um capitel (Contato). O texto fica numa coluna central; no celular as duas alas viram uma vinheta acima do título que se dissolve em retícula.
+Da Experiência ao Contato, cada seção fica entre duas gravuras laterais nas bordas da página, como a hero (`src/components/gravura/wings/`): a coluna espiral dos construtores e o guindaste de roda (Experiência, em papel sobre a tinta), a estátua inacabada e o busto no cavalete (Projetos), o armário de rolos e a esfera armilar (Educação), Mercúrio e a correspondência sobre um capitel (Contato). O texto fica numa coluna central; no celular as duas alas viram uma vinheta acima do título que se dissolve em retícula.
 
 As gravuras foram geradas no GPT Images 2 (as do papel com a gravura aprovada da hero como referência de estilo; as da Experiência em linha branca), convertidas em máscaras 1 bit por `scripts/dither-art.mjs --mode line` (`--invert` para linha branca, `--trim` para recortar o papel vazio, `--shave` para raspar fios de moldura) e registradas em provenance sidecars (`*.webp.json`) sem caminhos absolutos. As fontes ficam em `scripts/sources/`.
 

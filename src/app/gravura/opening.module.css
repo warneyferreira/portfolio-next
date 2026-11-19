@@ -15,7 +15,7 @@
   z-index: -1;
   pointer-events: none;
   background-color: var(--ink);
-  mask-image: url("../../public/images/background/hero-engraving.webp");
+  mask-image: url("../../../public/images/background/hero-engraving.webp");
   mask-repeat: no-repeat;
   /* A largura cobre a hero (a máscara é só a faixa de arte, 3344×2229);
      a imagem não reinicia na seção Sobre. */

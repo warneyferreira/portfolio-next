@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // Três layouts raiz (/, /gravura, /luxuria): o 404 vem de app/global-not-found.tsx.
+    globalNotFound: true,
+  },
 };
 
 export default nextConfig;

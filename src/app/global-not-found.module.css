@@ -1,0 +1,60 @@
+/* O 404 sai na tinta da Gravura (#c43c00 sobre #fef0d3), sem o CSS global
+   de nenhum design. */
+
+.page {
+  margin: 0;
+  background: #fef0d3;
+  color: #c43c00;
+  font-family: var(--font-sans), sans-serif;
+}
+
+.main {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 20px;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 24px;
+  text-align: center;
+}
+
+.main h1,
+.main p {
+  margin: 0;
+}
+
+.main h1 {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96, "wdth" 85;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.main p {
+  font-size: 1.0625rem;
+}
+
+.main a {
+  padding: 12px 18px;
+  border: 2px solid;
+  color: inherit;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.main a:hover {
+  background: #c43c00;
+  color: #fef0d3;
+}
+
+.main a:focus-visible {
+  outline: 3px solid #c43c00;
+  outline-offset: 3px;
+}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Wings from "@/components/wings/Wings";
+import Wings from "@/components/gravura/wings/Wings";
 import { projects } from "@/data/portfolio";
 import s from "./projects.module.css";
 

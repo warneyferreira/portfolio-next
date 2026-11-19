@@ -1,4 +1,4 @@
-import Wings from "@/components/wings/Wings";
+import Wings from "@/components/gravura/wings/Wings";
 import { certifications, certificationsIntro, education } from "@/data/portfolio";
 import s from "./education.module.css";
 

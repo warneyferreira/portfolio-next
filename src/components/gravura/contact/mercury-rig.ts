@@ -1,4 +1,4 @@
-import type { Rig } from "@/components/wings/rig";
+import type { Rig } from "@/components/gravura/wings/rig";
 
 /* Mercúrio (public/images/contact/mercury-dither.webp, 640×2052): só as
    duas asas do pétaso batem, bem devagar (um ciclo a cada ~5,5 s), em

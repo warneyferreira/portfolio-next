@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import BrandMark, { MARK_SVG } from "@/components/brand/BrandMark"
-import { GlassIconReveal } from "@/components/ui/liquid-glass-logo-reveal"
+import BrandMark, { MARK_SVG } from "@/components/gravura/brand/BrandMark"
+import { GlassIconReveal } from "@/components/gravura/ui/liquid-glass-logo-reveal"
 import s from "./intro.module.css"
 
 const INK = "#c43c00"
