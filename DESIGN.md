@@ -2,7 +2,7 @@
 
 Source of truth for the look of this portfolio. Seeded from §2 of the loop prompt on 2026-11-10. Owner decisions that changed §2 are applied in place and listed under [Refinements](#refinements). Follow it strictly; change it only with a logged reason.
 
-The portfolio has two designs, chosen at the entrance (`/`). Everything from Palette to Quality bars describes **Gravura** (`/gravura`, components in `src/components/gravura/`). **Luxúria** (`/luxuria`, `src/components/luxuria/`) and the chooser have their own sections at the end; Gravura's rules do not apply to them. Each design is its own root layout (`src/app/gravura/`, `src/app/luxuria/`, `src/app/(escolha)/`), so moving between them reloads the document and never carries the other design's global CSS. Content is shared: `src/data/portfolio.ts`.
+**Gravura** is the only design, served at `/` with components in `src/components/gravura/` and content in `src/data/portfolio.ts`. The old `/gravura` URL redirects to `/`. Unknown URLs use the Gravura palette and typography in `src/app/not-found.tsx`.
 
 ## Palette (strictly monochrome: one ink, one paper)
 
@@ -32,7 +32,7 @@ The portfolio has two designs, chosen at the entrance (`/`). Everything from Pal
 
 - **Mark** (`src/components/gravura/brand/BrandMark.tsx`, `src/app/icon.svg`): a 14×14 ink plate on a 16-unit grid, a pixel W knocked out (evenodd), and the site's dithered shadow — a 1-unit checker offset 2 units right and down. Print it at multiples of 16 px (32 px in the nav) so every checker cell is a whole pixel; `shape-rendering: crispEdges`, one colour, `currentColor`. No other mark, no gradient, no second colour.
 - **Lockup**: mark + `WARNEY REGO` in Martian Mono 11 px, uppercase, 0.1em tracking. The hero carries the name at display size; nothing else repeats it.
-- **Navbar** (`src/components/gravura/nav/`): one paper plate with a 2 px ink border, centred at the top (16 px from the top, 52 px tall, hugging its content). The mark opens the bar at the left, the name signs beside it, the five anchors follow, and a last cell, Trocar design, behind a 2 px ink rule, opens Luxúria directly. Hover and focus invert the cell (ink plate, paper text). ≤860 px: the mark, the name, Contato and Trocar design; ≤480 px the name leaves and the mark signs alone.
+- **Navbar** (`src/components/gravura/nav/`): one paper plate with a 2 px ink border, centred at the top (16 px from the top, 52 px tall, hugging its content). The mark and name are followed by five section links. Links invert on hover and show an ink outline on keyboard focus. At ≤860 px, the mark, name and Contato remain visible.
 - **Opening** (`src/components/gravura/intro/`): the glass reveal plays once over a paper veil, then the mark glides into the navbar. Monochrome: dispersion and colour bleed are zero, so the glass bends the mark without splitting it into colour. Skippable (button, Escape); reduced motion, missing WebGL or no JS skip it, and a 7 s failsafe ends it.
 - **Favicon**: the same mark, ink on paper, at 16 units.
 
@@ -52,22 +52,6 @@ The portfolio has two designs, chosen at the entrance (`/`). Everything from Pal
 - Lighthouse targets: Performance ≥ 90, Accessibility ≥ 95.
 - Dithered textures must not cause moiré at common zoom levels; test at 100% and 200%.
 
-## Luxúria
-
-Owner, 2026-11-19: a second design, "Luxúria", from the cover of the track "Luxúria" (Xamã part. Matuê, 2018) and its album "Pecado Capital". The complete edition keeps the established palette and type and presents the shared portfolio content as six editorial chapters.
-
-- **Palette** (`src/app/luxuria/globals.css`): `--carmim: #871c21` (the cover's field), `--vinho: #4b0f13` (the panel inside the frame), `--creme: #e4cfb4` (the only ink: type, frame, hover plates). Cream on carmim 6.3:1, on vinho 10:1. `frame.svg` repeats the carmim and cream hex values because an SVG image cannot read CSS variables.
-- **Type** (`src/components/luxuria/fonts.ts`): UnifrakturCook 700, `--font-gotica`, the heavy textura of "Pecado Capital", for the name and display; IM Fell English SC, `--font-romana`, old-press small caps like the "XAMÃ" above the cover title, for links and short text.
-- **Frame** (`src/components/luxuria/frame/`): the covers' border as a `border-image` (slice 16, `round`): a carmim band with cream drops (round end out, point in) held in V chevrons, a dot between each pair of Vs, and a larger diagonal drop in each corner. `--band` sets the thickness (18 px default); the panel inside is vinho. It is the one ornament: no gradients, shadows, glows or radii.
-- **Header** (`src/components/luxuria/header/`): a full-width framed panel, sticky 16 px from the top and sides of the carmim page. The name in gótica on the left; the five anchors, a single cream drop and Trocar design on the right, in romana. Hover and focus invert the link (cream plate, vinho text); focus also draws a 2 px cream outline. ≤1100 px the links tighten; ≤860 px the section links move to a second row so they remain available on mobile.
-- **Edition** (`src/app/luxuria/`): the framed cover pairs oversized blackletter with a cream drop seal, the résumé and a contact link. Sobre, Stack, Experiência, Projetos and Formação sit on the carmim field, separated by fine rules; chapter titles occupy a side column on desktop and sit above the content on mobile. Experience details and project features use native disclosures. The Estúdio preview reuses the real screenshot mask, printed in cream on vinho. A framed Contato chapter closes the edition.
-
-## Chooser
-
-`/` (`src/app/(escolha)/`): the screen split down the middle, each half printed in its own design and a single link. Gravura on the left: WARNEY REGO on a paper plate with a 2 px ink border and a 2 px checker shadow offset 8 px. Luxúria on the right: the name in gótica inside the frame. The heading crosses the seam, "Escolha o" in Gravura's grotesk, "design" in Luxúria's gótica. ≤760 px the halves stack and the whole heading sits on the paper. Hover inverts the half's Entrar box. The chooser copies the five colours of both designs because it loads neither design's global CSS.
-
-A global 404 (`src/app/global-not-found.tsx`, `experimental.globalNotFound`) covers unmatched URLs, since no single root layout wraps all three documents: Gravura's ink and paper, pt-BR copy, a link back to the chooser.
-
 ## Refinements
 
 | Date | §2 of the loop prompt said | Now | Reason |
@@ -86,3 +70,4 @@ A global 404 (`src/app/global-not-found.tsx`, `experimental.globalNotFound`) cov
 | 2026-11-19 | One design at `/` | Chooser at `/`; Gravura at `/gravura`; Luxúria at `/luxuria`; navbar gains Trocar design; ≤480 px the navbar name leaves | Owner: split the portfolio in two, the visitor chooses the design on entry. The switch cell keeps the mobile bar inside 360 px. |
 | 2026-11-19 | Trocar design returns to the chooser | Trocar design switches directly between the two designs with a crossfade in supporting browsers; reduced motion skips the fade, and switching to Gravura skips its opening | Owner: switch designs without revisiting the chooser. |
 | 2026-11-19 | Luxúria ends at the header | Framed cover, six complete editorial chapters and mobile section navigation | Owner: finish the portfolio; use the same verified professional content in both designs. |
+| 2026-11-19 | Two designs and a chooser | Gravura at `/`, with a redirect from `/gravura`; Luxúria and the design switch removed | Owner: make Gravura the only available design. |

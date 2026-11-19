@@ -2,7 +2,6 @@ export const profile = {
   name: "Warney Rego Ferreira Filho",
   shortName: "Warney Rego",
   role: "Desenvolvedor Full Stack e AI Engineer",
-  headline: "Full Stack e AI Engineering",
   location: "Teresina, PI",
   experienceYears: "3+ anos",
   description:
