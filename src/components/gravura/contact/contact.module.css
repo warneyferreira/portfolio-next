@@ -1,6 +1,4 @@
 .close {
-  --muted: #5c564d;
-  --rule: #bdb5a5;
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
 }
@@ -39,7 +37,7 @@
   isolation: isolate;
   margin-block: 0 clamp(56px, 7vw, 104px);
   padding: clamp(28px, 4vw, 60px);
-  border: 2px solid var(--ink);
+  border: var(--line) solid var(--ink);
   background: var(--paper);
 }
 
@@ -54,9 +52,9 @@
 .letter::after {
   position: absolute;
   z-index: -2;
-  inset: 10px -10px -10px 10px;
-  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
-  background-size: 5px 5px;
+  inset: 8px -10px -10px 8px;
+  background: var(--ink);
+  mask: var(--shade-4) 0 0 / 8px 8px repeat;
   content: "";
 }
 
@@ -78,11 +76,6 @@
   margin: 0;
 }
 
-.email span {
-  color: var(--muted);
-  font-size: 1rem;
-}
-
 .email a {
   font-size: clamp(1.2rem, 2.4vw, 2.3rem);
   font-weight: 700;
@@ -95,8 +88,10 @@
   text-underline-offset: 0.18em;
 }
 
-.close a:hover {
-  text-decoration-thickness: 3px;
+@media (hover: hover) {
+  .close a:hover {
+    text-decoration-thickness: 3px;
+  }
 }
 
 .close a:focus-visible {
@@ -119,10 +114,15 @@
   margin: 0;
 }
 
+.email span,
+.facts dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+
 .facts dt {
   margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 0.875rem;
 }
 
 .facts dd {
@@ -150,7 +150,7 @@
   align-items: flex-end;
   gap: 24px 32px;
   padding: 24px clamp(20px, 3.4vw, 48px) 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
   font-size: 0.875rem;
   line-height: 1.5;
 }

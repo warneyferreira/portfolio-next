@@ -1,62 +1,131 @@
-/* A hero: só o nome e a gravura reticulada. A arte vive em
-   opening.module.css, impressa em tinta única por baixo deste texto. */
-
 .hero {
-  position: relative;
-  isolation: isolate;
   display: grid;
-  align-items: center;
-  min-height: 100svh;
+  place-items: center;
   box-sizing: border-box;
-  padding: clamp(16px, 2.5vw, 40px);
-  overflow: hidden;
+  min-block-size: 100svh;
+  padding: max(var(--nav-clearance), 12svh) 20px;
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
 }
 
 .center {
   position: relative;
-  margin: 64px 6% 64px 32%;
+  display: grid;
+  justify-items: center;
+  gap: clamp(12px, 2vw, 28px);
+  text-align: center;
 }
 
 .title {
-  width: max-content;
-  text-align: center;
-  max-width: 100%;
   margin: 0;
-  color: var(--ink);
-  font-size: clamp(5.5rem, 12.5vw, 13rem);
+  font-size: clamp(3.25rem, 1.6rem + 9.6vw, 12rem);
   font-weight: 800;
   font-variation-settings: "opsz" 96, "wdth" 85;
-  line-height: 0.8;
-  letter-spacing: -0.04em;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  padding-inline-end: 0.045em;
   text-transform: uppercase;
 }
 
-.title span { display: block; }
-.title span + span {
-  margin-top: 0.12em;
+.title span {
+  display: block;
 }
 
-/* No celular o nome fica num prato de papel com borda de tinta e um
-   bloco reticulado deslocado 8 px para a direita e para baixo. */
-@media (max-width: 640px) {
+.kicker,
+.role {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(0.6875rem, 0.6rem + 0.24vw, 0.875rem);
+  font-weight: 550;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kicker::before,
+.kicker::after {
+  content: "";
+  inline-size: 24px;
+  block-size: 4px;
+  background: var(--ink);
+  mask: var(--shade-4) 0 0 / 8px 8px repeat;
+}
+
+.role {
+  max-inline-size: 40ch;
+}
+
+.resume {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-block-size: 48px;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  border: var(--line) solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.resume svg {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (hover: hover) {
+  .resume:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+}
+
+@media (max-width: 1100px), (max-aspect-ratio: 5/4) {
   .center {
-    position: relative;
-    margin: 64px 0;
-    padding: 28px 16px;
+    padding: clamp(20px, 4vw, 36px);
     border: var(--line) solid var(--ink);
     background: var(--paper);
   }
 
-  .center::before {
+  .center::before,
+  .center::after {
     content: "";
     position: absolute;
-    inset: 8px -8px -8px 8px;
-    z-index: -1;
-    background-color: var(--ink);
+    background: var(--ink);
     mask: var(--shade-4) 0 0 / 8px 8px repeat;
   }
 
-  .title { font-size: clamp(4.5rem, 19vw, 8rem); }
+  .center::before {
+    inset: 100% -10px -10px 6px;
+  }
+
+  .center::after {
+    inset: 6px -10px 0 100%;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .center {
+    gap: 12px;
+    padding-block: 16px;
+  }
+
+  .title {
+    font-size: clamp(3.25rem, 18svh, 6rem);
+  }
 }

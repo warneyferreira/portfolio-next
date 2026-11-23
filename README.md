@@ -4,11 +4,11 @@ Portfólio de [warneyrego.com](https://warneyrego.com) em Next.js (App Router), 
 
 Hero e Sobre compartilham uma gravura contínua em `src/app/opening.module.css`: a gravura aprovada da hero (Lady Justiça e Coliseu, gerada no GPT Images) é impressa como máscara 1 bit em `public/images/background/hero-engraving.webp` (3344 × 2229, ~164 KiB), com área central livre para leitura. Um único fundo atravessa as duas seções e não reinicia na seção Sobre. As laterais e a base de Sobre recebem gravuras adicionais geradas no GPT Images: colunas quebradas, cornijas, louros, oliveiras, moedas e fragmentos de mosaico. As máscaras `about-roman-{left,right,bottom}-dither.webp` e `eye-paper-dither.webp` usam dithering ordenado Bayer nas sombras, com cobertura binária, uma única tinta. Não há camada sobre o papel ou os textos. O conteúdo tem recuo lateral e inferior para não disputar espaço com as gravuras.
 
-A hero mantém a gravura à esquerda e o nome em tinta contrastante na área livre. No mobile, uma superfície opaca de papel com borda de tinta e um bloco reticulado deslocado protegem a leitura do nome sobre o recorte da imagem.
+A hero centraliza o nome e a atuação entre a Lady Justiça e o Coliseu. Em telas mais estreitas ou altas, uma área de papel com borda de tinta e sombra reticulada protege a leitura sobre o recorte da imagem.
 
 A parte superior da gravura preserva o traço da gravura gerada: linhas limpas, sem re-reticulação — re-reticular gravura de linha cria moiré. A máscara é entregue diretamente via CSS, sem recompressão do Next Image. Não há retícula artificial nem filtro de contraste global.
 
-A hero é estática, com WARNEY REGO em duas linhas monumentais de caixa alta. REGO fica centralizado em relação a WARNEY. Os links de navegação, o monograma WR, a apresentação e o CTA ficam fora da hero. Não há botão de tema: um tema só, claro.
+A hero é estática, com WARNEY REGO em duas linhas de caixa alta e o botão “Baixar currículo” logo abaixo da atuação. O monograma WR em forma de carimbo aparece na navegação, na abertura e no favicon. A abertura toca uma vez por aba, pode ser pulada e respeita a preferência por movimento reduzido. A barra de navegação fica oculta no celular. Não há botão de tema: um tema só, claro.
 
 A seção Sobre usa uma composição aberta em duas colunas. A ilustração `public/images/about/eye-paper-dither.webp`, gravura do olho e da mão no rasgo de papel, acompanha o título. Em telas de até 800 px, título, introdução, gravura e textos seguem em uma coluna. Os dados profissionais e o currículo permanecem em `src/data/portfolio.ts`.
 

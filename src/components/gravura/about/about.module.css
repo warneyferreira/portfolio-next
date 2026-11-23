@@ -109,18 +109,16 @@
 }
 
 /* Divisor em retícula: faixa de 8 px de tinta pontilhada, sem hairline cinza. */
-.bottom {
+.facts {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px 48px;
-  margin-top: clamp(48px, 5vw, 72px);
+  gap: 24px clamp(32px, 4vw, 64px);
+  margin: clamp(48px, 5vw, 72px) 0 0;
   padding-top: 36px;
 }
 
-.bottom::before {
+.facts::before {
   content: "";
   position: absolute;
   top: 0;
@@ -129,13 +127,6 @@
   height: 8px;
   background-color: var(--ink);
   mask: var(--shade-3) 0 0 / 8px 8px repeat;
-}
-
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px clamp(32px, 4vw, 64px);
-  margin: 0;
 }
 
 .facts dt {
@@ -152,39 +143,6 @@
   font-size: 1rem;
   font-weight: 650;
   line-height: 1.5;
-}
-
-.resume {
-  display: inline-flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  min-height: 52px;
-  box-sizing: border-box;
-  padding: 12px 20px;
-  border: 2px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5;
-  text-decoration: none;
-}
-
-.resume svg {
-  flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Inversão no hover: prato de papel, texto de tinta, borda de 2 px. */
-.resume:hover {
-  background: var(--paper);
-  color: var(--ink);
 }
 
 @media (max-width: 800px) {
@@ -217,14 +175,9 @@
   .facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
   }
 
   .role {
     grid-column: 1 / -1;
-  }
-
-  .resume {
-    width: 100%;
   }
 }

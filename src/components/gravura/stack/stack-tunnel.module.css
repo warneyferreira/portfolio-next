@@ -89,7 +89,7 @@
 .icon {
   width: 42px;
   height: 42px;
-  fill: var(--ink);
+  fill: currentColor;
 }
 
 .monogram {
@@ -122,18 +122,15 @@
   text-transform: uppercase;
 }
 
-/* inversão no hover: prato de tinta, ícone e texto em papel */
-.card:hover .plate {
-  background-color: var(--ink);
-  color: var(--paper);
-}
+@media (hover: hover) {
+  .card:hover .plate {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
 
-.card:hover .icon {
-  fill: var(--paper);
-}
-
-.card:hover .monogram {
-  border-color: var(--paper);
+  .card:hover .monogram {
+    border-color: currentColor;
+  }
 }
 
 /* ---------- menos movimento: grade estática ---------- */

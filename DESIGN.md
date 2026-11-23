@@ -30,11 +30,11 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 
 ## Brand
 
-- **Mark** (`src/components/gravura/brand/BrandMark.tsx`, `src/app/icon.svg`): a 14×14 ink plate on a 16-unit grid, a pixel W knocked out (evenodd), and the site's dithered shadow — a 1-unit checker offset 2 units right and down. Print it at multiples of 16 px (32 px in the nav) so every checker cell is a whole pixel; `shape-rendering: crispEdges`, one colour, `currentColor`. No other mark, no gradient, no second colour.
-- **Lockup**: mark + `WARNEY REGO` in Martian Mono 11 px, uppercase, 0.1em tracking. The hero carries the name at display size; nothing else repeats it.
-- **Navbar** (`src/components/gravura/nav/`): one paper plate with a 2 px ink border, centred at the top (16 px from the top, 52 px tall, hugging its content). The mark and name are followed by five section links. Links invert on hover and show an ink outline on keyboard focus. At ≤860 px, the mark, name and Contato remain visible.
-- **Opening** (`src/components/gravura/intro/`): the glass reveal plays once over a paper veil, then the mark glides into the navbar. Monochrome: dispersion and colour bleed are zero, so the glass bends the mark without splitting it into colour. Skippable (button, Escape); reduced motion, missing WebGL or no JS skip it, and a 7 s failsafe ends it.
-- **Favicon**: the same mark, ink on paper, at 16 units.
+- **Mark** (`src/components/gravura/brand/BrandMark.tsx`, `src/app/icon.svg`): a WR stencil cut out of a chamfered ink stamp on a 32-unit grid, with a stepped dither edge. It uses one colour and follows `currentColor` in the navbar and opening.
+- **Lockup**: mark + `WARNEY REGO` in uppercase Martian Mono with 0.1em tracking. In the hero, both lines of the name share the viewport's centreline above the professional role and résumé download. On narrower and taller screens, a flat paper plate keeps the engraving out of the lettering.
+- **Navbar** (`src/components/gravura/nav/`): one centred paper plate with an ink border separates the lockup from the five section links. Links invert only on hover-capable devices and retain a contrasting keyboard focus outline. The navbar is hidden at ≤720 px and on short touch screens in landscape.
+- **Opening** (`src/components/gravura/intro/`): the monochrome glass reveal plays once per tab. Where the navbar is visible, the mark glides into it as the veil fades. Visitors can skip with the button, Escape or Tab. Deep links, reduced motion, missing WebGL and no JS bypass the opening; a 4 s failsafe clears the veil if the reveal doesn't finish.
+- **Favicon**: the same mark, printed in ink on paper.
 
 ## Layout & components
 
@@ -71,3 +71,5 @@ Source of truth for the look of this portfolio. Seeded from §2 of the loop prom
 | 2026-11-19 | Trocar design returns to the chooser | Trocar design switches directly between the two designs with a crossfade in supporting browsers; reduced motion skips the fade, and switching to Gravura skips its opening | Owner: switch designs without revisiting the chooser. |
 | 2026-11-19 | Luxúria ends at the header | Framed cover, six complete editorial chapters and mobile section navigation | Owner: finish the portfolio; use the same verified professional content in both designs. |
 | 2026-11-19 | Two designs and a chooser | Gravura at `/`, with a redirect from `/gravura`; Luxúria and the design switch removed | Owner: make Gravura the only available design. |
+| 2026-11-23 | Offset hero name, pixel W and a single mobile nav link | Centred editorial hero, WR stencil, full mobile navigation, shorter opening and consistent one-ink details | Owner: centre the name and refine the mark, design and motion without leaving Gravura. |
+| 2026-11-23 | Résumé in Sobre and a mobile navbar | Résumé download in the hero; navbar on desktop only | Owner: make the download available up front and remove the navbar on phones. |

@@ -9,9 +9,21 @@ import Intro from "@/components/gravura/intro/Intro";
 import Nav from "@/components/gravura/nav/Nav";
 import s from "./opening.module.css";
 
+const startIntro = `
+  try {
+    if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        !sessionStorage.getItem("gravura-intro")) {
+      sessionStorage.setItem("gravura-intro", "1");
+      document.documentElement.dataset.intro = "playing";
+      setTimeout(() => delete document.documentElement.dataset.intro, 4000);
+    }
+  } catch {}
+`;
+
 export default function Home() {
   return (
     <>
+      <script dangerouslySetInnerHTML={{ __html: startIntro }} />
       <Nav />
       <main>
         <div className={s.opening}>
@@ -25,9 +37,6 @@ export default function Home() {
       </main>
       <Contact />
       <Intro />
-      <noscript>
-        <style>{`html[data-intro] [data-intro-veil]{display:none}html[data-intro] [data-brand-mark]{visibility:visible!important}`}</style>
-      </noscript>
     </>
   );
 }

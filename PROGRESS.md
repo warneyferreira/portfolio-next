@@ -1,14 +1,14 @@
 # Portfolio progress
 
 ## Status
-Current focus: the site opens on a design chooser (`/`): Gravura (`/gravura`, the design this loop builds) and Luxúria (`/luxuria`, header only so far). Next Gravura backlog item: shared spacing/type tokens (2b).
+Current focus: Gravura is the only design and opens directly at `/`. Next Gravura backlog item: shared spacing/type tokens (2b).
 Iteration count: 4
 
 ## Loop notes
 Read these and DESIGN.md before picking a task.
 
 - **Owner decisions (2026-11-10, final).** One ink `#c43c00` on paper `#fef0d3`; no black, no grey, no second colour, art included; no dark theme and no toggle. Reasons are in DESIGN.md under Refinements. Do not ask again.
-- **Two designs (owner, 2026-11-19).** `/` is a chooser split down the middle; Gravura lives at `/gravura`, Luxúria at `/luxuria`. Each is its own root layout (`src/app/gravura/`, `src/app/luxuria/`, `src/app/(escolha)/`), so switching reloads the page and global CSS never crosses designs. Components sit under `src/components/gravura/` and `src/components/luxuria/`; content stays shared in `src/data/portfolio.ts`. Gravura's rules in DESIGN.md do not apply to Luxúria, which has its own section there.
+- **Gravura only (owner, 2026-11-19).** `src/app/page.tsx` serves Gravura at `/`, with components in `src/components/gravura/` and content in `src/data/portfolio.ts`. The chooser and design switch were removed. The former `/gravura` URL redirects to `/`, and `/luxuria` returns 404.
 - **Stack.** Next.js 16.4.3 App Router (Turbopack, `cacheComponents`, `partialPrefetching`), React 19.3, TypeScript strict, CSS Modules, GSAP 3 + `@gsap/react` for scroll scenes, `simple-icons`. AGENTS.md applies: read the guide in `node_modules/next/dist/docs/01-app/` before writing Next code. Useful ones: in `01-getting-started/`, `03-layouts-and-pages.md`, `11-css.md`, `12-images.md`, `13-fonts.md` and `14-metadata-and-og-images.md`; in `03-api-reference/03-file-conventions/`, `dynamic-routes.md`, `01-metadata/opengraph-image.md` and `01-metadata/app-icons.md`; and `03-api-reference/04-functions/generate-static-params.md`.
 - **Checks.** `npm run lint`, `npx tsc --noEmit`, `npm run build`. All three pass at baseline. There is no test runner.
 - **Servers.** The owner may have `next dev` on :3000; never stop it. `next build` is safe next to it because dev writes to `.next/dev`.
@@ -34,7 +34,7 @@ Listed in priority order. Split a task here before doing part of it.
 - [x] 5b. New lower-section art: five GPT Images 2 engravings replace the rejected subjects; binary masks and portable provenance are integrated. The real Estúdio screenshot is Bayer-processed and its logo uses one ink. Original sources remain in scripts/sources/.
 - [x] 9b. Experiência finishing: timeline ledger with square markers and a dithered spine, square toggle, mono technology list, ramp edges; no halftone, pills or round controls remain.
 - [ ] 10b. Projetos finishing: replace remaining sheet/quiet colours, color-mix fills, pills and halftone depth with shared tokens/Bayer; move project-specific alt/link labels into projects[]. Lateral wings, real dithered screenshot and one-ink logo are integrated.
-- [ ] 11. Project detail page. `src/app/gravura/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
+- [ ] 11. Project detail page. `src/app/projetos/[slug]/page.tsx` with `generateStaticParams` (read the dynamic-routes doc first; `cacheComponents` is on); add `slug` to `projects[]`; content only from the data file; cards link to it.
 - [ ] 12b. Educação finishing: remove remaining grey rules/text and halftone badges. Lateral wings and all existing degree/certification content are integrated.
 - [ ] 13. Writing section. No articles exist in the repo. Build the list component and a `writing` array in `portfolio.ts` that renders nothing while empty, marked `TODO(content):`.
 - [ ] 14b. Contato finishing: remove remaining muted text and halftone depth (letter shadow, grey footer rule). Lateral wings, footer and real contact links are integrated.

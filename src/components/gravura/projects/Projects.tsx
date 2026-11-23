@@ -34,7 +34,7 @@ export default function Projects() {
               <p className={s.description}>{project.description}</p>
               <a className={s.visit} href={project.href} target="_blank" rel="noopener noreferrer">
                 Visitar o Estúdio
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg>
                 <span className={s.srOnly}> (abre em nova aba)</span>
               </a>
               <ul className={s.tags} aria-label="Recursos">

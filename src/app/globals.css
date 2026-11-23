@@ -6,6 +6,7 @@
   --ink: #c43c00;
   --paper: #fef0d3;
   --line: 2px;
+  --nav-clearance: 88px;
   color-scheme: light;
 
   /* Escala de retículas --shade-0 (papel) … --shade-8 (tinta sólida),
@@ -42,11 +43,17 @@
   }
 }
 
+@media (max-width: 720px), (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  :root {
+    --nav-clearance: 16px;
+  }
+}
+
 /* Papel liso: a textura de papel foi aposentada com o tema escuro. */
 html {
   background-color: var(--paper);
   /* A barra flutua sobre a página: âncoras param abaixo dela. */
-  scroll-padding-top: 88px;
+  scroll-padding-top: var(--nav-clearance);
 }
 
 body {

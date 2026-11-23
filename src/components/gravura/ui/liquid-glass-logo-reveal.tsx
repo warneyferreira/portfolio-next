@@ -814,6 +814,7 @@ export interface GlassIconRevealProps extends Omit<React.HTMLAttributes<HTMLDivE
   /** Without `loop`: called once the reveal rests, with the CSS px size of the logo's longer side
    * (it sits centred in the container) */
   onEnd?: (logoSize: number) => void
+  onUnavailable?: () => void
 }
 
 type Live = { settings: Settings; loop: boolean; speed: number; time?: number; onEnd?: (logoSize: number) => void }
@@ -838,12 +839,12 @@ export function GlassIconReveal({
   tuning,
   label = "Logo",
   onEnd,
+  onUnavailable,
   style,
   ...props
 }: GlassIconRevealProps) {
   const wrapRef = React.useRef<HTMLDivElement>(null)
   const engineRef = React.useRef<ReturnType<typeof startEngine> | null>(null)
-  const [fallback, setFallback] = React.useState(false)
 
   // Objects and arrays go through JSON so inline literals don't restart the memo every render.
   const tuningKey = JSON.stringify(tuning ?? {})
@@ -866,7 +867,7 @@ export function GlassIconReveal({
     if (!wrap) return
     const engine = startEngine(wrap, live)
     if (!engine) {
-      setFallback(true)
+      onUnavailable?.()
       return
     }
     engineRef.current = engine
@@ -874,24 +875,26 @@ export function GlassIconReveal({
       engineRef.current = null
       engine.dispose()
     }
-  }, [])
+  }, [onUnavailable])
 
   React.useEffect(() => {
+    if (!engineRef.current) return
     let cancelled = false
     loadLogo(logo).then(
       (data) => {
         if (cancelled) return
         engineRef.current?.setLogo(data)
       },
-      (err) => console.error(err),
+      (err) => {
+        if (cancelled) return
+        if (onUnavailable) onUnavailable()
+        else console.error(err)
+      },
     )
     return () => {
       cancelled = true
     }
-  }, [logo])
-
-  const fallbackUrl = React.useMemo(() => (fallback ? logoUrl(logo) : ""), [fallback, logo])
-  const fallbackSize = settings.tileSize * settings.logoScale * settings.finalScale
+  }, [logo, onUnavailable])
 
   return (
     <div
@@ -900,32 +903,7 @@ export function GlassIconReveal({
       aria-label={label}
       style={{ position: "relative", isolation: "isolate", overflow: "hidden", userSelect: "none", backgroundColor: settings.background, ...style }}
       {...props}
-    >
-      {fallback && (
-        <span
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            margin: "auto",
-            display: "block",
-            width: fallbackSize,
-            height: fallbackSize,
-            maxWidth: "40%",
-            maxHeight: "40%",
-            backgroundColor: settings.logoColor,
-            maskImage: `url("${fallbackUrl}")`,
-            WebkitMaskImage: `url("${fallbackUrl}")`,
-            maskSize: "contain",
-            WebkitMaskSize: "contain",
-            maskRepeat: "no-repeat",
-            WebkitMaskRepeat: "no-repeat",
-            maskPosition: "center",
-            WebkitMaskPosition: "center",
-          }}
-        />
-      )}
-    </div>
+    />
   )
 }
 

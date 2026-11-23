@@ -248,8 +248,8 @@
 .toggle {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   box-sizing: border-box;
   border: var(--line) solid var(--paper);
 }
@@ -260,13 +260,13 @@
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
-  transition: rotate 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover inverte o quadrado: papel chapado, cruz de tinta. */
-.more summary:hover .toggle {
-  background: var(--paper);
-  color: var(--ink);
+@media (hover: hover) {
+  .more summary:hover .toggle {
+    background: var(--paper);
+    color: var(--ink);
+  }
 }
 
 .more[open] .toggle svg {
@@ -302,12 +302,6 @@
   font-weight: 500;
   line-height: 1.6;
   letter-spacing: -0.02em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .toggle svg {
-    transition: none;
-  }
 }
 
 /* Sem régua: o período sobe para cima da empresa e a faixa corre na

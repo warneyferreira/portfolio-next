@@ -20,6 +20,7 @@ export const nav = [
 ] as const;
 
 export const hero = {
+  label: "Portfólio",
   resumeLabel: "Baixar currículo",
 };
 

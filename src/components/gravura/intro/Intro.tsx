@@ -7,54 +7,49 @@ import s from "./intro.module.css"
 
 const INK = "#c43c00"
 const PAPER = "#fef0d3"
-const FLIGHT_MS = 780
-
 type Rect = { x: number; y: number; w: number; h: number }
 
-const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+const getPlaying = () => document.documentElement.dataset.intro === "playing"
+const getServerPlaying = () => false
 
-/* A abertura: o vidro revela a marca no papel, e ao fim a marca desliza
-   até a barra. O véu é opaco, então a página só aparece quando ele sai. */
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-intro"] })
+  return () => observer.disconnect()
+}
+
+function finish() {
+  delete document.documentElement.dataset.intro
+}
+
 export default function Intro() {
-  const [gone, setGone] = React.useState(false)
+  const playing = React.useSyncExternalStore(subscribe, getPlaying, getServerPlaying)
   const [flight, setFlight] = React.useState<{ from: Rect; to: Rect } | null>(null)
-  const [launched, setLaunched] = React.useState(false)
-  const finished = React.useRef(false)
-
-  const finish = React.useCallback(() => {
-    if (finished.current) return
-    finished.current = true
-    document.documentElement.dataset.intro = "done"
-    setGone(true)
-  }, [])
+  const clone = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    if (reduced() || window.location.hash === "#inicio") finish()
-  }, [finish])
-
-  // Enquanto o véu está de pé a página não rola por baixo dele.
-  React.useEffect(() => {
-    if (gone) return
+    if (!playing) return
     const block = (e: Event) => e.preventDefault()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") finish()
+      if (e.key === "Escape" || e.key === "Tab") finish()
     }
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const onMotion = () => { if (motion.matches) finish() }
     window.addEventListener("wheel", block, { passive: false })
     window.addEventListener("touchmove", block, { passive: false })
     window.addEventListener("keydown", onKey)
-    // Rede de segurança: sem WebGL, ou com a marca que não carrega, onEnd nunca vem.
-    const failsafe = window.setTimeout(finish, 7000)
+    motion.addEventListener("change", onMotion)
     return () => {
       window.removeEventListener("wheel", block)
       window.removeEventListener("touchmove", block)
       window.removeEventListener("keydown", onKey)
-      clearTimeout(failsafe)
+      motion.removeEventListener("change", onMotion)
     }
-  }, [gone, finish])
+  }, [playing])
 
   const handoff = React.useCallback(
     (size: number) => {
-      if (finished.current) return
+      if (!getPlaying()) return
       const mark = document.querySelector<SVGElement>("[data-brand-mark]")
       const r = mark?.getBoundingClientRect()
       if (!r || !r.width) {
@@ -71,33 +66,26 @@ export default function Intro() {
         to: { x: r.left, y: r.top, w: r.width, h: r.height },
       })
     },
-    [finish],
+    [],
   )
 
   React.useEffect(() => {
-    if (!flight) return
-    let inner = 0
-    const outer = requestAnimationFrame(() => {
-      inner = requestAnimationFrame(() => setLaunched(true))
-    })
-    const land = window.setTimeout(finish, FLIGHT_MS + 60)
-    return () => {
-      cancelAnimationFrame(outer)
-      cancelAnimationFrame(inner)
-      clearTimeout(land)
-    }
-  }, [flight, finish])
-
-  if (gone) return null
-
-  const dx = flight ? flight.to.x + flight.to.w / 2 - (flight.from.x + flight.from.w / 2) : 0
-  const dy = flight ? flight.to.y + flight.to.h / 2 - (flight.from.y + flight.from.h / 2) : 0
-  const scale = flight ? flight.to.w / flight.from.w : 1
+    if (!playing || !flight || !clone.current) return
+    const { from, to } = flight
+    const dx = to.x + to.w / 2 - (from.x + from.w / 2)
+    const dy = to.y + to.h / 2 - (from.y + from.h / 2)
+    const animation = clone.current.animate([
+      { transform: "none" },
+      { transform: `translate(${dx}px, ${dy}px) scale(${to.w / from.w})` },
+    ], { duration: 500, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "forwards" })
+    animation.finished.then(finish, () => {})
+    return () => animation.cancel()
+  }, [flight, playing])
 
   return (
     <>
       <div className={s.veil} data-intro-veil data-leaving={flight ? "" : undefined}>
-        <GlassIconReveal
+        {playing && !flight && <GlassIconReveal
           logo={MARK_SVG}
           label="Warney Rego"
           look="light"
@@ -108,7 +96,9 @@ export default function Intro() {
           tileSize={440}
           loop={false}
           hold={0}
+          speed={1.7}
           onEnd={handoff}
+          onUnavailable={finish}
           style={{ position: "absolute", inset: 0 }}
           tuning={{
             // Uma tinta só: o vidro dobra a marca, mas não separa cor.
@@ -118,20 +108,20 @@ export default function Intro() {
             present: 1.2,
             startZoom: 2.3,
           }}
-        />
+        />}
         <button type="button" className={s.skip} onClick={finish}>
           Pular
         </button>
       </div>
-      {flight && (
+      {playing && flight && (
         <div
+          ref={clone}
           className={s.clone}
           style={{
             left: flight.from.x,
             top: flight.from.y,
             width: flight.from.w,
             height: flight.from.h,
-            transform: launched ? `translate(${dx}px, ${dy}px) scale(${scale})` : "none",
           }}
         >
           <BrandMark />

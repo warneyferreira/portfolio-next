@@ -1,4 +1,4 @@
-import { about, hero, profile } from "@/data/portfolio";
+import { about, profile } from "@/data/portfolio";
 import s from "./about.module.css";
 
 export default function About() {
@@ -28,28 +28,20 @@ export default function About() {
         </div>
       </div>
 
-      <div className={s.bottom}>
-        <dl className={s.facts}>
-          <div className={s.role}>
-            <dt>Atuação</dt>
-            <dd>{profile.role}</dd>
-          </div>
-          <div>
-            <dt>Base</dt>
-            <dd>{profile.location}</dd>
-          </div>
-          <div>
-            <dt>Experiência</dt>
-            <dd>{profile.experienceYears}</dd>
-          </div>
-        </dl>
-        <a className={s.resume} href={profile.resume} download>
-          {hero.resumeLabel}
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-            <path d="M12 3v13m-5-5 5 5 5-5M5 17v4h14v-4" />
-          </svg>
-        </a>
-      </div>
+      <dl className={s.facts}>
+        <div className={s.role}>
+          <dt>Atuação</dt>
+          <dd>{profile.role}</dd>
+        </div>
+        <div>
+          <dt>Base</dt>
+          <dd>{profile.location}</dd>
+        </div>
+        <div>
+          <dt>Experiência</dt>
+          <dd>{profile.experienceYears}</dd>
+        </div>
+      </dl>
     </section>
   );
 }

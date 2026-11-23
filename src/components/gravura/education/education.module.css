@@ -1,9 +1,6 @@
 /* Educação: o armário de rolos e a esfera armilar ficam nas margens
    (components/wings); curso e certificações ocupam a coluna. */
 .education {
-  --muted: #5c564d;
-  --rule: #bdb5a5;
-
   position: relative;
   isolation: isolate;
   margin-inline: -8px;
@@ -78,7 +75,7 @@
 
 .highlights li {
   padding: 13px 0 13px 22px;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--ink);
   position: relative;
   font-size: clamp(1rem, 0.3vw + 0.85rem, 1.125rem);
   line-height: 1.5;
@@ -113,7 +110,6 @@
 .certHeading p {
   max-width: 38ch;
   margin: 0;
-  color: var(--muted);
   font-size: clamp(1.1rem, 1.4vw, 1.4rem);
   line-height: 1.5;
   text-wrap: pretty;
@@ -135,14 +131,14 @@
   gap: 20px;
   align-content: start;
   padding: 22px 0 26px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
 }
 
 .date {
   margin: 3px 0 0;
-  color: var(--muted);
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 550;
   font-variant-numeric: tabular-nums;
 }
 
@@ -157,7 +153,6 @@
 
 .issuer {
   margin: 8px 0 0;
-  color: var(--muted);
   line-height: 1.4;
 }
 
@@ -166,8 +161,6 @@
   margin: 14px 0 0;
   padding: 5px 8px;
   border: 1px solid var(--ink);
-  background-image: radial-gradient(var(--rule) 0.7px, transparent 0.7px);
-  background-size: 5px 5px;
   font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1.3;
