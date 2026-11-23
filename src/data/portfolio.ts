@@ -115,7 +115,7 @@ export const experience: {
   role: string;
   promotedTo?: string;
   summary: string;
-  details: string;
+  details: string[];
   results: Result[];
   tags: string[];
   resume?: string[];
@@ -126,8 +126,11 @@ export const experience: {
     role: "Engenheiro de Software",
     summary:
       "Integro IA generativa aos sistemas educacionais de uma rede com mais de 1.000 escolas no Piauí e Maranhão, modernizando aplicações PHP legadas e colocando IA no fluxo de trabalho dos professores.",
-    details:
-      "No portal do professor (GEDUCA), construí o Gerador de Plano de Aula Inteligente: a partir de disciplina, ano, metodologia e contexto, o Gemini gera o plano completo — objetivos, habilidades BNCC, conteúdo, metodologia, avaliação e referências — com ajuste por seção ou do plano inteiro em conversa multi-turn e exportação em PDF. Implementei streaming SSE de ponta a ponta (Gemini → serviço de APIs → portal PHP 5.2 → navegador) e saída estruturada com JSON Schema para garantir os 10 campos; a sugestão de BNCC usa candidatos reais do banco, então o modelo escolhe a habilidade, nunca inventa o código. O histórico fica no MSSQL de cada escola, respeitando a arquitetura multi-tenant em que cada cliente tem banco próprio. Também atuo na refatoração de sistemas PHP legados e na integração das APIs internas que sustentam esses fluxos.",
+    details: [
+      "No portal do professor (GEDUCA), construí o Gerador de Plano de Aula Inteligente: a partir de disciplina, ano, metodologia e contexto, o Gemini gera o plano completo — objetivos, habilidades BNCC, conteúdo, metodologia, avaliação e referências — com ajuste por seção ou do plano inteiro em conversa multi-turn e exportação em PDF.",
+      "Implementei streaming SSE de ponta a ponta (Gemini → serviço de APIs → portal PHP 5.2 → navegador) e saída estruturada com JSON Schema para garantir os 10 campos; a sugestão de BNCC usa candidatos reais do banco, então o modelo escolhe a habilidade, nunca inventa o código.",
+      "O histórico fica no MSSQL de cada escola, respeitando a arquitetura multi-tenant em que cada cliente tem banco próprio. Também atuo na refatoração de sistemas PHP legados e na integração das APIs internas que sustentam esses fluxos.",
+    ],
     results: [
       { value: "1.000+", label: "escolas atendidas pela rede no Piauí e Maranhão" },
       { label: "Gerador de plano de aula com Gemini integrado ao portal do professor" },
@@ -149,8 +152,11 @@ export const experience: {
     promotedTo: "Coordenador de Engenharia de IA",
     summary:
       "Liderei a engenharia de IA como coordenador hands-on, da arquitetura à entrega em produção, com privacidade e confiabilidade como requisito e não como enfeite.",
-    details:
-      "Fine-tuning de modelos sobre dados regulatórios da ANVISA para triagem e análise clínica, assistentes conversacionais e geração automatizada de relatórios em infraestrutura privacy-first e descentralizada para dados sensíveis. Avaliação de modelos e provedores, open source contra proprietários, equilibrando custo, janela de contexto e latência, com inferência local otimizada por quantização, tuning de system prompt e uso racional de GPU. Também respondi pela liderança técnica do time mobile do app de saúde usado em todo o Piauí: decisões arquiteturais, revisão de código, mentoria e alinhamento com stakeholders.",
+    details: [
+      "Fine-tuning de modelos sobre dados regulatórios da ANVISA para triagem e análise clínica, assistentes conversacionais e geração automatizada de relatórios em infraestrutura privacy-first e descentralizada para dados sensíveis.",
+      "Avaliação de modelos e provedores, open source contra proprietários, equilibrando custo, janela de contexto e latência, com inferência local otimizada por quantização, tuning de system prompt e uso racional de GPU.",
+      "Também respondi pela liderança técnica do time mobile do app de saúde usado em todo o Piauí: decisões arquiteturais, revisão de código, mentoria e alinhamento com stakeholders.",
+    ],
     results: [
       { value: "65%", label: "de redução no tempo de resposta das telas principais" },
       { value: "55%", label: "de redução no carregamento inicial do app" },
@@ -165,8 +171,10 @@ export const experience: {
     role: "Desenvolvedor Frontend",
     summary:
       "Plataformas web, apps e PWAs com foco em performance e consistência entre iOS e Android.",
-    details:
-      "Arquitetura de componentes reutilizáveis, integração com APIs, gerenciamento de estado global e funcionalidades offline. Estruturação de bancos PostgreSQL com criação e otimização de policies de segurança (RLS), garantindo controle de acesso granular sobre dados sensíveis.",
+    details: [
+      "Arquitetura de componentes reutilizáveis, integração com APIs, gerenciamento de estado global e funcionalidades offline.",
+      "Estruturação de bancos PostgreSQL com criação e otimização de policies de segurança (RLS), garantindo controle de acesso granular sobre dados sensíveis.",
+    ],
     results: [
       { value: "40% a 60%", label: "menos tempo de carregamento" },
       { value: "30%", label: "de redução no bundle via code splitting e lazy loading" },
@@ -179,8 +187,9 @@ export const experience: {
     company: "Grupo Vanguarda",
     role: "Estágio em Sistemas",
     summary: "Automação de processos empresariais sobre base Oracle e ferramentas internas de gestão.",
-    details:
+    details: [
       "Procedures e consultas complexas em PL/SQL, interfaces de PDV em Java e uma aplicação web em Next.js com fine-tuning de modelos em PyTorch para processos internos de gestão.",
+    ],
     results: [
       { value: "70% a 80%", label: "menos tempo de execução nos processos" },
       { value: "15 a 20", label: "horas semanais economizadas em tarefas repetitivas" },

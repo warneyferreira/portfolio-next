@@ -63,7 +63,7 @@
   .wings {
     position: relative;
     inset: auto;
-    height: clamp(240px, 72vw, 400px);
+    height: var(--wings-mobile-height, clamp(240px, 72vw, 400px));
     margin: 0 calc(var(--gutter) * -1) 28px;
   }
 
