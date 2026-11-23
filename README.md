@@ -12,7 +12,7 @@ A hero é estática, com WARNEY REGO em duas linhas de caixa alta e o botão “
 
 A seção Sobre usa uma composição aberta em duas colunas. A ilustração `public/images/about/eye-paper-dither.webp`, gravura do olho e da mão no rasgo de papel, acompanha o título. Em telas de até 800 px, título, introdução, gravura e textos seguem em uma coluna. Os dados profissionais e o currículo permanecem em `src/data/portfolio.ts`.
 
-O currículo para download fica em `public/curriculo-warney-rego.pdf`: PDF de duas páginas com texto selecionável e links, incluindo Inforgeneses, encerramento da MedSafe em outubro de 2026, Estúdio e certificações.
+O currículo para download fica em `public/curriculo-warney-rego.pdf`: PDF de duas páginas com texto selecionável e links, gerado por `node scripts/curriculo.mjs` a partir de `src/data/portfolio.ts`. Inclui o Gerador de Plano de Aula Inteligente na Inforgeneses (Gemini, streaming SSE e BNCC), o encerramento da MedSafe em outubro de 2026, o Estúdio e as certificações.
 
 O cartão do Estúdio destaca a captura real do site, reticulada em 1 bit (`studio-screenshot-dither.webp`, Bayer). A prévia usa uma máscara CSS pintada com `var(--ink)`, sem recompressão pelo Next Image nem exibição do original em cores. A logo usa uma única tinta; os detalhes de recursos ficam em uma área expansível, sem JavaScript adicional.
 
@@ -37,4 +37,5 @@ As importações CSS geram URLs com hash; `hero-engraving.webp.json` registra a 
 ```bash
 npm install
 npm run dev
+npm run curriculo   # regenera o PDF a partir de src/data/portfolio.ts
 ```

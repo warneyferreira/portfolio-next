@@ -11,6 +11,32 @@ export const profile = {
   highlightStack: ["Next.js", "React Native", "Node.js", "PostgreSQL", "LangChain", "Docker"],
 };
 
+/* Conteúdo do PDF em public/curriculo-warney-rego.pdf. Fica aqui para o site
+   e o currículo compartilharem a mesma fonte. */
+export const resume = {
+  role: "Engenheiro de Software | Full Stack e IA",
+  summary:
+    "Engenheiro de software com 3+ anos de experiência em aplicações web e mobile, modernização de sistemas legados e integração de IA. Atuação com PHP, Node.js e Python no backend e React, Next.js, Angular e React Native nas interfaces.",
+  skills: [
+    {
+      label: "Web e mobile",
+      items: ["React", "Next.js", "Angular", "TypeScript", "React Native", "Expo", "PWAs", "Tailwind CSS", "RxJS", "Angular Material"],
+    },
+    {
+      label: "Backend e dados",
+      items: ["PHP", "CodeIgniter", "Node.js", "Express", "Python", "Django", "Flask", "FastAPI", "Java", "SQL Server", "Oracle", "PL/SQL", "PostgreSQL", "Supabase", "Firebase"],
+    },
+    {
+      label: "Inteligência artificial",
+      items: ["LLMs", "IA generativa", "RAG", "embeddings", "bancos vetoriais", "fine-tuning", "quantização", "prompt engineering", "saída estruturada", "streaming SSE", "speech-to-text", "OpenAI", "Gemini", "Whisper", "LangChain", "PyTorch"],
+    },
+    {
+      label: "Infraestrutura e integração",
+      items: ["Docker", "Docker Compose", "Kubernetes", "Portainer", "CI/CD", "APIs REST", "JWT", "Zod", "Socket.IO", "WebRTC"],
+    },
+  ],
+};
+
 export const nav = [
   { href: "#sobre", label: "Sobre" },
   { href: "#stack", label: "Stack" },
@@ -92,17 +118,29 @@ export const experience: {
   details: string;
   results: Result[];
   tags: string[];
+  resume?: string[];
 }[] = [
   {
     period: "out 2026 – atual",
     company: "Inforgeneses",
     role: "Engenheiro de Software",
     summary:
-      "Atuo na evolução de sistemas em PHP, com refatoração de aplicações legadas e integração de inteligência artificial.",
+      "Integro IA generativa aos sistemas educacionais de uma rede com mais de 1.000 escolas no Piauí e Maranhão, modernizando aplicações PHP legadas e colocando IA no fluxo de trabalho dos professores.",
     details:
-      "Desenvolvimento e manutenção de sistemas em PHP, refatoração de código legado e integração de recursos de IA às aplicações.",
-    results: [],
-    tags: ["PHP", "Sistemas legados", "Refatoração", "Integração de IA"],
+      "No portal do professor (GEDUCA), construí o Gerador de Plano de Aula Inteligente: a partir de disciplina, ano, metodologia e contexto, o Gemini gera o plano completo — objetivos, habilidades BNCC, conteúdo, metodologia, avaliação e referências — com ajuste por seção ou do plano inteiro em conversa multi-turn e exportação em PDF. Implementei streaming SSE de ponta a ponta (Gemini → serviço de APIs → portal PHP 5.2 → navegador) e saída estruturada com JSON Schema para garantir os 10 campos; a sugestão de BNCC usa candidatos reais do banco, então o modelo escolhe a habilidade, nunca inventa o código. O histórico fica no MSSQL de cada escola, respeitando a arquitetura multi-tenant em que cada cliente tem banco próprio. Também atuo na refatoração de sistemas PHP legados e na integração das APIs internas que sustentam esses fluxos.",
+    results: [
+      { value: "1.000+", label: "escolas atendidas pela rede no Piauí e Maranhão" },
+      { label: "Gerador de plano de aula com Gemini integrado ao portal do professor" },
+      { label: "Streaming SSE ponta a ponta e saída estruturada por JSON Schema" },
+      { label: "Sugestão de BNCC sobre candidatos reais, sem códigos inventados" },
+    ],
+    resume: [
+      "Integro IA generativa aos sistemas educacionais de uma rede com mais de 1.000 escolas no Piauí e Maranhão, modernizando aplicações PHP legadas e o portal do professor.",
+      "Construí o Gerador de Plano de Aula Inteligente: o Gemini gera o plano completo (objetivos, habilidades BNCC, conteúdo, metodologia, avaliação e referências), com ajuste por seção ou do plano inteiro em conversa multi-turn.",
+      "Implementei streaming SSE de ponta a ponta (Gemini → APIs → portal PHP 5.2 → navegador), saída estruturada com JSON Schema e sugestão de BNCC sobre candidatos reais do banco — o modelo escolhe, nunca inventa o código.",
+      "Histórico de planos no MSSQL de cada escola (multi-tenant) e exportação do Organizador Curricular em PDF.",
+    ],
+    tags: ["Gemini", "IA generativa", "Streaming SSE", "JSON Schema", "PHP 5.2", "CodeIgniter", "SQL Server", "Multi-tenant", "BNCC"],
   },
   {
     period: "2026 – out 2026",
