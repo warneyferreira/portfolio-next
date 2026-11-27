@@ -1,0 +1,91 @@
+/* Design alternativo. Escopo isolado do Gravura — nada aqui vaza para "/".
+
+   Dois temas, trocados em html[data-alt-tema] (tema/tema.ts, botão na
+   barra): escuro (padrão, fundo preto) e claro (branco pastel). Os nomes
+   dos tokens vêm do primeiro conceito (espuma sobre o mar): --alt-foam é
+   o texto principal em qualquer tema, --alt-bg o fundo. Os --*-rgb são
+   canais "r g b" para rgb(var(--x) / alfa) e para os canvas. */
+.root {
+  --alt-bg: #000;
+  --alt-bg-rgb: 0 0 0;
+  --alt-foam: #f4ece4; /* texto principal (17:1 sobre o preto) */
+  --alt-foam-rgb: 244 236 228;
+  --alt-foam-soft: rgb(244 236 228 / 0.72);
+  --alt-shallow: #9cc3ee; /* ênfase: números, a linha do Sobre */
+  --alt-rule: rgb(244 236 228 / 0.2);
+  --alt-sky: #cdd7df; /* fundo do botão cheio */
+  --alt-ink: #0b1f3a; /* texto do botão cheio */
+  --alt-ink-soft: #3f4b5c;
+  --alt-sea: #1f5fa8; /* seleção e foco */
+  --alt-deep: #041025; /* só o hero arquivado (hero/) usa */
+  --alt-grao-rgb: 235 235 242; /* grãos do nome e do título */
+  /* Margem lateral das seções. */
+  --edge: clamp(20px, 4vw, 48px);
+
+  min-height: 100svh;
+  background: var(--alt-bg);
+  color: var(--alt-foam);
+  color-scheme: dark;
+  font-family: var(--alt-sans), system-ui, sans-serif;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Claro: branco pastel, levemente quente; tinta quase preta. Contraste:
+   texto 16:1, secundário 6:1, ênfase azul 6:1. */
+:global(html[data-alt-tema="claro"]) .root {
+  --alt-bg: #f6f2ea;
+  --alt-bg-rgb: 246 242 234;
+  --alt-foam: #16181d;
+  --alt-foam-rgb: 22 24 29;
+  --alt-foam-soft: rgb(22 24 29 / 0.68);
+  --alt-shallow: #1f5fa8;
+  --alt-rule: rgb(22 24 29 / 0.16);
+  --alt-sky: #2a2f3a;
+  --alt-ink: #f6f2ea;
+  --alt-grao-rgb: 30 32 40;
+
+  color-scheme: light;
+}
+
+@media (min-width: 900px) {
+  .root {
+    --edge: clamp(48px, 9vw, 200px);
+  }
+}
+
+.root ::selection {
+  background: var(--alt-sea);
+  color: #fff;
+}
+
+/* ---------- Parallax: camadas que emergem ----------
+   Qualquer elemento com data-depth="1".."4" dentro da página. O controlador
+   (components/alternative/parallax/Parallax.tsx) escreve --p de 0 a 1;
+   aqui a camada sobe de --from até o lugar e aparece nos primeiros 60%.
+   Sem JS ou com movimento reduzido, html[data-alt-parallax] não existe e
+   nada disso se aplica: tudo fica parado e visível. */
+:global(html[data-alt-parallax]) .root [data-depth] {
+  --from: calc(var(--depth-step, 7svh) * var(--d, 1));
+  transform: translate3d(0, calc((1 - var(--p, 1)) * var(--from)), 0);
+  opacity: clamp(0, calc(var(--p, 1) / 0.6), 1);
+}
+
+.root [data-depth="1"] {
+  --d: 0.6;
+}
+.root [data-depth="2"] {
+  --d: 1.7;
+}
+.root [data-depth="3"] {
+  --d: 2.9;
+}
+.root [data-depth="4"] {
+  --d: 4.3;
+}
+
+.root :focus-visible {
+  outline: 2px solid var(--alt-sea);
+  outline-offset: 4px;
+}

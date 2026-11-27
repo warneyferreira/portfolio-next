@@ -1,0 +1,199 @@
+/* Educação: o curso ocupa meia página, com as ênfases alinhadas ao pé da
+   coluna. A régua fica no artigo; o miolo é que emerge. */
+.degrees {
+  margin-top: clamp(40px, 6vw, 88px);
+}
+
+/* Entra inteira na rolagem (--r do data-reveal). */
+.degree {
+  --on: clamp(0, calc((var(--r, 1) - 0.1) / 0.5), 1);
+
+  border-top: 1px solid var(--alt-rule);
+  opacity: var(--on);
+  transform: translate3d(0, calc((1 - var(--on)) * 28px), 0);
+}
+
+.degree:last-child {
+  border-bottom: 1px solid var(--alt-rule);
+}
+
+.degreeInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(24px, 4vw, 64px);
+  padding-block: clamp(28px, 3.4vw, 48px);
+}
+
+.institution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin: 0 0 clamp(12px, 1.6vw, 20px);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--alt-foam);
+}
+
+.period {
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--alt-foam-soft);
+}
+
+.course {
+  max-width: 18ch;
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 700;
+  font-stretch: 118%;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.highlights {
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  position: relative;
+  padding: 14px 0 14px 22px;
+  border-bottom: 1px solid var(--alt-rule);
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+}
+
+.highlights li:first-child {
+  padding-top: 0;
+}
+
+.highlights li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.highlights li::before {
+  content: "";
+  position: absolute;
+  top: 1.62em;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: var(--alt-shallow);
+}
+
+.highlights li:first-child::before {
+  top: 0.92em;
+}
+
+/* ---------- Certificações ---------- */
+
+.certs {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 16px clamp(32px, 5vw, 80px);
+  margin-top: clamp(64px, 9vw, 128px);
+}
+
+/* O cabeçalho acompanha a rolagem pelo índice de certificados. */
+.certsHead {
+  position: sticky;
+  top: 32px;
+  display: grid;
+  gap: 12px;
+}
+
+.certsTitle {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 700;
+  font-stretch: 118%;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.certList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cert {
+  display: grid;
+  grid-template-columns: minmax(0, 96px) minmax(0, 1fr);
+  gap: 16px;
+  align-content: start;
+  padding-block: clamp(14px, 1.6vw, 20px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+.cert:last-child {
+  border-bottom: 1px solid var(--alt-rule);
+}
+
+.date {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--alt-foam-soft);
+}
+
+.certBody {
+  min-width: 0;
+}
+
+.certName {
+  margin: 0;
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.issuer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--alt-foam-soft);
+}
+
+.badge {
+  font-size: 14px;
+  color: var(--alt-shallow);
+}
+
+@media (max-width: 900px) {
+  .degreeInner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 32px);
+  }
+
+  .certs {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 40px);
+  }
+
+  .certsHead {
+    position: static;
+  }
+}
+
+@media (max-width: 420px) {
+  .cert {
+    grid-template-columns: minmax(0, 74px) minmax(0, 1fr);
+    gap: 12px;
+  }
+}

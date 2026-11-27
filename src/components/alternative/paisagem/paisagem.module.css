@@ -1,0 +1,17 @@
+/* Quadro: a caixa da imagem original (1672×941). Quem usa decide onde ele
+   fica e o tamanho; as camadas dentro se posicionam em % dele. */
+.quadro {
+  position: absolute;
+  aspect-ratio: 1672 / 941;
+  pointer-events: none;
+  user-select: none;
+}
+
+.camada {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: auto;
+  max-width: none;
+}

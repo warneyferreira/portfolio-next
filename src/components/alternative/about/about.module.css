@@ -1,0 +1,278 @@
+/* Sobre — "ponta a ponta". O hero abre a página; o Sobre começa abaixo
+   dele, no fundo do tema (--alt-bg). */
+.about {
+  --lead: clamp(56px, 10svh, 120px);
+  --pad: var(--edge);
+  --dot: 11px;
+
+  position: relative;
+  z-index: 1;
+  padding: var(--lead) var(--pad) clamp(96px, 18svh, 200px);
+  /* Sem fundo próprio: o fundo do tema vem do .root. */
+  color: var(--alt-foam);
+}
+
+/* O véu de fibras que descarrega o título: atrás do conteúdo, de ponta a
+   ponta, cobrindo o topo da seção. Some nas bordas de cima e de baixo para
+   não ter quina; a opacidade é do NomeDesfeito (a fita esmaece conforme o
+   título se monta). `.about .fibras` vence o CSS base do GhostFibers
+   (position/height do contêiner). */
+.about .fibras {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: clamp(420px, 78svh, 760px);
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 66%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 66%, transparent 100%);
+}
+
+/* Largura inteira: a linha vai de uma borda à outra em qualquer tela.
+   As medidas de leitura ficam nos textos. */
+.inner {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(14px, 1.6vw, 20px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+/* Montado pelos grãos que saem da fita do Sobre (hero-base/NomeDesfeito),
+   que depois troca o título pela retícula que pinga. Com o canvas ativo,
+   --montado vira 0 e este h2 fica transparente (segue no DOM). Sem JS ou
+   com movimento reduzido não existe: o título é texto normal. Sem
+   data-depth: o transform do parallax tiraria as letras de onde os grãos
+   pousam. */
+.statement {
+  max-width: 30ch;
+  margin: 0 auto;
+  font-size: clamp(32px, 4.4vw, 76px);
+  font-weight: 650;
+  font-stretch: 112%;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  text-align: center;
+  text-wrap: balance;
+  opacity: var(--montado, 1);
+}
+
+/* ---------- Percurso: a linha do stack ---------- */
+
+/* O percurso atravessa a largura inteira. A linha se desenha com --r
+   (data-reveal). */
+.route {
+  position: relative;
+  margin-top: clamp(48px, 9svh, 120px);
+}
+
+/* Trilho apagado de ponta a ponta + o traço aceso que cresce com --r.
+   Pontos nas duas pontas; o da direita acende quando o traço chega. */
+.track {
+  position: relative;
+  height: var(--dot);
+}
+
+.track::before,
+.fill {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  translate: 0 -50%;
+}
+
+.track::before {
+  background: var(--alt-rule);
+}
+
+.fill {
+  height: 2px;
+  background: var(--alt-shallow);
+  transform-origin: left center;
+  transform: scaleX(clamp(0, calc((var(--r, 1) - 0.25) / 0.6), 1));
+}
+
+.track::after,
+.fill::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  translate: 0 -50%;
+}
+
+/* Ponta esquerda: sempre acesa (é onde tudo começa). */
+.track::after {
+  left: 0;
+  background: var(--alt-shallow);
+}
+
+/* Ponta direita: vive dentro do traço, então chega junto com ele. A escala
+   do pai é desfeita para o ponto não achatar. */
+.fill::after {
+  right: 0;
+  background: var(--alt-foam);
+  opacity: clamp(0, calc((var(--r, 1) - 0.82) * 20), 1);
+}
+
+/* Paradas: as seis áreas do stack em colunas iguais, cada uma com um tique
+   que desce do trilho. Acendem em sequência quando o traço passa. */
+.stops {
+  display: grid;
+  grid-template-columns: repeat(var(--stops), minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stops li {
+  --lit: clamp(0, calc((var(--r, 1) - 0.25) / 0.6 * var(--stops) - var(--i)), 1);
+
+  position: relative;
+  padding-top: 26px;
+  font-size: clamp(15px, 1.35vw, 22px);
+  font-weight: 650;
+  font-stretch: 112%;
+  letter-spacing: -0.01em;
+  color: var(--alt-foam);
+  text-shadow: 0 0 14px var(--alt-bg), 0 0 4px var(--alt-bg);
+  opacity: calc(0.28 + 0.72 * var(--lit));
+}
+
+.stops li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 16px;
+  background: var(--alt-shallow);
+  opacity: var(--lit);
+}
+
+/* A primeira parada encosta no ponto da ponta esquerda. */
+.stops li:first-child::before {
+  left: calc(var(--dot) / 2);
+}
+
+.stops li:first-child {
+  padding-left: 0;
+}
+
+/* ---------- As duas pontas ---------- */
+
+.ends {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 120px);
+  margin-top: clamp(32px, 6svh, 72px);
+}
+
+/* O back-end se alinha à ponta direita da linha. */
+.endBack {
+  justify-self: end;
+}
+
+.end {
+  max-width: min(100%, 34rem);
+}
+
+.endTitle {
+  margin: 0 0 14px;
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 650;
+  font-stretch: 112%;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.endText {
+  margin: 0;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+}
+
+/* ---------- Parallax ----------
+   As camadas usam data-depth (regras globais em alternative.module.css). */
+
+/* ---------- Estreito: o percurso fica vertical ---------- */
+
+@media (max-width: 720px) {
+  .route {
+    margin-top: 32px;
+    padding-left: 28px;
+  }
+
+  .track {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--dot);
+    height: auto;
+  }
+
+  .track::before,
+  .fill {
+    inset: 0 auto;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: auto;
+    translate: -50% 0;
+  }
+
+  .fill {
+    width: 2px;
+    transform-origin: center top;
+    transform: scaleY(clamp(0, calc((var(--r, 1) - 0.25) / 0.6), 1));
+  }
+
+  .track::after {
+    top: 0;
+    left: 0;
+    translate: none;
+  }
+
+  .fill::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .stops {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .stops li {
+    padding-top: 0;
+    font-size: 20px;
+  }
+
+  .stops li::before {
+    top: 50%;
+    left: -28px;
+    width: 16px;
+    height: 1px;
+  }
+
+  .stops li:first-child::before {
+    left: -28px;
+  }
+
+  .ends {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .endBack {
+    justify-self: start;
+  }
+}

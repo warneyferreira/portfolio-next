@@ -1,0 +1,16 @@
+/* Cabeçalho compartilhado pelas seções abaixo do Sobre: régua no topo e
+   título grande. A hierarquia vem da largura e do peso da Archivo. */
+.head {
+  padding-top: clamp(14px, 1.6vw, 20px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(34px, 4.6vw, 72px);
+  font-weight: 650;
+  font-stretch: 112%;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}

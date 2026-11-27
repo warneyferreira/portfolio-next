@@ -1,0 +1,186 @@
+/* Projetos: nome grande, e a captura do produto como um relevo claro na
+   água. A captura é uma retícula com alfa: aqui ela é pintada de espuma
+   via mask, então nunca entra cor da identidade do Gravura. */
+/* Cada projeto entra inteiro na rolagem (--r) sem se mover depois. */
+.project {
+  --on: clamp(0, calc((var(--r, 1) - 0.1) / 0.5), 1);
+  opacity: var(--on);
+  transform: translate3d(0, calc((1 - var(--on)) * 40px), 0);
+}
+
+.collection {
+  margin-top: clamp(40px, 6vw, 88px);
+}
+
+.project + .project {
+  margin-top: clamp(64px, 9vw, 140px);
+}
+
+.lead {
+  display: grid;
+  gap: 10px;
+  padding-top: clamp(16px, 2vw, 24px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+.type {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--alt-foam-soft);
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 112px);
+  font-weight: 780;
+  font-stretch: 124%;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+
+.subtitle {
+  max-width: 34ch;
+  margin: 0;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--alt-foam);
+  text-wrap: pretty;
+}
+
+.spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(32px, 5vw, 80px);
+  margin-top: clamp(32px, 4vw, 56px);
+}
+
+/* ---------- Captura ---------- */
+
+.figure {
+  margin: 0;
+}
+
+.preview {
+  aspect-ratio: 2462 / 1258;
+  /* O relevo: a espuma desce de luminosa no topo a quase nada no pé,
+     como se a tela estivesse submersa. */
+  background: linear-gradient(
+    to bottom,
+    var(--alt-foam) 0%,
+    rgb(var(--alt-foam-rgb) / 0.82) 55%,
+    color-mix(in srgb, var(--alt-shallow) 45%, transparent) 100%
+  );
+  mask-image: url("/images/projects/studio-screenshot-dither.webp");
+  mask-position: center;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--alt-foam-soft);
+}
+
+/* ---------- Texto ---------- */
+
+.body {
+  display: grid;
+  gap: clamp(24px, 3vw, 36px);
+  align-content: start;
+}
+
+.description {
+  max-width: 46ch;
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+}
+
+.highlights {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 22px;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: var(--alt-foam);
+  text-wrap: pretty;
+}
+
+.highlights li::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: var(--alt-shallow);
+}
+
+/* Botão claro: pílula de 48px. */
+.visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--alt-sky);
+  color: var(--alt-ink);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.visit svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (hover: hover) {
+  .visit:hover {
+    background: var(--alt-foam);
+  }
+}
+
+.visit:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 900px) {
+  .spread {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 40px);
+  }
+
+  .body {
+    gap: 24px;
+  }
+}

@@ -1,0 +1,169 @@
+/* Hero: o nome em Archivo expandida se desfaz e vira o véu de fibras.
+   Três faixas: cargo e cidade no topo, o nome no terço de baixo,
+   disponibilidade e ações embaixo. Fundo do tema (--alt-bg: preto no
+   escuro, branco pastel no claro), o mesmo das seções.
+
+   Camadas, de trás para a frente: fibras (0), véu do topo (1) e o conteúdo
+   (3). O nome desfeito é um canvas fixo da página (hero-base/NomeDesfeito,
+   montado em page.tsx), por cima de tudo. */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: clamp(100px, 14svh, 148px) var(--edge) clamp(24px, 4svh, 40px);
+  background: var(--alt-bg);
+  color: var(--alt-foam);
+}
+
+/* O véu de fibras nasce no nome: a fita é empurrada para baixo e para a
+   direita até a ponta dela cair sobre o fim do nome (onde as letras se
+   desfazem), e a máscara apaga o trecho que passaria por baixo e à esquerda
+   delas. Daí ela sobe para o canto de cima à direita. */
+.fibers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  translate: 14% 14%;
+  mask-image: linear-gradient(to top right, transparent 0%, transparent 28%, #000 46%);
+  -webkit-mask-image: linear-gradient(to top right, transparent 0%, transparent 28%, #000 46%);
+}
+
+/* Véu escuro no topo para a meta e a barra de vidro. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(var(--alt-bg-rgb) / 0.6), transparent 26%);
+}
+
+/* Com o canvas do nome desfeito pronto, o h1 fica transparente — continua
+   no DOM para leitores de tela e seleção. */
+.hero[data-nome="pronto"] .name {
+  color: transparent;
+}
+
+.meta,
+.main,
+.foot {
+  position: relative;
+  z-index: 3;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--alt-rule);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--alt-foam-soft);
+}
+
+.meta p {
+  margin: 0;
+}
+
+/* O nome desce para o terço de baixo: o topo fica aberto para o conteúdo
+   que ainda vai entrar. */
+.main {
+  margin-top: auto;
+  padding-top: clamp(32px, 7svh, 96px);
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(64px, min(15vw, 22svh), 240px);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+}
+
+.name span {
+  display: block;
+}
+
+.name span + span {
+  padding-inline-start: 1.08em;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 32px;
+  margin-top: clamp(32px, 6svh, 72px);
+  padding-top: 16px;
+  border-top: 1px solid var(--alt-rule);
+}
+
+.availability {
+  max-width: 30ch;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--alt-foam-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding-inline: 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primary {
+  background: var(--alt-sky);
+  color: var(--alt-ink);
+  transition: background-color 160ms ease;
+}
+
+.secondary {
+  border: 1.5px solid rgb(var(--alt-foam-rgb) / 0.45);
+  color: var(--alt-foam);
+  transition: border-color 160ms ease;
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    background: var(--alt-foam);
+  }
+
+  .secondary:hover {
+    border-color: var(--alt-foam);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    min-height: 100svh;
+    padding-top: clamp(88px, 12svh, 120px);
+  }
+
+  .foot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

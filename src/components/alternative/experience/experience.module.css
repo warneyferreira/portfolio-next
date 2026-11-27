@@ -1,0 +1,252 @@
+/* Experiência: duas colunas desencontradas. A esquerda carrega quando,
+   onde e o cargo; a direita, o resumo, os resultados e os detalhes. As
+   réguas ficam no <li>, fora do data-depth, para não tremerem ao emergir. */
+.timeline {
+  margin: clamp(40px, 6vw, 88px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  border-top: 1px solid var(--alt-rule);
+}
+
+.entry:last-child {
+  border-bottom: 1px solid var(--alt-rule);
+}
+
+/* Entra inteira na rolagem (--r do data-reveal), sem se mover depois. */
+.job {
+  --on: clamp(0, calc((var(--r, 1) - 0.1) / 0.5), 1);
+
+  opacity: var(--on);
+  transform: translate3d(0, calc((1 - var(--on)) * 32px), 0);
+  display: grid;
+  grid-template-columns: minmax(0, 0.46fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 56px) clamp(32px, 6vw, 96px);
+  padding-block: clamp(32px, 4.5vw, 64px);
+}
+
+.period {
+  margin: 0 0 clamp(12px, 1.4vw, 20px);
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--alt-foam-soft);
+}
+
+.company {
+  margin: 0;
+  font-size: clamp(28px, 2.9vw, 44px);
+  font-weight: 700;
+  font-stretch: 120%;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  /* Só quebra dentro da palavra se ela não couber de jeito nenhum. */
+  overflow-wrap: break-word;
+}
+
+.role {
+  margin: 12px 0 0;
+  max-width: 20ch;
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 600;
+  font-stretch: 108%;
+  line-height: 1.3;
+}
+
+.previous {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--alt-foam-soft);
+}
+
+/* A coluna da direita desce um pouco em relação ao topo da esquerda. */
+.what {
+  display: grid;
+  gap: clamp(20px, 2.6vw, 32px);
+  align-content: start;
+  min-width: 0;
+  padding-top: clamp(0px, 0.6vw, 10px);
+}
+
+.summary {
+  max-width: 54ch;
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ---------- Resultados ---------- */
+
+/* Linhas, não células: um resultado sem número simplesmente ocupa a
+   sobra da última linha, sem bloco vazio pintado. */
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 3vw, 40px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.results li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  min-width: 0;
+  padding-block: clamp(14px, 1.8vw, 20px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+.value {
+  font-size: clamp(24px, 2.4vw, 34px);
+  font-weight: 750;
+  font-stretch: 125%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--alt-shallow);
+}
+
+/* Resultado sem número: um traço curto no lugar do valor, alinhado ao
+   topo da primeira linha do texto. */
+.delivery::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  margin-top: 0.7em;
+  background: var(--alt-foam-soft);
+}
+
+.label {
+  font-size: clamp(14px, 1.05vw, 15px);
+  line-height: 1.45;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+}
+
+/* ---------- Detalhes ---------- */
+
+.more {
+  border-top: 1px solid var(--alt-rule);
+  padding-top: clamp(14px, 1.6vw, 20px);
+}
+
+.more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1.5px solid rgb(var(--alt-foam-rgb) / 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--alt-foam);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.more summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (hover: hover) {
+  .more summary:hover {
+    background: rgb(var(--alt-foam-rgb) / 0.08);
+    border-color: rgb(var(--alt-foam-rgb) / 0.6);
+  }
+}
+
+.toggle {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  transition: rotate 180ms ease;
+}
+
+.more[open] .toggle {
+  rotate: 45deg;
+}
+
+.closeLabel,
+.more[open] .openLabel {
+  display: none;
+}
+
+.more[open] .closeLabel {
+  display: inline;
+}
+
+.expanded {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  padding-block: clamp(18px, 2vw, 28px) 4px;
+}
+
+.details {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  max-width: 68ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+}
+
+.details p {
+  margin: 0;
+}
+
+.stackTitle {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--alt-foam);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--alt-foam-soft);
+}
+
+@media (max-width: 900px) {
+  .job {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 32px);
+  }
+
+  .role {
+    max-width: 34ch;
+  }
+
+  .expanded {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

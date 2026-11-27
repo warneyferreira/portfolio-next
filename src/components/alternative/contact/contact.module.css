@@ -1,0 +1,245 @@
+/* Contato: o fecho. A seção ocupa a tela; o rodapé fecha no mesmo fundo.
+   Sem fundo próprio: o fundo do tema vem do .root. */
+.close {
+  position: relative;
+  color: var(--alt-foam);
+}
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 88svh;
+  padding: 0 var(--edge) clamp(56px, 8svh, 96px);
+  overflow: hidden;
+  scroll-margin-top: calc(24px - var(--nav-clearance, 0px));
+}
+
+/* ---------- Conteúdo ---------- */
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.message {
+  max-width: 21ch;
+  margin: 0 0 0 auto;
+  font-size: clamp(32px, 4.6vw, 72px);
+  font-weight: 650;
+  font-stretch: 112%;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* Frase e e-mail sobem juntos: são uma camada só, então nunca se cruzam
+   durante a emergência. */
+.lead {
+  margin-top: clamp(40px, 7vw, 96px);
+}
+
+.email {
+  display: block;
+  width: fit-content;
+  margin-top: clamp(28px, 4vw, 56px);
+  font-size: clamp(26px, 4.2vw, 64px);
+  font-weight: 700;
+  font-stretch: 118%;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--alt-foam);
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--alt-foam-rgb) / 0.3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+@media (hover: hover) {
+  .email:hover {
+    color: var(--alt-shallow);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ---------- Caminhos ---------- */
+
+/* Os caminhos ficam sem data-depth: são o último conteúdo da página, e no
+   fim da rolagem a emergência de uma camada ainda não teria assentado. */
+.ways {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  margin-top: auto;
+  padding-top: clamp(48px, 8svh, 120px);
+}
+
+.ways::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 1px;
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+  background: var(--alt-rule);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 10px;
+}
+
+/* Pílulas de 48px, só contorno, porque o e-mail grande já é a ação
+   principal da seção. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 22px;
+  border: 1.5px solid rgb(var(--alt-foam-rgb) / 0.45);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--alt-foam);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+@media (hover: hover) {
+  .pill:hover {
+    background: rgb(var(--alt-foam-rgb) / 0.1);
+  }
+}
+
+.pill:active {
+  transform: scale(0.97);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px clamp(24px, 4vw, 48px);
+  margin: 0;
+}
+
+.facts div {
+  min-width: 0;
+}
+
+.facts dt {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--alt-foam-soft);
+}
+
+.facts dd {
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Rodapé ---------- */
+
+.footer {
+  padding: 0 var(--edge) clamp(24px, 4vh, 40px);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 32px;
+  padding-top: clamp(18px, 2vw, 26px);
+  border-top: 1px solid var(--alt-rule);
+}
+
+.signature {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--alt-foam-soft);
+}
+
+.person {
+  color: var(--alt-foam);
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.footerLinks a {
+  color: var(--alt-foam);
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+@media (hover: hover) {
+  .footerLinks a:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (max-width: 900px) {
+  .ways {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(24px, 6vw, 40px);
+  }
+
+  .ways::before {
+    margin-bottom: 0;
+  }
+
+  .contact {
+    min-height: 0;
+  }
+
+  .ways {
+    padding-top: clamp(32px, 6svh, 64px);
+  }
+}
+
+@media (max-width: 720px) {
+  .message {
+    max-width: 24ch;
+    margin-left: 0;
+  }
+
+  .email {
+    font-size: clamp(22px, 6.2vw, 40px);
+  }
+
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pill {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 0 16px;
+  }
+}

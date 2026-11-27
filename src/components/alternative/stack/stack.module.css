@@ -1,0 +1,152 @@
+/* Stack: índice de seis linhas. O nome da categoria é grande e expandido;
+   as tecnologias se alinham em colunas para ler como índice, não como
+   nuvem de etiquetas.
+
+   Revelação guiada pela rolagem: --r (0..1) vem do controlador de parallax
+   via data-reveal. Cada parte da linha lê a própria janela de --r, então a
+   sequência é sempre a mesma em qualquer velocidade de rolagem:
+     régua 0 → .45 · nome .12 → .52 · descrição .28 → .62 ·
+     tecnologias .36 → .95, escalonadas pelo índice (--i de --n). */
+.index {
+  margin: clamp(40px, 6vw, 88px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  --r-line: clamp(0, calc(var(--r, 1) / 0.45), 1);
+  --r-name: clamp(0, calc((var(--r, 1) - 0.12) / 0.4), 1);
+  --r-text: clamp(0, calc((var(--r, 1) - 0.28) / 0.34), 1);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
+  gap: 16px clamp(24px, 4vw, 80px);
+  padding-block: clamp(28px, 3.6vw, 52px);
+}
+
+/* Régua: desenhada da esquerda para a direita. */
+.row::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--alt-rule);
+  transform-origin: left center;
+  transform: scaleX(var(--r-line));
+}
+
+/* A última linha fecha o índice com uma régua embaixo, que vem junto. */
+.row:last-child::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: var(--alt-rule);
+  transform-origin: left center;
+  transform: scaleX(var(--r-line));
+}
+
+/* Nome: sobe de trás de uma máscara (a própria caixa do título). */
+.name {
+  margin: 0;
+  overflow: hidden;
+  /* Folga para descendentes e acentos não serem cortados pela máscara. */
+  padding-block: 0.06em 0.12em;
+  font-size: clamp(30px, 3.6vw, 56px);
+  font-weight: 700;
+  font-stretch: 120%;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.name span {
+  display: block;
+  transform: translate3d(0, calc((1 - var(--r-name)) * 110%), 0);
+}
+
+.body {
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+  min-width: 0;
+  align-content: start;
+}
+
+.description {
+  max-width: 46ch;
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  color: var(--alt-foam-soft);
+  text-wrap: pretty;
+  opacity: var(--r-text);
+  transform: translate3d(0, calc((1 - var(--r-text)) * 12px), 0);
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 600;
+  font-stretch: 112%;
+  line-height: 1.35;
+}
+
+/* Cascata: cada tecnologia começa um pouco depois da anterior. */
+.items li {
+  --r-item: clamp(0, calc((var(--r, 1) - 0.36 - var(--i) / var(--n) * 0.34) / 0.25), 1);
+
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  opacity: var(--r-item);
+  transform: translate3d(0, calc((1 - var(--r-item)) * 16px), 0);
+}
+
+/* Ícone de marca em um tom só, na tinta do texto; os itens sem marca
+   (RAG, embeddings etc.) usam um ponto do mesmo tamanho. */
+.icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  opacity: 0.72;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.stub {
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+@media (max-width: 1100px) {
+  .items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .items {
+    gap: 6px 20px;
+  }
+}
